@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok 欧洲全域运营 | 数漫极光 DigitAuro</title>
+  <meta name="description" content="TikTok 欧洲 TAP 认证服务商，全托管/联营/本土店租赁三种模式，本土达人矩阵，覆盖 EU5 市场。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/common.css?v=18">
+  <style>
+    .page-hero { background: var(--space-dark); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(23,208,200,.2), transparent 60%), radial-gradient(ellipse 50% 40% at 80% 70%, rgba(254,44,85,.15), transparent 60%), radial-gradient(ellipse 40% 50% at 20% 50%, rgba(37,244,238,.08), transparent 60%); pointer-events: none; }
+    .page-hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+    .page-hero-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; line-height: 1.15; margin-bottom: 20px; color: var(--white); }
+    .page-hero-highlight { display: inline-block; padding: 4px 14px; border-radius: 6px; font-weight: 900; }
+    .hl-pink { background: linear-gradient(135deg, rgba(254,44,85,.3), rgba(255,0,80,.2)); color: #FE2C55; }
+    .hl-cyan { background: linear-gradient(135deg, rgba(37,244,238,.3), rgba(0,242,234,.2)); color: #00f2ea; }
+    .hero-badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 100px; font-size: .82rem; font-weight: 800; transition: all .35s; }
+    .hero-badge.b1 { background: linear-gradient(135deg, rgba(199,107,240,.3), rgba(155,77,237,.2)); color: #C9A0F0; border: 1px solid rgba(199,107,240,.4); }
+    .hero-badge.b2 { background: linear-gradient(135deg, rgba(23,208,200,.4), rgba(14,155,184,.3)); color: #fff; border: 1px solid rgba(23,208,200,.5); box-shadow: 0 4px 20px rgba(23,208,200,.25); }
+    .hero-badge.b3 { background: linear-gradient(135deg, rgba(245,196,0,.3), rgba(200,160,0,.18)); color: #F5D060; border: 1px solid rgba(245,196,0,.4); }
+    .hero-badge:hover { transform: translateY(-2px); }
+
+    .page-hero-desc { font-size: 1.05rem; color: rgba(255,255,255,.55); line-height: 1.8; margin-bottom: 32px; }
+    .tt-hero-panel { position: relative; min-height: 430px; padding: 28px; border-radius: 26px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 28px 80px rgba(0,0,0,.28); backdrop-filter: blur(18px); overflow: hidden; }
+    .tt-hero-panel::before { content: ''; position: absolute; inset: -30%; background: radial-gradient(circle at 18% 22%, rgba(37,244,238,.24), transparent 32%), radial-gradient(circle at 86% 78%, rgba(254,44,85,.22), transparent 34%), radial-gradient(circle at 58% 8%, rgba(245,183,27,.14), transparent 26%); pointer-events: none; }
+    .tt-market-map { position: relative; height: 220px; border-radius: 18px; background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); border: 1px solid rgba(255,255,255,.1); overflow: hidden; }
+    .tt-market-map::before { content: ''; position: absolute; inset: 18px; border-radius: 14px; border: 1px dashed rgba(255,255,255,.12); }
+    .tt-market-title { position: absolute; top: 18px; left: 18px; font-size: .74rem; font-weight: 900; letter-spacing: .12em; color: rgba(255,255,255,.55); }
+    .tt-orbit { position: absolute; inset: 52px 86px 34px; border-radius: 50%; border: 1px solid rgba(37,244,238,.18); transform: rotate(-8deg); }
+    .tt-orbit.two { inset: 70px 48px 52px; border-color: rgba(254,44,85,.14); transform: rotate(16deg); }
+    .market-node { position: absolute; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); color: #fff; font-size: .72rem; font-weight: 900; box-shadow: 0 12px 30px rgba(0,0,0,.18); transition: transform .35s, border-color .35s, background .35s; }
+    .market-node:hover { transform: translateY(-5px) scale(1.04); background: rgba(255,255,255,.12); border-color: rgba(37,244,238,.34); }
+    .market-node.de { left: 42%; top: 38%; color: #25f4ee; }
+    .market-node.fr { left: 25%; top: 52%; color: #c9a0f0; }
+    .market-node.it { left: 52%; top: 63%; color: #f5d060; }
+    .market-node.es { left: 18%; top: 70%; color: #25f4ee; }
+    .market-node.uk { left: 28%; top: 22%; color: #fe5f7c; }
+    .tt-hub { position: absolute; right: 30px; bottom: 28px; width: 78px; height: 78px; border-radius: 24px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(37,244,238,.16), rgba(254,44,85,.14)); border: 1px solid rgba(255,255,255,.16); color: #fff; }
+    .tt-hub svg { width: 38px; height: 38px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; animation: hubFloat 4s ease-in-out infinite; }
+    .tt-hero-metrics { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+    .tt-hero-metric { min-height: 78px; border-radius: 16px; padding: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); transition: transform .35s, background .35s, border-color .35s; }
+    .tt-hero-metric:hover { transform: translateY(-5px); background: rgba(255,255,255,.085); border-color: rgba(254,44,85,.26); }
+    .tt-hero-metric span { display: block; font-size: .68rem; color: rgba(255,255,255,.5); font-weight: 800; margin-bottom: 8px; }
+    .tt-hero-metric strong { color: #fff; font-size: 1.05rem; }
+    .tt-hero-lane { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .tt-lane-card { display: flex; align-items: center; gap: 10px; min-height: 58px; border-radius: 15px; padding: 12px 14px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.76); font-size: .78rem; font-weight: 850; transition: transform .35s, color .35s, border-color .35s; }
+    .tt-lane-card:hover { transform: translateX(5px); color: #fff; border-color: rgba(37,244,238,.24); }
+    .tt-lane-card svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    @keyframes hubFloat { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-7px) rotate(-3deg); } }
+
+    .service-section { padding: 104px 0; position: relative; overflow: hidden; }
+    .service-section.alt { background: linear-gradient(180deg, #fbfcff 0%, var(--surface-light) 100%); }
+    .service-section.alt::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(199,107,240,.24), rgba(23,208,200,.22), transparent); }
+    .service-tag { display: inline-block; font-size: .75rem; font-weight: 800; padding: 6px 16px; border-radius: 100px; margin-bottom: 16px; letter-spacing: .06em; }
+    .service-tag.tt { background: rgba(254,44,85,.1); color: #FE2C55; }
+    .service-title { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 900; color: var(--ink-title) !important; line-height: 1.25; margin-bottom: 16px; }
+    .service-desc { font-size: 1.02rem; color: var(--ink-body) !important; line-height: 1.8; max-width: 680px; margin: 0 auto; }
+
+    .gradient-text { color: var(--aurora-purple-2) !important; }
+    .page-hero .gradient-text { background: linear-gradient(120deg, var(--aurora-purple-1), var(--aurora-purple-2) 30%, var(--aurora-teal-1) 60%, var(--aurora-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent !important; background-clip: text; font-weight: 900; }
+
+    /* Operating models - flat linear cards */
+    .modes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+    .mode-card { --mode-color: var(--aurora-teal-2); --mode-soft: rgba(23,208,200,.08); --mode-border: rgba(23,208,200,.22); --mode-shadow: rgba(23,208,200,.16); position: relative; background: white; border: 1px solid rgba(10,14,30,.08); border-top: 4px solid var(--mode-color); border-radius: 18px; padding: 34px 30px 30px; transition: all .35s cubic-bezier(.25,.6,.35,1); overflow: hidden; box-shadow: 0 12px 36px rgba(10,14,30,.045); }
+    .mode-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--mode-soft), transparent 58%); pointer-events: none; }
+    .mode-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(10,14,30,.08); border-color: rgba(10,14,30,.08); border-top-color: var(--mode-color); }
+    .mode-card.green { --mode-color: #16b981; --mode-soft: rgba(22,185,129,.1); --mode-border: rgba(22,185,129,.24); --mode-shadow: rgba(22,185,129,.16); }
+    .mode-card.purple { --mode-color: #9b4ded; --mode-soft: rgba(155,77,237,.1); --mode-border: rgba(155,77,237,.24); --mode-shadow: rgba(155,77,237,.16); }
+    .mode-card.gold { --mode-color: #f5b71b; --mode-soft: rgba(245,183,27,.14); --mode-border: rgba(245,183,27,.28); --mode-shadow: rgba(245,183,27,.18); }
+    .mode-card-head { position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
+    .mode-card-icon { width: 62px; height: 62px; border-radius: 18px; display: flex; align-items: center; justify-content: center; background: var(--mode-soft); color: var(--mode-color); border: 1px solid var(--mode-border); transition: all .35s cubic-bezier(.25,.6,.35,1); }
+    .mode-card-icon svg { width: 34px; height: 34px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .mode-card:hover .mode-card-icon { transform: translateY(-2px); background: white; box-shadow: 0 12px 30px var(--mode-shadow); }
+    .mode-card-type { font-size: .75rem; font-weight: 900; color: var(--mode-color); letter-spacing: .12em; text-transform: uppercase; }
+    .mode-card-name { position: relative; font-size: 1.25rem; font-weight: 900; color: var(--ink-title) !important; margin-bottom: 10px; }
+    .mode-card-tag { position: relative; font-size: .78rem; font-weight: 800; padding: 6px 12px; border-radius: 999px; display: inline-flex; align-items: center; margin-bottom: 14px; background: var(--mode-soft); color: var(--mode-color); }
+    .mode-card-desc { position: relative; font-size: .92rem; color: var(--ink-body) !important; line-height: 1.75; }
+    .mode-meta { position: relative; display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(10,14,30,.08); }
+    .mode-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: .82rem; line-height: 1.35; }
+    .mode-meta-key { color: var(--ink-muted); font-weight: 700; }
+    .mode-meta-val { color: var(--ink-title); font-weight: 850; text-align: right; }
+    .mode-card-list { position: relative; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding: 0; list-style: none; }
+    .mode-card-list li { font-size: .78rem; color: var(--mode-color); font-weight: 760; padding: 6px 10px; border-radius: 999px; background: white; border: 1px solid var(--mode-border); }
+
+    /* Creator pool - standalone visual section */
+    .creator-section { background: linear-gradient(135deg, rgba(22,185,129,.035), rgba(155,77,237,.035), rgba(245,183,27,.035)); }
+    .creator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 48px; }
+    .creator-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .creator-copy { background: white; border: 1px solid rgba(10,14,30,.08); border-radius: 18px; padding: 30px; box-shadow: 0 16px 42px rgba(10,14,30,.045); }
+    .creator-stat { padding: 24px; border-radius: 16px; transition: all .35s; background: white; border: 1px solid rgba(10,14,30,.08); box-shadow: 0 10px 28px rgba(10,14,30,.04); }
+    .creator-stat:hover { transform: translateY(-4px); box-shadow: 0 18px 44px rgba(10,14,30,.07); }
+    .creator-stat.cs1 { border-top: 4px solid #16b981; }
+    .creator-stat.cs2 { border-top: 4px solid #9b4ded; }
+    .creator-stat.cs3 { border-top: 4px solid #f5b71b; }
+    .creator-stat.cs4 { border-top: 4px solid #17d0c8; }
+    .creator-stat-val { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; }
+    .cs1 .creator-stat-val { color: #16b981; }
+    .cs2 .creator-stat-val { color: #9b4ded; }
+    .cs3 .creator-stat-val { color: #f5b71b; }
+    .cs4 .creator-stat-val { color: #17d0c8; }
+    .creator-stat-label { font-size: .8rem; color: var(--ink-muted) !important; }
+
+    /* Process flow - six engine cards */
+    .flow-timeline { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+    .flow-step { --flow-color: #16b981; --flow-soft: rgba(22,185,129,.1); --flow-border: rgba(22,185,129,.24); position: relative; display: flex; flex-direction: column; min-height: 260px; padding: 26px; background: white; border: 1px solid rgba(10,14,30,.08); border-radius: 18px; box-shadow: 0 12px 36px rgba(10,14,30,.045); transition: all .35s cubic-bezier(.25,.6,.35,1); overflow: hidden; }
+    .flow-step::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--flow-color); }
+    .flow-step::after { content: ''; position: absolute; inset: 0; background: linear-gradient(150deg, var(--flow-soft), transparent 58%); pointer-events: none; }
+    .flow-step:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(10,14,30,.08); }
+    .flow-step:nth-child(1), .flow-step:nth-child(4) { --flow-color: #16b981; --flow-soft: rgba(22,185,129,.1); --flow-border: rgba(22,185,129,.24); }
+    .flow-step:nth-child(2), .flow-step:nth-child(5) { --flow-color: #9b4ded; --flow-soft: rgba(155,77,237,.1); --flow-border: rgba(155,77,237,.24); }
+    .flow-step:nth-child(3), .flow-step:nth-child(6) { --flow-color: #f5b71b; --flow-soft: rgba(245,183,27,.14); --flow-border: rgba(245,183,27,.28); }
+    .flow-step-top { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
+    .flow-step-num { width: auto; height: auto; border-radius: 0; flex-shrink: 0; display: block; font-size: .78rem; font-weight: 900; color: var(--flow-color); letter-spacing: .12em; z-index: 2; transition: all .35s; }
+    .flow-step-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: var(--flow-soft); color: var(--flow-color); border: 1px solid var(--flow-border); }
+    .flow-step-icon svg { width: 26px; height: 26px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .flow-step-content { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .flow-step-title { font-size: 1.06rem; font-weight: 900; color: var(--ink-title) !important; margin-bottom: 8px; }
+    .flow-step-desc { font-size: .9rem; color: var(--ink-body) !important; line-height: 1.7; }
+    .flow-step-items { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 18px; }
+    .flow-step-tag { font-size: .72rem; font-weight: 760; padding: 5px 10px; border-radius: 999px; background: var(--flow-soft); color: var(--flow-color); border: 1px solid var(--flow-border); }
+
+    @media (max-width: 768px) {
+      .page-hero-content { grid-template-columns: 1fr; }
+      .tt-hero-panel { min-height: auto; }
+      .tt-hero-metrics { grid-template-columns: 1fr; }
+      .tt-hero-lane { grid-template-columns: 1fr; }
+      .modes-grid { grid-template-columns: 1fr; }
+      .creator-grid { grid-template-columns: 1fr; gap: 40px; }
+      .flow-timeline { grid-template-columns: 1fr; }
+      .flow-step { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+<div class="noise-overlay"></div>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img class="logo-dark" src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro">
+      <img class="logo-light" src="assets/logos/digitauro-logo-light.png" alt="数漫极光 DigitAuro">
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a class="nav-link active" href="index.html#business">核心业务 ▾</a>
+        <div class="nav-dropdown">
+          <a class="dropdown-card" href="independent-site.html"><img class="dropdown-icon-img" src="assets/logos/biz-independent.png" alt=""><div><div class="dropdown-title">独立站与 Google 全域增长</div><div class="dropdown-desc">建站 + Google SEM/SEO 全链路</div></div></a>
+          <a class="dropdown-card" href="social-media.html"><img class="dropdown-icon-img" src="assets/logos/biz-social.png" alt=""><div><div class="dropdown-title">社媒运营</div><div class="dropdown-desc">五平台内容 + 投放 + 舆情一体化</div></div></a>
+          <a class="dropdown-card" href="geo-ai.html"><img class="dropdown-icon-img" src="assets/logos/biz-geo-ai.png" alt=""><div><div class="dropdown-title">GEO 全球 AI 获客</div><div class="dropdown-desc">让 ChatGPT、Gemini 主动推荐你</div></div></a>
+          <a class="dropdown-card active" href="tiktok-europe.html"><img class="dropdown-icon-img" src="assets/logos/biz-tiktok-eu.png" alt=""><div><div class="dropdown-title">TikTok 欧洲全域运营</div><div class="dropdown-desc">欧洲 TAP + 本土店 + 达人资源池</div></div></a>
+          <a class="dropdown-card" href="content-production.html"><img class="dropdown-icon-img" src="assets/logos/biz-vdoo.png" alt=""><div><div class="dropdown-title">内容素材制作服务</div><div class="dropdown-desc">15秒短视频 / 故事板分镜 / 定制时长视频</div></div></a>
+          <a class="dropdown-card" href="amazon-erp.html"><img class="dropdown-icon-img" src="assets/logos/biz-amazon-erp.png" alt=""><div><div class="dropdown-title">Amazon SPN 及 ERP 服务</div><div class="dropdown-desc">Listing 优化 + 库存管理 + 订单履约</div></div></a>
+        </div>
+      </div>
+      <a class="nav-link" href="index.html#tech">增长技术</a>
+      <a class="nav-link" href="index.html#jiumai">前海玖麦</a>
+      <a class="nav-link" href="index.html#partners">生态伙伴</a>
+      <a class="nav-link" href="insights.html">洞察</a>
+      <a class="nav-link" href="mailto:young@digitauro.com">联系</a>
+      <a class="btn-nav" href="index.html#contact">获取增长方案 →</a>
+    </div>
+    <button class="menu-toggle" aria-label="菜单">☰</button>
+  </div>
+</nav>
+
+<style>.hero-breadcrumb { padding: 12px 0 0; position: relative; z-index: 5; }.hero-breadcrumb a { color: rgba(255,255,255,.6); font-size: .82rem; font-weight: 500; text-decoration: none; transition: color .2s; }.hero-breadcrumb a:hover { color: rgba(255,255,255,.9); }.hero-breadcrumb span { color: rgba(255,255,255,.3); font-size: .82rem; }.hero-breadcrumb .bc-current { color: rgba(255,255,255,.7); font-weight: 600; }</style>
+<div class="hero-breadcrumb"><div class="breadcrumb-inner"><a href="index.html">首页</a><span>/</span><a href="index.html#business">核心业务</a><span>/</span><span class="bc-current">TikTok 欧洲全域运营</span></div></div>
+
+<!-- HERO -->
+<section class="page-hero" style="padding-top: var(--nav-height); padding-bottom: 80px;">
+<div class="container">
+<div class="page-hero-content">
+<div class="page-hero-text reveal">
+  <div class="hero-badge-row">
+    <span class="hero-badge b1">TikTok 欧洲 TAP 认证服务商</span>
+    <span class="hero-badge b2">本土店核心资源</span>
+    <span class="hero-badge b3">EU5 全覆盖</span>
+  </div>
+  <h1 class="page-hero-title">TikTok 欧洲全域运营 — <span class="gradient-text">本土店 · 达人池 · TAP 认证</span></h1>
+  <p class="page-hero-desc">手握欧洲本土店铺资源，自有本土达人矩阵。TikTok for Business 和 TikTok Shop 欧洲 TAP 认证服务商——从本土店开店到达人带货到全案运营，一站式覆盖 EU5。</p>
+  <div class="page-hero-actions">
+    <a class="btn-primary" href="index.html#contact">获取 TikTok 欧洲方案 →</a>
+    <a class="btn-secondary" href="#modes">了解运营模式</a>
+  </div>
+</div>
+<div class="page-hero-image reveal d2">
+        <div class="tt-hero-panel">
+          <div class="tt-market-map">
+            <div class="tt-market-title">EU5 MARKET COVERAGE</div>
+            <div class="tt-orbit"></div>
+            <div class="tt-orbit two"></div>
+            <div class="market-node uk">UK</div>
+            <div class="market-node fr">FR</div>
+            <div class="market-node de">DE</div>
+            <div class="market-node it">IT</div>
+            <div class="market-node es">ES</div>
+            <div class="tt-hub"><svg viewBox="0 0 24 24"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9.2 9.2 14.8 14.8"/></svg></div>
+          </div>
+          <div class="tt-hero-metrics">
+            <div class="tt-hero-metric"><span>LOCAL STORE</span><strong>本土店资源</strong></div>
+            <div class="tt-hero-metric"><span>CREATOR POOL</span><strong>达人矩阵</strong></div>
+            <div class="tt-hero-metric"><span>TAP SERVICE</span><strong>认证服务商</strong></div>
+          </div>
+          <div class="tt-hero-lane">
+            <div class="tt-lane-card"><svg viewBox="0 0 24 24"><path d="M4 10h16"/><path d="M5 10l1-5h12l1 5"/><path d="M6 10v9h12v-9"/><path d="M9 19v-5h6v5"/></svg> 本土店开店与运营</div>
+            <div class="tt-lane-card"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="7" r="2"/><path d="M3 20c.7-3.2 2.4-5 5-5s4.3 1.8 5 5"/><path d="M14 14c2.5.2 4.2 1.8 5 5"/></svg> 达人带货与内容排期</div>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+</section>
+
+<!-- THREE MODES -->
+<section class="service-section alt" id="modes">
+<div class="container">
+<div class="service-header reveal" style="text-align: center; margin-bottom: 48px;">
+  <span class="service-tag tt">Operating Models</span>
+  <h2 class="service-title">三种模式 — <span class="gradient-text">不同阶段，灵活组合</span></h2>
+  <p class="service-desc">不强制单一模式。根据品类、阶段和资源灵活选型——你可以在不同市场采用不同模式，也可以从全托管起步逐步迁移到联营或本土店。</p>
+</div>
+<div class="modes-grid reveal d2">
+  <div class="mode-card green">
+    <div class="mode-card-head">
+      <div class="mode-card-type">Managed</div>
+      <div class="mode-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M7 7v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V7"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/><path d="M9 12h6"/><path d="M9 15h4"/></svg></div>
+    </div>
+    <div class="mode-card-name">全托管模式</div>
+    <div class="mode-card-tag mt1">低门槛启动 · 团队压力最小</div>
+    <div class="mode-card-desc">选品、定价、达人对接、内容产出、店铺运营全包。你只需供货——其余的我们来。</div>
+    <div class="mode-meta">
+      <div class="mode-meta-row"><span class="mode-meta-key">适合阶段</span><span class="mode-meta-val">冷启动 / 试水欧洲</span></div>
+      <div class="mode-meta-row"><span class="mode-meta-key">投入方式</span><span class="mode-meta-val">供货 + 基础配合</span></div>
+      <div class="mode-meta-row"><span class="mode-meta-key">运营主责</span><span class="mode-meta-val">DigitAuro 全案执行</span></div>
+    </div>
+    <ul class="mode-card-list"><li>零团队可启动</li><li>选品定价</li><li>达人对接</li></ul>
+  </div>
+  <div class="mode-card purple">
+    <div class="mode-card-head">
+      <div class="mode-card-type">Co-Operate</div>
+      <div class="mode-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9.2 9.2 14.8 14.8"/></svg></div>
+    </div>
+    <div class="mode-card-name">联营模式</div>
+    <div class="mode-card-tag mt2">利润共创 · 资源共享</div>
+    <div class="mode-card-desc">共同运营、利润分成。降低试错成本，享受本土资源和运营经验的双重加持——中国品牌最受欢迎的模式。</div>
+    <div class="mode-meta">
+      <div class="mode-meta-row"><span class="mode-meta-key">适合阶段</span><span class="mode-meta-val">验证后放量</span></div>
+      <div class="mode-meta-row"><span class="mode-meta-key">投入方式</span><span class="mode-meta-val">资源共投 + 利润分成</span></div>
+      <div class="mode-meta-row"><span class="mode-meta-key">运营主责</span><span class="mode-meta-val">双方协同决策</span></div>
+    </div>
+    <ul class="mode-card-list"><li>保留主导权</li><li>共享本土店</li><li>共享达人池</li></ul>
+  </div>
+  <div class="mode-card gold">
+    <div class="mode-card-head">
+      <div class="mode-card-type">Local Store</div>
+      <div class="mode-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h16"/><path d="M5 10l1-5h12l1 5"/><path d="M6 10v9h12v-9"/><path d="M9 19v-5h6v5"/><path d="M8 5h8"/></svg></div>
+    </div>
+    <div class="mode-card-name">本土店租赁</div>
+    <div class="mode-card-tag mt3">独立经营 · 利润自主</div>
+    <div class="mode-card-desc">提供欧洲本土店铺资质和运营指导，快速开店上线。你独立运营内容、广告和达人合作——利润归你。</div>
+    <div class="mode-meta">
+      <div class="mode-meta-row"><span class="mode-meta-key">适合阶段</span><span class="mode-meta-val">成熟品牌 / 自建团队</span></div>
+      <div class="mode-meta-row"><span class="mode-meta-key">投入方式</span><span class="mode-meta-val">店铺资质 + 运营支持</span></div>
+      <div class="mode-meta-row"><span class="mode-meta-key">运营主责</span><span class="mode-meta-val">品牌方自主运营</span></div>
+    </div>
+    <ul class="mode-card-list"><li>合规资质</li><li>利润自主</li><li>资源对接</li></ul>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- CREATOR POOL - standalone visual section -->
+<section class="service-section creator-section">
+<div class="container">
+<div class="service-header reveal" style="text-align: center; margin-bottom: 48px;">
+  <span class="service-tag tt">Creator Network</span>
+  <h2 class="service-title">达人资源池 — <span class="gradient-text">欧洲本土达人，精准匹配品牌调性</span></h2>
+  <p class="service-desc">不是随便找达人发视频。我们自建欧洲本土达人资源池，按品类、粉丝画像、内容风格精准匹配。达人合作不是一次性投流——是持续的品牌人设建设。</p>
+</div>
+<div class="creator-grid reveal d2">
+<div class="creator-copy">
+  <div class="service-desc" style="font-size: .95rem; margin: 0; color: var(--ink-body) !important;">
+    <p>我们在德国、法国、意大利、西班牙和英国建立了本土达人合作网络，覆盖时尚、美妆、家居、3C、户外等核心品类。达人筛选不是看粉丝数量——是看粉丝质量、内容风格和品牌契合度。</p>
+    <p style="margin-top: 16px;">每季度更新的达人库 + 月度达人合作排期，让品牌在欧洲 TikTok 的曝光既精准又持续。</p>
+  </div>
+</div>
+<div class="creator-visual">
+  <div class="creator-stat cs1"><div class="creator-stat-val">DE+FR+IT+ES+UK</div><div class="creator-stat-label">覆盖 EU5 本土市场</div></div>
+  <div class="creator-stat cs2"><div class="creator-stat-val">品类匹配</div><div class="creator-stat-label">按品类/粉丝画像/内容风格筛选</div></div>
+  <div class="creator-stat cs3"><div class="creator-stat-val">月度排期</div><div class="creator-stat-label">持续合作 · 品牌人设建设</div></div>
+  <div class="creator-stat cs4"><div class="creator-stat-val">真实带货</div><div class="creator-stat-label">自有达人池 · 非一次性投流</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PROCESS FLOW -->
+<section class="service-section alt">
+<div class="container">
+<div class="service-header reveal" style="text-align: center; margin-bottom: 48px;">
+  <span class="service-tag tt">Growth Process</span>
+  <h2 class="service-title">欧洲增长全链路 — <span class="gradient-text">从 0 到持续增长的六步引擎</span></h2>
+  <p class="service-desc">不是开店就结束。从市场准入到本土化内容到达人带货到数据复盘——每一步都为下一步造势。</p>
+</div>
+<div class="flow-timeline reveal d3">
+  <div class="flow-step">
+    <div class="flow-step-top"><div class="flow-step-num">PHASE 01</div><div class="flow-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 20V7"/><path d="M19 20V7"/><path d="M5 7h14l-2-3H7z"/><path d="M8 11h8"/><path d="M8 15h5"/></svg></div></div>
+    <div class="flow-step-content">
+      <div class="flow-step-title">市场准入与资质搭建</div>
+      <div class="flow-step-desc">本土店资质申请、TikTok Shop 入驻审核、品牌合规备案——开店就是第一天。</div>
+      <div class="flow-step-items"><span class="flow-step-tag">本土店资质</span><span class="flow-step-tag">TAP 认证</span><span class="flow-step-tag">合规审查</span></div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-step-top"><div class="flow-step-num">PHASE 02</div><div class="flow-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18V6"/><path d="M8 18v-7"/><path d="M12 18v-4"/><path d="M16 18V9"/><path d="M20 18V5"/><path d="M4 18h16"/></svg></div></div>
+    <div class="flow-step-content">
+      <div class="flow-step-title">选品策略与定价模型</div>
+      <div class="flow-step-desc">基于欧洲 TikTok 品类数据制定选品策略和定价模型——卖什么、卖多少钱、为什么。</div>
+      <div class="flow-step-items"><span class="flow-step-tag">品类数据</span><span class="flow-step-tag">竞品分析</span><span class="flow-step-tag">定价策略</span></div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-step-top"><div class="flow-step-num">PHASE 03</div><div class="flow-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6h14"/><path d="M7 10h10"/><path d="M9 14h6"/><path d="M12 18v2"/><path d="M8 20h8"/><path d="M4 4l16 16"/></svg></div></div>
+    <div class="flow-step-content">
+      <div class="flow-step-title">本土化内容生产</div>
+      <div class="flow-step-desc">本地语言 + 本地文化理解——不是翻译，是用欧洲消费者的语言和审美做内容。</div>
+      <div class="flow-step-items"><span class="flow-step-tag">本地制作</span><span class="flow-step-tag">多语言</span><span class="flow-step-tag">文化适配</span></div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-step-top"><div class="flow-step-num">PHASE 04</div><div class="flow-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="7" r="2"/><path d="M3 20c.7-3.2 2.4-5 5-5s4.3 1.8 5 5"/><path d="M14 14c2.5.2 4.2 1.8 5 5"/></svg></div></div>
+    <div class="flow-step-content">
+      <div class="flow-step-title">达人矩阵启动</div>
+      <div class="flow-step-desc">匹配品类达人、排期合作、视频产出——第1天就有达人带货。</div>
+      <div class="flow-step-items"><span class="flow-step-tag">达人匹配</span><span class="flow-step-tag">合作排期</span><span class="flow-step-tag">内容审核</span></div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-step-top"><div class="flow-step-num">PHASE 05</div><div class="flow-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13l6-6v4h5a5 5 0 0 1 5 5v2"/><path d="M10 11v6"/><path d="M7 14h6"/></svg></div></div>
+    <div class="flow-step-content">
+      <div class="flow-step-title">广告投放与流量放大</div>
+      <div class="flow-step-desc">TikTok Ads 定向投放 + Spark Ads 种草扩量——把自然流量和付费流量组合放大。</div>
+      <div class="flow-step-items"><span class="flow-step-tag">TikTok Ads</span><span class="flow-step-tag">Spark Ads</span><span class="flow-step-tag">ROI 追踪</span></div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-step-top"><div class="flow-step-num">PHASE 06</div><div class="flow-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16l3-3 3 2 5-7"/><path d="M18 8h-4"/><path d="M18 8v4"/></svg></div></div>
+    <div class="flow-step-content">
+      <div class="flow-step-title">数据复盘与月度迭代</div>
+      <div class="flow-step-desc">月度 GMV 复盘、达人效果追踪、内容数据诊断——用数据决定下一步。</div>
+      <div class="flow-step-items"><span class="flow-step-tag">GMV 看板</span><span class="flow-step-tag">达人ROI</span><span class="flow-step-tag">迭代建议</span></div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- INSIGHT CARD -->
+<section style="background: var(--white); padding: 80px 0;">
+  <div class="container">
+    <a class="insight-feature-card reveal" href="insights/tiktok-europe-window.html" style="display: block; text-decoration: none; color: inherit; background: var(--surface-light); border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 48px; max-width: 800px; margin: 0 auto; transition: all .4s cubic-bezier(.25,.6,.35,1);">
+      <div class="insight-feature-tag" style="font-size: .75rem; font-weight: 800; color: var(--aurora-teal-2); letter-spacing: .06em; margin-bottom: 16px;">深度阅读 · 增长研究院</div>
+      <h3 class="insight-feature-title" style="font-size: 1.4rem; font-weight: 900; color: var(--ink-title); line-height: 1.3; margin-bottom: 14px;">万亿欧洲蓝海：TikTok Shop 的窗口期还有多久？</h3>
+      <p class="insight-feature-excerpt" style="font-size: .95rem; color: var(--ink-body); line-height: 1.75;">欧洲电商市场规模 7000 亿+，TikTok Shop GMV 同比增速 180%。全托管 / 联营 / 本土店租赁三路径入局欧洲——12-18 个月红利窗口。深度阅读完整分析 →</p>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+<div class="cta-glow"></div><div class="cta-glow-2"></div>
+<div class="container">
+<div class="cta-content reveal">
+  <div class="section-label teal light">Get Started</div>
+  <h2 class="cta-heading">准备好进入万亿欧洲 TikTok 市场了吗？</h2>
+  <p class="cta-desc">24 小时内回复，免费诊断你的 TikTok 欧洲增长方案。</p>
+  <div style="display: flex; gap: 16px; justify-content: center; margin-top: 28px;">
+    <a class="btn-primary" href="mailto:young@digitauro.com">获取 TikTok 欧洲方案 →</a>
+    <a class="btn-secondary" href="index.html#business">查看其他业务</a>
+  </div>
+  <div class="cta-email"><a href="mailto:young@digitauro.com">young@digitauro.com</a></div>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+  <div class="footer-brand"><img src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro"><div class="footer-slogan" style="color: #fff;">你的全球增长合伙人</div><p class="footer-positioning" style="color: rgba(255,255,255,.5);">整合流量和技术，驱动品牌全球增长。</p></div>
+  <div class="footer-col"><h4>核心业务</h4><ul><li><a href="independent-site.html">独立站与 Google 增长</a></li><li><a href="social-media.html">社媒运营</a></li><li><a href="geo-ai.html">GEO AI 获客</a></li><li><a href="tiktok-europe.html">TikTok 欧洲</a></li><li><a href="content-production.html">内容素材制作</a></li><li><a href="amazon-erp.html">Amazon SPN 及 ERP</a></li></ul></div>
+  <div class="footer-col"><h4>产品与技术</h4><ul><li><a href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎协同</a></li></ul></div>
+  <div class="footer-col"><h4>公司</h4><ul><li><a href="index.html#business">关于我们</a></li><li><a href="insights.html">洞察</a></li><li><a href="mailto:young@digitauro.com">young@digitauro.com</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+  <div class="footer-copy">© DigitAuro 2026 · 深圳市数漫极光科技有限公司 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2025440301号-1</a></div>
+  <div class="footer-affiliates"><a class="footer-affiliate-link" href="#"><img src="assets/logos/jiumi_partner.png" alt="前海九米" style="height: 18px;">前海九米</a><span class="footer-affiliate-divider">·</span><a class="footer-affiliate-link" href="https://digitwalk.com" target="_blank" rel="noopener"><img src="assets/logos/digitwalk-new.png" alt="数字漫步">数字漫步 DigitWalk</a></div>
+</div>
+</div>
+</footer>
+<a class="float-contact" href="index.html#contact"><span>💬</span>聊聊你的出海计划</a>
+
+<script>
+const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const observer=new IntersectionObserver((e)=>{e.forEach(t=>{if(t.isIntersecting){t.target.classList.add('in');observer.unobserve(t.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;const t=document.querySelector(h);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
+</script>
+</body>
+</html>

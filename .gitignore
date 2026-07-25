@@ -2,3 +2,5 @@
 .workbuddy/
 node_modules/
 *.log
+gen_*.py
+generate_images.py

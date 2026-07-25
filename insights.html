@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>洞察 | 数漫极光 DigitAuro</title>
+  <meta name="description" content="数漫极光跨境增长洞察——来自一线实战的方法论沉淀与趋势研判。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/common.css?v=18">
+  <style>
+    .insights-list { background: var(--white); }
+    .article-card {
+      display: grid; grid-template-columns: 1fr 200px; gap: 40px; align-items: center;
+      background: var(--white); border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl); padding: 40px; margin-bottom: 28px;
+      transition: all .35s cubic-bezier(.25,.6,.35,1); cursor: pointer;
+      text-decoration: none; color: inherit;
+    }
+    .article-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(10,14,30,.08); border-color: var(--aurora-purple-2); }
+    .article-tag {
+      display: inline-block; font-size: .72rem; font-weight: 800;
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; letter-spacing: .04em;
+    }
+    .article-tag.geo { background: rgba(199,107,240,.1); color: var(--aurora-purple-2); }
+    .article-tag.tiktok { background: rgba(23,208,200,.1); color: var(--aurora-teal-2); }
+    .article-tag.site { background: rgba(245,196,0,.12); color: #C9A800; }
+    .article-tag.social { background: rgba(74,222,128,.12); color: #4ade80; }
+    .article-title {
+      font-size: 1.3rem; font-weight: 900; color: var(--ink-title);
+      line-height: 1.4; margin-bottom: 10px;
+    }
+    .article-excerpt {
+      font-size: .92rem; color: var(--ink-body); line-height: 1.7;
+    }
+    .article-arrow {
+      font-size: 1.5rem; color: var(--aurora-purple-2); text-align: right;
+      transition: transform .3s;
+    }
+    .article-card:hover .article-arrow { transform: translateX(6px); }
+    @media (max-width: 768px) {
+      .article-card { grid-template-columns: 1fr; gap: 16px; }
+      .article-arrow { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/logos/digitauro-logo-light.png" alt="数漫极光 DigitAuro">
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a class="nav-link" href="index.html#business">核心业务 ▾</a>
+        <div class="nav-dropdown">
+          <a class="dropdown-card" href="independent-site.html"><img class="dropdown-icon-img" src="assets/logos/biz-independent.png" alt=""><div><div class="dropdown-title">独立站与 Google 全域增长</div><div class="dropdown-desc">建站 + Google SEM/SEO 全链路</div></div></a>
+          <a class="dropdown-card" href="social-media.html"><img class="dropdown-icon-img" src="assets/logos/biz-social.png" alt=""><div><div class="dropdown-title">社媒运营</div><div class="dropdown-desc">五平台内容 + 投放 + 舆情一体化</div></div></a>
+          <a class="dropdown-card" href="geo-ai.html"><img class="dropdown-icon-img" src="assets/logos/biz-geo-ai.png" alt=""><div><div class="dropdown-title">GEO 全球 AI 获客</div><div class="dropdown-desc">让 ChatGPT、Gemini 主动推荐你</div></div></a>
+          <a class="dropdown-card" href="tiktok-europe.html"><img class="dropdown-icon-img" src="assets/logos/biz-tiktok-eu.png" alt=""><div><div class="dropdown-title">TikTok 欧洲全域运营</div><div class="dropdown-desc">欧洲 TAP + 本土店 + 达人资源池</div></div></a>
+          <a class="dropdown-card" href="content-production.html"><img class="dropdown-icon-img" src="assets/logos/biz-vdoo.png" alt=""><div><div class="dropdown-title">内容素材制作服务</div><div class="dropdown-desc">15秒短视频 / 故事板分镜 / 定制时长视频</div></div></a>
+          <a class="dropdown-card" href="amazon-erp.html"><img class="dropdown-icon-img" src="assets/logos/biz-amazon-erp.png" alt=""><div><div class="dropdown-title">Amazon SPN 及 ERP 服务</div><div class="dropdown-desc">Listing 优化 + 库存管理 + 订单履约</div></div></a>
+        </div>
+      </div>
+      <a class="nav-link" href="index.html#tech">增长技术</a>
+      <a class="nav-link" href="index.html#jiumai">前海玖麦</a>
+      <a class="nav-link" href="index.html#partners">生态伙伴</a>
+      <a class="nav-link active" href="insights.html">洞察</a>
+      <a class="nav-link" href="mailto:young@digitauro.com">联系</a>
+      <a class="btn-nav" href="index.html#contact">获取增长方案 →</a>
+    </div>
+    <button class="menu-toggle" aria-label="菜单">☰</button>
+  </div>
+</nav>
+
+<div class="breadcrumb"><div class="breadcrumb-inner"><a href="index.html">首页</a><span>/</span><span class="current">洞察</span></div></div>
+
+<section class="insights-list" style="padding-top: 40px;">
+  <div class="container">
+    <div class="section-label purple reveal">Insights</div>
+    <h2 class="section-heading reveal d1"><span class="gradient-text">洞察 — 我们如何理解跨境增长</span></h2>
+    <p class="section-desc reveal d2">来自一线实战的方法论沉淀与趋势研判。</p>
+
+    <a class="article-card reveal d1" href="insights/geo-ai-cut.html">
+      <div>
+        <span class="article-tag geo">GEO · AI 获客</span>
+        <h3 class="article-title">你的外贸客户，正在被 AI「三刀截流」</h3>
+        <p class="article-excerpt">60% 海外 AI 搜索用户不再点击网站；采购商「先问 AI，再找供应商」已成习惯。GEO 不是蹭关键词——是抢占采购决策的「第一排」。</p>
+      </div>
+      <div class="article-arrow">→</div>
+    </a>
+
+    <a class="article-card reveal d2" href="insights/tiktok-europe-window.html">
+      <div>
+        <span class="article-tag tiktok">TikTok 欧洲</span>
+        <h3 class="article-title">万亿欧洲蓝海：TikTok Shop 的窗口期还有多久？</h3>
+        <p class="article-excerpt">欧洲电商市场规模 7000 亿+，TikTok Shop GMV 同比增速 180%。全托管 / 联营 / 本土店租赁三路径入局欧洲。</p>
+      </div>
+      <div class="article-arrow">→</div>
+    </a>
+
+    <a class="article-card reveal d3" href="insights/independent-site-asset.html">
+      <div>
+        <span class="article-tag site">独立站 · 增长资产</span>
+        <h3 class="article-title">独立站不是网站，是你的海外增长资产</h3>
+        <p class="article-excerpt">海外采购商的第一习惯——Google 搜索供应商品牌名，看官网是否专业。独立站 + Google 增长闭环让资产持续产生复利。</p>
+      </div>
+      <div class="article-arrow">→</div>
+    </a>
+
+    <a class="article-card reveal d4" href="insights/social-media-signal.html">
+      <div>
+        <span class="article-tag social">社媒运营 · B2B 获客</span>
+        <h3 class="article-title">社媒是 B2B 采购的第一信号源——你的客户在刷什么？</h3>
+        <p class="article-excerpt">72% 的 B2B 采购商在联系供应商之前会先查社媒——LinkedIn、YouTube、TikTok 五平台如何成为你的信任杠杆。</p>
+      </div>
+      <div class="article-arrow">→</div>
+    </a>
+
+    <div class="cta-section" style="margin-top: 60px; padding: 60px 0;">
+      <div class="container">
+        <div class="cta-content reveal">
+          <h2 class="cta-heading">准备好开启你的跨境增长了吗？</h2>
+          <p class="cta-desc">24 小时内回复，免费诊断你的增长方案。</p>
+          <div style="display: flex; gap: 16px; justify-content: center; margin-top: 28px;">
+            <a class="btn-primary" href="mailto:young@digitauro.com">获取增长方案 →</a>
+            <a class="btn-secondary" href="index.html">返回首页</a>
+          </div>
+          <div style="margin-top: 20px; text-align: center;"><a href="mailto:young@digitauro.com" style="color: rgba(255,255,255,.5);">young@digitauro.com</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro"><div class="footer-slogan" style="color: #fff;">你的全球增长合伙人</div><p class="footer-positioning" style="color: rgba(255,255,255,.5);">整合流量和技术，驱动品牌全球增长。</p></div>
+      <div class="footer-col"><h4>核心业务</h4><ul><li><a href="independent-site.html">独立站与 Google 增长</a></li><li><a href="social-media.html">社媒运营</a></li><li><a href="geo-ai.html">GEO AI 获客</a></li><li><a href="tiktok-europe.html">TikTok 欧洲</a></li><li><a href="content-production.html">内容素材制作</a></li><li><a href="amazon-erp.html">Amazon SPN 及 ERP</a></li></ul></div>
+      <div class="footer-col"><h4>产品与技术</h4><ul><li><a href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎协同</a></li></ul></div>
+      <div class="footer-col"><h4>公司</h4><ul><li><a href="index.html#business">关于我们</a></li><li><a href="insights.html" class="active">洞察</a></li><li><a href="mailto:young@digitauro.com">young@digitauro.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© DigitAuro 2026 · 深圳市数漫极光科技有限公司 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2025440301号-1</a></div>
+      <div class="footer-affiliates"><a class="footer-affiliate-link" href="#" rel="noopener"><img src="assets/logos/jiumi_partner.png" alt="前海九米" style="height: 18px;">前海九米</a><span class="footer-affiliate-divider">·</span><a class="footer-affiliate-link" href="https://digitwalk.com" target="_blank" rel="noopener"><img src="assets/logos/digitwalk-new.png" alt="数字漫步">数字漫步 DigitWalk</a></div>
+    </div>
+  </div>
+</footer>
+
+<a class="float-contact" href="index.html#contact"><span>💬</span>聊聊你的出海计划</a>
+<script>
+const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const observer=new IntersectionObserver((e)=>{e.forEach(t=>{if(t.isIntersecting)t.target.classList.add('in')})},{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;const t=document.querySelector(h);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
+</script>
+</body>
+</html>

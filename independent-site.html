@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>独立站与 Google 全域增长 | 数漫极光 DigitAuro</title>
+  <meta name="description" content="全定制独立站开发 + Google 一级代理 SEM/SEO 全链路运营。AI 驱动建站与增长。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/common.css?v=18">
+  <style>
+    /* Page hero - matches homepage aurora aesthetic */
+    .page-hero { background: var(--space-dark); position: relative; overflow: hidden; }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 80% 20%, rgba(199,107,240,.18), transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(23,208,200,.12), transparent 70%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(245,196,0,.06), transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(199,107,240,.4), rgba(23,208,200,.4), transparent);
+    }
+    .page-hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; position: relative; z-index: 2; }
+    .page-hero-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; line-height: 1.15; margin-bottom: 20px; color: var(--white); }
+    .page-hero-desc { font-size: 1.05rem; color: rgba(255,255,255,.55); line-height: 1.8; margin-bottom: 32px; max-width: 520px; }
+    .hero-badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+      border-radius: 100px; font-size: .78rem; font-weight: 700;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.75);
+    }
+    .hero-badge img { height: 18px; width: auto; }
+    .page-hero-visual { position: relative; height: 400px; margin-top: 24px; }
+    .hero-feature-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      position: relative; height: 100%;
+    }
+    .hero-feature {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius-md); backdrop-filter: blur(12px);
+      padding: 28px 22px; display: flex; flex-direction: column; justify-content: center;
+      transition: all .4s cubic-bezier(.25,.6,.35,1);
+    }
+    .hero-feature:hover { transform: translateY(-4px); background: rgba(255,255,255,.08); }
+    .hero-feature-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .hero-feature-title { font-size: .95rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+    .hero-feature-desc { font-size: .78rem; color: rgba(255,255,255,.4); line-height: 1.5; }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .stat-card { text-align: center; padding: 36px 20px; background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-lg); transition: all .35s; }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(10,14,30,.06); }
+    .stat-value { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; color: var(--aurora-purple-2); margin-bottom: 8px; }
+    .stat-label { font-size: .85rem; color: var(--ink-muted); }
+
+    /* Section shared */
+    .service-section { padding: 100px 0; }
+    .service-section.alt { background: var(--surface-light); }
+    .service-header { margin-bottom: 48px; text-align: center; }
+    .ai-section .service-title { color: var(--white) !important; }
+    .ai-section .service-desc { color: rgba(255,255,255,.55) !important; }
+    .service-tag {
+      display: inline-block; font-size: .75rem; font-weight: 800; padding: 6px 16px;
+      border-radius: 100px; margin-bottom: 16px; letter-spacing: .06em;
+    }
+    .service-tag.build { background: rgba(199,107,240,.1); color: var(--aurora-purple-2); }
+    .service-tag.seo { background: rgba(74,222,128,.12); color: #4ade80; }
+    .service-tag.ads { background: rgba(251,191,36,.12); color: var(--aurora-gold); }
+        .service-section .service-title { color: var(--ink-title) !important; }
+    .service-section.alt .service-title { color: var(--ink-title) !important; }
+    .service-card-title { color: var(--ink-title) !important; }
+    .service-card-desc { color: var(--ink-body) !important; }
+    .buildora-ft-text strong { color: var(--ink-title) !important; display: block; margin-bottom: 4px; }
+    .service-title { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 900; color: #fff; line-height: 1.25; margin-bottom: 16px; }
+    .service-desc { font-size: 1.02rem; color: var(--ink-body) !important; line-height: 1.8; max-width: 680px; margin: 0 auto; }
+    .service-grid { display: grid; gap: 24px; margin-top: 48px; }
+    .service-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .service-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .service-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .service-card {
+      background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-lg);
+      padding: 32px; transition: all .35s cubic-bezier(.25,.6,.35,1);
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(10,14,30,.06); }
+    .service-card-icon {
+      width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center;
+      justify-content: center; margin-bottom: 18px;
+    }
+    .service-card-icon img { width: 32px; height: 32px; object-fit: contain; }
+    .ai-card-icon img { width: 56px; height: 56px; object-fit: contain; }
+    .hero-feature-icon img { width: 24px; height: 24px; object-fit: contain; }
+    .buildora-ft-icon img { width: 24px; height: 24px; object-fit: contain; }
+    .line-icon { color: var(--icon-color, var(--aurora-purple-2)); }
+    .line-icon svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .hero-feature-icon.line-icon svg, .buildora-ft-icon.line-icon svg { width: 24px; height: 24px; }
+    .ai-card-icon.line-icon svg { width: 56px; height: 56px; }
+    .seo-pipe-icon.line-icon svg { width: 30px; height: 30px; }
+    .advantage-icon.line-icon svg { width: 60%; height: 60%; }
+    .icon-green { --icon-color: #16b981; }
+    .icon-purple { --icon-color: #9b4ded; }
+    .icon-teal { --icon-color: #17d0c8; }
+    .icon-gold { --icon-color: #f5b71b; }
+    .ai-card-icon { display: flex; justify-content: center; margin-bottom: 20px; }
+    .service-card-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .service-card-desc { font-size: .9rem; color: var(--ink-body); line-height: 1.7; }
+
+    /* AI & Tech highlight section */
+    .ai-section {
+      background:
+        radial-gradient(ellipse 60% 42% at 18% 35%, rgba(155,77,237,.18), transparent 68%),
+        radial-gradient(ellipse 55% 38% at 82% 78%, rgba(23,208,200,.16), transparent 68%),
+        linear-gradient(180deg, #0b1022 0%, #0d1227 48%, #0b1328 100%);
+      position: relative; overflow: hidden;
+    }
+    .ai-section::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 65% at 50% 45%, #000, transparent 82%);
+      pointer-events: none;
+    }
+    .ai-section::after {
+      content: ''; position: absolute; inset: auto 0 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(155,77,237,.38), rgba(23,208,200,.32), transparent);
+      pointer-events: none;
+    }
+    .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; position: relative; z-index: 2; }
+    .ai-card {
+      --card-accent: #9b4ded; --card-soft: rgba(155,77,237,.1); --card-border: rgba(155,77,237,.32);
+      text-align: center; padding: 42px 30px; background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.09); border-radius: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 18px 48px rgba(0,0,0,.18);
+      backdrop-filter: blur(16px);
+      transition: transform .35s cubic-bezier(.25,.6,.35,1), background .35s, border-color .35s, box-shadow .35s;
+    }
+    .ai-card:nth-child(2) { --card-accent: #17d0c8; --card-soft: rgba(23,208,200,.1); --card-border: rgba(23,208,200,.32); }
+    .ai-card:nth-child(3) { --card-accent: #16b981; --card-soft: rgba(22,185,129,.1); --card-border: rgba(22,185,129,.32); }
+    .ai-card:hover { background: rgba(255,255,255,.07); transform: translateY(-7px); border-color: var(--card-border); box-shadow: 0 24px 70px rgba(0,0,0,.32), 0 0 0 1px var(--card-soft); }
+    .ai-card-icon {
+      width: 76px; height: 76px; border-radius: 22px; margin: 0 auto 22px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--card-soft);
+      border: 1px solid var(--card-border);
+      font-size: 2.4rem;
+      transition: transform .35s, background .35s, box-shadow .35s;
+    }
+    .ai-card:hover .ai-card-icon { transform: translateY(-3px); background: rgba(255,255,255,.08); box-shadow: 0 14px 34px var(--card-soft); }
+    .ai-card-title { font-size: 1.1rem; font-weight: 800; color: var(--white) !important; margin-bottom: 8px; }
+    .ai-card-desc { font-size: .88rem; color: rgba(255,255,255,.55) !important; line-height: 1.7; }
+
+    /* Partner badges */
+    .partner-badges { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+    .partner-badge { color: var(--ink-body) !important;
+      display: flex; align-items: center; gap: 8px; padding: 12px 22px;
+      background: #fff; border: 1px solid var(--border-light); border-radius: 100px;
+      font-size: .85rem; font-weight: 700; color: #fff; transition: all .3s;
+    }
+    .partner-badge:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.06); }
+    .partner-badge img { height: 24px; width: auto; }
+
+    /* Buildora highlight */
+    .buildora-ft { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: stretch; margin-top: 56px; }
+    .buildora-features { display: flex; flex-direction: column; gap: 16px; }
+    .buildora-feature {
+      --feature-accent: #16b981; --feature-soft: rgba(22,185,129,.1); --feature-border: rgba(22,185,129,.3);
+      display: flex; align-items: flex-start; gap: 16px; padding: 22px 24px;
+      background: rgba(255,255,255,.055); border-radius: 18px; border: 1px solid rgba(255,255,255,.09);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 14px 36px rgba(0,0,0,.14);
+      backdrop-filter: blur(14px);
+      transition: transform .35s cubic-bezier(.25,.6,.35,1), background .35s, border-color .35s, box-shadow .35s, padding .35s;
+    }
+    .buildora-feature:nth-child(2) { --feature-accent: #9b4ded; --feature-soft: rgba(155,77,237,.11); --feature-border: rgba(155,77,237,.3); }
+    .buildora-feature:nth-child(3) { --feature-accent: #17d0c8; --feature-soft: rgba(23,208,200,.1); --feature-border: rgba(23,208,200,.3); }
+    .buildora-feature:hover { transform: translateX(6px); background: rgba(255,255,255,.075); border-color: var(--feature-border); box-shadow: 0 20px 50px rgba(0,0,0,.2), 0 0 0 1px var(--feature-soft); }
+    .buildora-ft-icon {
+      width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+      border: 1px solid var(--feature-border);
+      background: var(--feature-soft) !important;
+      transition: transform .35s, background .35s, box-shadow .35s;
+    }
+    .buildora-feature:hover .buildora-ft-icon { transform: translateY(-2px); background: rgba(255,255,255,.08) !important; box-shadow: 0 12px 30px var(--feature-soft); }
+    .buildora-ft-text strong { display: block; color: rgba(255,255,255,.94) !important; margin-bottom: 6px; font-weight: 850; }
+    .buildora-ft-text span { font-size: .88rem; color: rgba(255,255,255,.58) !important; line-height: 1.65; }
+    .buildora-visual {
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 55% at 18% 12%, rgba(155,77,237,.22), transparent 68%),
+        radial-gradient(ellipse 70% 60% at 88% 88%, rgba(23,208,200,.16), transparent 70%),
+        rgba(255,255,255,.045);
+      border-radius: 22px; padding: 56px 52px; text-align: center;
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 24px 70px rgba(0,0,0,.2);
+      backdrop-filter: blur(18px);
+      transition: transform .35s cubic-bezier(.25,.6,.35,1), border-color .35s, box-shadow .35s;
+    }
+    .buildora-visual::before {
+      content: ''; position: absolute; inset: 24px; border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.055); pointer-events: none;
+    }
+    .buildora-visual:hover { transform: translateY(-6px); border-color: rgba(155,77,237,.32); box-shadow: 0 30px 84px rgba(0,0,0,.28), 0 0 0 1px rgba(155,77,237,.12); }
+    .buildora-visual-icon {
+      position: relative; z-index: 1;
+      width: 92px; height: 92px; border-radius: 24px; margin: 0 auto 26px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(155,77,237,.12);
+      border: 1px solid rgba(155,77,237,.22);
+      font-size: 3rem;
+      transition: transform .35s, box-shadow .35s;
+    }
+    .buildora-visual:hover .buildora-visual-icon { transform: translateY(-3px) scale(1.03); box-shadow: 0 16px 40px rgba(155,77,237,.18); }
+    .buildora-visual-title { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 10px; }
+    .buildora-visual-desc { position: relative; z-index: 1; font-size: .92rem; color: rgba(255,255,255,.58); line-height: 1.75; max-width: 560px; margin: 0 auto; }
+
+    /* SEO flow */
+    .seo-pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 48px; }
+    .seo-pipe-step {
+      text-align: center; padding: 28px 16px; position: relative;
+      background: #fff; border: 1px solid var(--border-light);
+    }
+    .seo-pipe-step:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .seo-pipe-step:last-child { border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+    .seo-pipe-step::after {
+      content: '→'; position: absolute; right: -12px; top: 50%; transform: translateY(-50%);
+      font-size: 1.2rem; color: #4ade80; font-weight: 900; z-index: 2;
+    }
+    .seo-pipe-step:last-child::after { display: none; }
+    .seo-pipe-step:hover { background: rgba(74,222,128,.04); }
+    .seo-pipe-icon { font-size: 1.5rem; margin-bottom: 10px; }
+    .seo-pipe-title { color: var(--ink-title) !important; font-size: .92rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .seo-pipe-desc { color: var(--ink-body) !important; font-size: .76rem; color: var(--ink-muted); line-height: 1.5; }
+
+    /* Process timeline */
+    .proc-tl { position: relative; padding: 20px 0; }
+    .proc-tl::before {
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--aurora-purple-1), var(--aurora-teal-1), var(--aurora-gold));
+      opacity: .25;
+    }
+    .proc-step { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 30px; align-items: start; margin-bottom: 32px; position: relative; }
+    .proc-step .proc-dot { grid-column: 2; grid-row: 1; }
+    .proc-step:not(.rev) .proc-content { grid-column: 1 !important; grid-row: 1; }
+    .proc-step:not(.rev) > div:not(.proc-content):not(.proc-dot) { grid-column: 3 !important; grid-row: 1; }
+    .proc-step.rev .proc-content { grid-column: 3 !important; grid-row: 1; }
+    .proc-step.rev > div:not(.proc-content):not(.proc-dot) { grid-column: 1 !important; grid-row: 1; }
+    .proc-step .proc-spacer { display: none; }
+    .proc-dot {
+      width: 20px; height: 20px; border-radius: 50%; margin: 10px auto 0;
+      z-index: 2; position: relative; flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(199,107,240,.5);
+    }
+    .proc-step:nth-child(odd) .proc-dot { background: var(--aurora-purple-2); box-shadow: 0 0 20px rgba(199,107,240,.5); }
+    .proc-step:nth-child(even) .proc-dot { background: var(--aurora-teal-1); box-shadow: 0 0 20px rgba(23,208,200,.5); }
+    .proc-content { padding: 24px 28px; background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius-lg); transition: all .3s; }
+    .proc-content:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.04); }
+    .proc-num { font-size: .72rem; font-weight: 800; color: var(--aurora-purple-2); letter-spacing: .06em; margin-bottom: 6px; }
+    .proc-title { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .proc-desc { font-size: .88rem; color: var(--ink-body); line-height: 1.7; }
+
+    .case-cta { text-align: center; padding: 60px 0; }
+    .case-cta h3 { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .case-cta p { color: var(--ink-muted); margin-bottom: 24px; font-size: .95rem; }
+
+    @media (max-width: 768px) {
+      .page-hero-content { grid-template-columns: 1fr; }
+      .page-hero-visual { height: auto; }
+      .hero-feature-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .service-grid.cols-2,.service-grid.cols-3,.service-grid.cols-4 { grid-template-columns: 1fr; }
+      .buildora-ft { grid-template-columns: 1fr; }
+      .seo-pipeline { grid-template-columns: 1fr; }
+      .seo-pipe-step { border-radius: var(--radius-md) !important; margin-bottom: 8px; }
+      .seo-pipe-step::after { display: none; }
+      .ai-grid { grid-template-columns: 1fr; }
+      .proc-tl::before { left: 30px; }
+      .proc-step, .proc-step.rev {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 20px !important;
+        direction: ltr !important;
+      }
+      .proc-step .proc-dot, .proc-step.rev .proc-dot {
+        flex: 0 0 20px !important;
+        width: 20px !important;
+        min-width: 20px !important;
+        order: 1 !important;
+      }
+      .proc-step .proc-content, .proc-step.rev .proc-content {
+        flex: 1 !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        order: 2 !important;
+      }
+      .proc-step .proc-spacer, .proc-step.rev .proc-spacer { display: none !important; }
+      
+    }
+.gradient-text { color: var(--aurora-purple-2) !important; -webkit-text-fill-color: var(--aurora-purple-2) !important; }
+    .service-title { color: var(--ink-title) !important; }
+    .ai-section .gradient-text { color: var(--aurora-purple-1) !important; -webkit-text-fill-color: var(--aurora-purple-1) !important; }
+    .dark-section .gradient-text { color: var(--aurora-purple-1) !important; -webkit-text-fill-color: var(--aurora-purple-1) !important; }
+    .page-hero .gradient-text { color: var(--aurora-purple-1) !important; -webkit-text-fill-color: var(--aurora-purple-1) !important; }
+
+    /* Enhanced animations */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideRight {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes floatLight {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes shimmerBorder {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(199,107,240,.3); }
+      50% { box-shadow: 0 0 20px 4px rgba(199,107,240,.15); }
+    }
+    @keyframes countReveal {
+      from { opacity: 0; transform: scale(.5) rotateX(20deg); }
+      to { opacity: 1; transform: scale(1) rotateX(0); }
+    }
+    .reveal { opacity: 0; }
+    .reveal.d1 { animation-delay: .1s; }
+    .reveal.d2 { animation-delay: .2s; }
+    .reveal.d3 { animation-delay: .3s; }
+    .reveal.in { animation: fadeSlideUp .7s cubic-bezier(.22,.61,.36,1) both; }
+    .page-hero-text.reveal.in { animation: fadeSlideRight .8s cubic-bezier(.22,.61,.36,1) both; }
+    .page-hero-visual.reveal.in { animation: scaleIn .8s cubic-bezier(.22,.61,.36,1) both; }
+    .stat-card.reveal.in { animation: countReveal .6s cubic-bezier(.22,.61,.36,1) both; }
+    .stat-card:nth-child(2).reveal.in { animation-delay: .15s; }
+    .stat-card:nth-child(3).reveal.in { animation-delay: .3s; }
+    .stat-card:nth-child(4).reveal.in { animation-delay: .45s; }
+
+    .service-card { position: relative; }
+    .service-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg);
+      opacity: 0; transition: opacity .4s;
+      background: linear-gradient(135deg, rgba(199,107,240,.15), rgba(74,222,128,.1), rgba(251,191,36,.08));
+      pointer-events: none;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-card-icon {
+      transition: all .4s cubic-bezier(.25,.6,.35,1);
+    }
+    .service-card:hover .service-card-icon {
+      transform: scale(1.1) rotate(-5deg);
+      box-shadow: 0 8px 24px rgba(199,107,240,.25);
+    }
+    .service-card:hover .service-card-title {
+      color: var(--aurora-purple-2) !important;
+    }
+
+    .ai-card {
+      position: relative; overflow: hidden;
+      transition: all .5s cubic-bezier(.25,.6,.35,1);
+    }
+    .ai-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg);
+      opacity: 0; transition: opacity .4s;
+      background: radial-gradient(ellipse at center, rgba(199,107,240,.1), transparent 70%);
+      pointer-events: none;
+    }
+    .ai-card:hover::after { opacity: 1; }
+    .ai-card:hover .ai-card-icon svg {
+      animation: floatLight 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 16px rgba(199,107,240,.5));
+    }
+
+    .buildora-feature {
+      position: relative;
+      transition: all .4s cubic-bezier(.25,.6,.35,1);
+    }
+    .buildora-feature::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(180deg, var(--aurora-purple-2), var(--aurora-teal-2));
+      border-radius: 2px; opacity: 0; transition: opacity .3s;
+    }
+    .buildora-feature:hover::before { opacity: 1; }
+    .buildora-feature:hover { padding-left: 24px; }
+
+    .seo-pipe-step {
+      transition: all .4s cubic-bezier(.25,.6,.35,1);
+      position: relative; overflow: hidden;
+    }
+    .seo-pipe-step::before {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #4ade80, var(--aurora-purple-2));
+      transform: scaleX(0); transition: transform .4s cubic-bezier(.25,.6,.35,1);
+    }
+    .seo-pipe-step:hover::before { transform: scaleX(1); }
+    .seo-pipe-step:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.06); }
+    .seo-pipe-step:hover .seo-pipe-icon svg {
+      transform: scale(1.2);
+      filter: drop-shadow(0 4px 12px rgba(199,107,240,.3));
+    }
+    .seo-pipe-icon svg { transition: all .35s; }
+
+    .proc-content { transition: all .4s cubic-bezier(.25,.6,.35,1); }
+    .proc-content:hover {
+      transform: translateY(-4px) translateX(0) !important;
+      box-shadow: 0 16px 40px rgba(199,107,240,.12);
+      border-color: var(--aurora-purple-2);
+    }
+    .proc-dot {
+      transition: all .4s;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+    .proc-step:hover .proc-dot {
+      transform: scale(1.5);
+      animation: none;
+      box-shadow: 0 0 30px rgba(199,107,240,.6) !important;
+    }
+
+    .partner-badge {
+      transition: all .35s cubic-bezier(.25,.6,.35,1);
+    }
+    .partner-badge:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(199,107,240,.15);
+      border-color: var(--aurora-purple-2);
+    }
+    .partner-badge:hover img { transform: scale(1.1); }
+    .partner-badge img { transition: all .35s; }
+
+    .hero-badge {
+      transition: all .35s cubic-bezier(.25,.6,.35,1);
+    }
+    .hero-badge:hover {
+      transform: translateY(-2px);
+      background: rgba(199,107,240,.15);
+      border-color: rgba(199,107,240,.3);
+      box-shadow: 0 4px 20px rgba(199,107,240,.2);
+    }
+
+    .advantage-icon { transition: all .4s cubic-bezier(.25,.6,.35,1); }
+    .advantage-card:hover .advantage-icon {
+      transform: scale(1.15) rotate(-6deg);
+      box-shadow: 0 8px 24px rgba(199,107,240,.3);
+    }
+
+    .insight-feature-card {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--surface-light); border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl); padding: 48px; max-width: 800px; margin: 0 auto;
+      transition: all .4s cubic-bezier(.25,.6,.35,1);
+    }
+    .insight-feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(199,107,240,.12);
+      border-color: var(--aurora-purple-2);
+    }
+    .insight-feature-tag {
+      font-size: .75rem; font-weight: 800; color: var(--aurora-purple-2);
+      letter-spacing: .06em; margin-bottom: 16px;
+    }
+    .insight-feature-title {
+      font-size: 1.4rem; font-weight: 900; color: var(--ink-title);
+      line-height: 1.3; margin-bottom: 14px;
+    }
+    .insight-feature-excerpt {
+      font-size: .95rem; color: var(--ink-body); line-height: 1.75;
+    }
+</style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img class="logo-dark" src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro">
+      <img class="logo-light" src="assets/logos/digitauro-logo-light.png" alt="数漫极光 DigitAuro">
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a class="nav-link active" href="index.html#business">核心业务 ▾</a>
+        <div class="nav-dropdown">
+          <a class="dropdown-card active" href="independent-site.html"><img class="dropdown-icon-img" src="assets/logos/biz-independent.png" alt=""><div><div class="dropdown-title">独立站与 Google 全域增长</div><div class="dropdown-desc">建站 + Google SEM/SEO 全链路</div></div></a>
+          <a class="dropdown-card" href="social-media.html"><img class="dropdown-icon-img" src="assets/logos/biz-social.png" alt=""><div><div class="dropdown-title">社媒运营</div><div class="dropdown-desc">五平台内容 + 投放 + 舆情一体化</div></div></a>
+          <a class="dropdown-card" href="geo-ai.html"><img class="dropdown-icon-img" src="assets/logos/biz-geo-ai.png" alt=""><div><div class="dropdown-title">GEO 全球 AI 获客</div><div class="dropdown-desc">让 ChatGPT、Gemini 主动推荐你</div></div></a>
+          <a class="dropdown-card" href="tiktok-europe.html"><img class="dropdown-icon-img" src="assets/logos/biz-tiktok-eu.png" alt=""><div><div class="dropdown-title">TikTok 欧洲全域运营</div><div class="dropdown-desc">欧洲 TAP + 本土店 + 达人资源池</div></div></a>
+          <a class="dropdown-card" href="content-production.html"><img class="dropdown-icon-img" src="assets/logos/biz-vdoo.png" alt=""><div><div class="dropdown-title">内容素材制作服务</div><div class="dropdown-desc">15秒短视频 / 故事板分镜 / 定制时长视频</div></div></a>
+          <a class="dropdown-card" href="amazon-erp.html"><img class="dropdown-icon-img" src="assets/logos/biz-amazon-erp.png" alt=""><div><div class="dropdown-title">Amazon SPN 及 ERP 服务</div><div class="dropdown-desc">Listing 优化 + 库存管理 + 订单履约</div></div></a>
+        </div>
+      </div>
+      <a class="nav-link" href="index.html#tech">增长技术</a>
+      <a class="nav-link" href="index.html#jiumai">前海玖麦</a>
+      <a class="nav-link" href="index.html#partners">生态伙伴</a>
+      <a class="nav-link" href="insights.html">洞察</a>
+      <a class="nav-link" href="mailto:young@digitauro.com">联系</a>
+      <a class="btn-nav" href="index.html#contact">获取增长方案 →</a>
+    </div>
+    <button class="menu-toggle" aria-label="菜单">☰</button>
+  </div>
+</nav>
+
+
+
+<!-- ===== HERO ===== -->
+<section class="page-hero" style="padding-top: var(--nav-height); padding-bottom: 80px;">
+  <div class="page-hero-mesh"></div><div class="page-hero-aurora-band"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-text reveal">
+        <div class="hero-badge-row">
+          <span class="hero-badge"><img src="assets/logos/google_partner.png" alt="" style="height:16px;"> Google 一级代理</span>
+          <span class="hero-badge"><img src="assets/logos/shopify-color.webp" alt="" style="height:16px;"> Shopify Plus Partner</span>
+          <span class="hero-badge">专属广告优化师</span>
+        </div>
+        <h1 class="page-hero-title">独立站与 Google 全域增长 — <span class="gradient-text">全定制开发，品牌由你定义</span></h1>
+        <p class="page-hero-desc">全定制独立站开发 + Google 一级代理 SEM/SEO 全链路运营加持，专属广告优化师精细运作每一分预算。3D 模型、AR 全息展示、AI 内容引擎——为不同行业定制建站亮点。</p>
+        <div class="page-hero-actions">
+          <a class="btn-primary" href="index.html#contact">获取建站 + 运营方案 →</a>
+          <a class="btn-secondary" href="#build">了解建站服务</a>
+        </div>
+      </div>
+      <div class="page-hero-visual reveal d2">
+        <div class="hero-feature-grid">
+          <div class="hero-feature">
+            <div class="hero-feature-icon line-icon icon-purple" style="background: rgba(199,107,240,.15);"><svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h7"/><path d="M16 14l4 4"/><path d="M20 14l-4 4"/></svg></div>
+            <div class="hero-feature-title">全定制开发</div>
+            <div class="hero-feature-desc">品牌专属设计，每个像素为你而生</div>
+          </div>
+          <div class="hero-feature">
+            <div class="hero-feature-icon line-icon icon-green" style="background: rgba(74,222,128,.15);"><svg viewBox="0 0 24 24"><path d="M5 20V7"/><path d="M19 20V7"/><path d="M5 7h14l-2-3H7z"/><path d="M8 11h8"/><path d="M8 15h5"/></svg></div>
+            <div class="hero-feature-title">全定制开发</div>
+            <div class="hero-feature-desc">深度策略定位，品质交付</div>
+          </div>
+          <div class="hero-feature">
+            <div class="hero-feature-icon line-icon icon-teal" style="background: rgba(23,208,200,.15);"><svg viewBox="0 0 24 24"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="M7.8 7.8l2.8 2.8"/><path d="M13.4 13.4l2.8 2.8"/><path d="M16.2 7.8l-2.8 2.8"/><path d="M10.6 13.4l-2.8 2.8"/><circle cx="12" cy="12" r="2"/></svg></div>
+            <div class="hero-feature-title">AI 内容引擎</div>
+            <div class="hero-feature-desc">多语言 SEO 内容自动生成与优化</div>
+          </div>
+          <div class="hero-feature">
+            <div class="hero-feature-icon line-icon icon-gold" style="background: rgba(251,191,36,.15);"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-6"/><path d="M5 5l4 3 4-4 6 5"/></svg></div>
+            <div class="hero-feature-title">SEM 精准投流</div>
+            <div class="hero-feature-desc">专属优化师，ROAS 全程可追踪</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section style="padding: 64px 0;">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal"><div class="stat-value">100+</div><div class="stat-label">独立站全案案例</div></div>
+      <div class="stat-card reveal d1"><div class="stat-value">一级代理</div><div class="stat-label">Google 官方资质</div></div>
+      <div class="stat-card reveal d2"><div class="stat-value">Shopify Plus</div><div class="stat-label">官方合作伙伴</div></div>
+      <div class="stat-card reveal d3"><div class="stat-value">100%</div><div class="stat-label">全定制开发</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BUILD ===== -->
+<section class="service-section" id="build">
+  <div class="container">
+    <div class="service-header reveal">
+      <span class="service-tag build">Website Building</span>
+      <h2 class="service-title">全定制独立站 <span class="gradient-text">每一个像素都为品牌服务</span></h2>
+      <p class="service-desc">不是套模板，不是改样式。从品牌策略、信息架构、UI/UX 设计到前后端开发——每一个环节都从零出发，为你的品牌量身打造。支持多语言架构、3D 模型嵌入、AR 全息展示。</p>
+    </div>
+    <div class="service-grid cols-2 reveal d1">
+      <div class="service-card">
+        <div class="service-card-icon line-icon icon-green" style="background: rgba(74,222,128,.08);"><svg viewBox="0 0 24 24"><path d="M5 20V7"/><path d="M19 20V7"/><path d="M5 7h14l-2-3H7z"/><path d="M8 11h8"/><path d="M8 15h5"/></svg></div>
+        <h3 class="service-card-title">全定制开发</h3>
+        <p class="service-card-desc">深度品牌诊断 + 定制策略 + 全案执行。从市场调研到产品结构梳理到网站落地——不是做页面，是做品牌。适合对品牌有长期投入决心的出海企业。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon line-icon icon-purple" style="background: rgba(199,107,240,.08);"><svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h7"/><path d="M16 14l4 4"/><path d="M20 14l-4 4"/></svg></div>
+        <h3 class="service-card-title">全定制独立站开发</h3>
+        <p class="service-card-desc">品牌专属 UI/UX 设计 + 自研框架开发。每一行代码、每一个交互动效都为你的品牌量身打造。支持多语言架构、3D 模型、AR 展示——你的独立站就是你的品牌名片。</p>
+      </div>
+    </div>
+
+    <!-- Custom design highlights -->
+    <div class="service-grid cols-3 reveal d2" style="margin-top: 24px;">
+      <div class="service-card">
+        <div class="service-card-icon line-icon icon-purple" style="background: rgba(199,107,240,.08);"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 16l8-8 3 3-8 8H6z"/><path d="M13 9l2 2"/><path d="M17 5l2 2"/></svg></div>
+        <h3 class="service-card-title">全定制视觉设计</h3>
+        <p class="service-card-desc">品牌色板、字体系统、交互动效——每一个像素都为品牌定制，不与任何竞品雷同。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon line-icon icon-teal" style="background: rgba(23,208,200,.08);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.7 3.7 5.7 3.7 9S14.5 18.3 12 21"/><path d="M12 3c-2.5 2.7-3.7 5.7-3.7 9S9.5 18.3 12 21"/></svg></div>
+        <h3 class="service-card-title">多语言 + 多币种</h3>
+        <p class="service-card-desc">全球化架构原生内置，英文、法语、德语等市场独立 SEO 策略，不做机械翻译。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon line-icon icon-green" style="background: rgba(74,222,128,.08);"><svg viewBox="0 0 24 24"><path d="M4 14a8 8 0 1 1 16 0"/><path d="M12 14l4-5"/><path d="M6 19h12"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg></div>
+        <h3 class="service-card-title">性能 + Core Web Vitals</h3>
+        <p class="service-card-desc">Google PageSpeed 90+、Core Web Vitals 全绿通过——性能从架构中长出来，不是事后优化。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI & 3D Tech ===== -->
+<section class="ai-section">
+  <div class="container" style="position: relative; z-index: 2;">
+    <div class="service-header reveal" style="text-align: center;">
+      <span class="service-tag build" style="background: rgba(199,107,240,.15); color: var(--aurora-purple-1);">AI & 3D Tech</span>
+      <h2 class="service-title" style="color: var(--white);">AI 驱动建站 — <span class="gradient-text">你的独立站可以是一座数字展厅</span></h2>
+      <p class="service-desc" style="color: rgba(255,255,255,.5);">独立站不止是页面。我们用 AI 和 3D 技术让它成为海外客户沉浸式了解产品、信任品牌的第一场景。</p>
+    </div>
+    <div class="ai-grid reveal d2">
+      <div class="ai-card">
+        <div class="ai-card-icon line-icon icon-purple"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg></div>
+        <div class="ai-card-title">Buildora 3D 模型</div>
+        <div class="ai-card-desc">自研 3D 建模引擎，为建材、工业设备、家居等行业提供产品 3D 展示。客户可以在独立站上旋转、缩放、拆解你的产品——比 100 张图片更有说服力。</div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-icon line-icon icon-teal"><svg viewBox="0 0 24 24"><path d="M5 8V5h3"/><path d="M16 5h3v3"/><path d="M19 16v3h-3"/><path d="M8 19H5v-3"/><path d="M8 11l4-2 4 2v5l-4 2-4-2z"/><path d="M12 9v9"/><path d="M8 11l4 2 4-2"/></svg></div>
+        <div class="ai-card-title">AR 全息展示</div>
+        <div class="ai-card-desc">客户用手机摄像头就能将你的产品「摆放」在真实空间中。家具、建材、装饰品——沉浸式体验让决策速度提升 3 倍。</div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-icon line-icon icon-green"><svg viewBox="0 0 24 24"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="M7.8 7.8l2.8 2.8"/><path d="M13.4 13.4l2.8 2.8"/><path d="M16.2 7.8l-2.8 2.8"/><path d="M10.6 13.4l-2.8 2.8"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="ai-card-title">AI 内容引擎</div>
+        <div class="ai-card-desc">多语言产品描述、SEO 博客、落地页文案——AI 自动生成 + 人工精修。内容生产效率提升 10 倍，全球市场本地化内容不用头疼。</div>
+      </div>
+    </div>
+
+    <!-- Buildora highlight -->
+    <div class="buildora-ft reveal d3">
+      <div class="buildora-features">
+        <div class="buildora-feature">
+          <div class="buildora-ft-icon line-icon icon-green" style="background: rgba(74,222,128,.1);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg></div>
+          <div class="buildora-ft-text"><strong>建材行业 3D 产品目录</strong><span>Buildora 3D 引擎专为建材设计：铝合金门窗、预制房屋、模块化建材——客户在独立站上在线定制、查看 3D 效果，询盘转化率提升 40%+。</span></div>
+        </div>
+        <div class="buildora-feature">
+          <div class="buildora-ft-icon line-icon icon-purple" style="background: rgba(199,107,240,.1);"><svg viewBox="0 0 24 24"><path d="M5 8V5h3"/><path d="M16 5h3v3"/><path d="M19 16v3h-3"/><path d="M8 19H5v-3"/><path d="M8 11l4-2 4 2v5l-4 2-4-2z"/></svg></div>
+          <div class="buildora-ft-text"><strong>AR 空间预览</strong><span>家具、卫浴、户外装备——海外客户扫码即可将产品 AR 投射到真实环境中。沉浸式浏览让决策速度最大化。</span></div>
+        </div>
+        <div class="buildora-feature">
+          <div class="buildora-ft-icon line-icon icon-teal" style="background: rgba(23,208,200,.1);"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-6"/><path d="M6 6l4 3 4-4 4 3"/></svg></div>
+          <div class="buildora-ft-text"><strong>数据驱动的定制体验</strong><span>基于 Buildora 的客户交互数据（热门视角、常看规格、放弃节点），持续优化产品展示和定制流程——让独立站比销售更懂客户。</span></div>
+        </div>
+      </div>
+      <div class="buildora-visual">
+        <div class="buildora-visual-icon line-icon icon-purple"><svg viewBox="0 0 24 24" style="height:80px;width:80px;"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/><path d="M8 5.8l8 4.5"/></svg></div>
+        <div class="buildora-visual-title">Buildora 3D 产品引擎</div>
+        <div class="buildora-visual-desc">数漫极光自研 3D 建模与展示引擎，为建材、工业设备和家居行业打造身临其境的产品展示体验。不是贴图，是真正的 3D 交互——旋转、缩放、拆解，每一个角度都是真实的产品数据。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEO ===== -->
+<section class="service-section alt" id="seo">
+  <div class="container">
+    <div class="service-header reveal">
+      <span class="service-tag seo">SEO Growth</span>
+      <h2 class="service-title">Google SEO 自然增长 — <span class="gradient-text">让海外客户搜到你</span></h2>
+      <p class="service-desc">70% 的 B2B 海外采购商从 Google 搜索开始。我们不做黑帽 SEO——技术优化 + AI 内容引擎 + 外链建设三管齐下，自然流量持续复合增长。</p>
+    </div>
+    <div class="seo-pipeline reveal d2">
+      <div class="seo-pipe-step">
+        <div class="seo-pipe-icon line-icon icon-green"><svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M6 10h12"/><path d="M8 14h8"/><path d="M10 18h4"/></svg></div><div class="seo-pipe-title">技术审计</div><div class="seo-pipe-desc">架构分析 / Core Web Vitals / Schema 标记</div>
+      </div>
+      <div class="seo-pipe-step">
+        <div class="seo-pipe-icon line-icon icon-purple"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/><path d="M8 11h6"/></svg></div><div class="seo-pipe-title">关键词策略</div><div class="seo-pipe-desc">行业词 / 长尾词 / 竞品词矩阵</div>
+      </div>
+      <div class="seo-pipe-step">
+        <div class="seo-pipe-icon line-icon icon-teal"><svg viewBox="0 0 24 24"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><circle cx="12" cy="12" r="2"/></svg></div><div class="seo-pipe-title">AI 内容部署</div><div class="seo-pipe-desc">Blog / 产品页 / 落地页 AI 生成+人工</div>
+      </div>
+      <div class="seo-pipe-step">
+        <div class="seo-pipe-icon line-icon icon-gold"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"/></svg></div><div class="seo-pipe-title">外链建设</div><div class="seo-pipe-desc">行业权威引用 + PR + 数字足迹</div>
+      </div>
+      <div class="seo-pipe-step">
+        <div class="seo-pipe-icon line-icon icon-green"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-6"/><path d="M6 6l4 3 4-4 4 3"/></svg></div><div class="seo-pipe-title">持续优化</div><div class="seo-pipe-desc">GSC 追踪 / 排名报表 / 月度迭代</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ADS ===== -->
+<section class="service-section" id="ads">
+  <div class="container">
+    <div class="service-header reveal">
+      <span class="service-tag ads">Google Ads</span>
+      <h2 class="service-title">SEM 精准投放 — <span class="gradient-text">专属优化师精细运作每一分钱</span></h2>
+      <p class="service-desc">Google 一级代理 + 专属广告优化师 1V1 服务。搜索广告、Shopping Ads、再营销三管齐下——不是帮你花钱，是用数据让每一分钱都花在可能成交的人身上。</p>
+    </div>
+    <div class="service-grid cols-3 reveal d1" style="margin-bottom: 40px;">
+      <div class="service-card" style="text-align: center;">
+        <div class="service-card-icon line-icon icon-gold" style="background: rgba(251,191,36,.08); margin: 0 auto 18px;"><svg viewBox="0 0 24 24"><path d="M4 13l6-6v4h5a5 5 0 0 1 5 5v2"/><path d="M10 11v6"/><path d="M7 14h6"/></svg></div>
+        <h3 class="service-card-title">专属广告优化师</h3>
+        <p class="service-card-desc" style="text-align: left;">不是机器自动投放——每个客户配专属优化师。人手调整关键词、出价、素材、落地页，用经验为你守预算、提 ROAS。</p>
+      </div>
+      <div class="service-card" style="text-align: center;">
+        <div class="service-card-icon line-icon icon-purple" style="background: rgba(199,107,240,.08); margin: 0 auto 18px;"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h4"/><path d="M15 17l2-2 2 2"/></svg></div>
+        <h3 class="service-card-title">全链路可追踪</h3>
+        <p class="service-card-desc" style="text-align: left;">GTM + GA4 全埋点配置。从广告点击到官网浏览到表单提交——每一次触达和转化都可追踪、可归因、可优化。</p>
+      </div>
+      <div class="service-card" style="text-align: center;">
+        <div class="service-card-icon line-icon icon-green" style="background: rgba(74,222,128,.08); margin: 0 auto 18px;"><svg viewBox="0 0 24 24"><path d="M7 7h10v10H7z"/><path d="M4 4l3 3"/><path d="M20 4l-3 3"/><path d="M4 20l3-3"/><path d="M20 20l-3-3"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <h3 class="service-card-title">再营销追回客户</h3>
+        <p class="service-card-desc" style="text-align: left;">70% 的潜在客户不会一次性成交。展示广告 + Shopping Ads 再营销持续触达——让已经认识你的客户最终选择你。</p>
+      </div>
+    </div>
+    <div class="partner-badges reveal d2">
+      <div class="partner-badge"><img src="assets/logos/google_partner.png" alt=""> Google 一级代理 · 专属广告优化师</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="service-section alt" id="process">
+  <div class="container">
+    <div class="section-label purple reveal">Process</div>
+    <h2 class="section-heading reveal d1">从调研到增长 — <span class="gradient-text">六步闭环，持续迭代</span></h2>
+    <p class="section-desc reveal d2">不是交付即结束，每月数据复盘，每一步都为增长创造复利。</p>
+    <div class="proc-tl reveal d3">
+      <div class="proc-step"><div class="proc-content"><div class="proc-num">Step 01</div><div class="proc-title">市场调研与品牌定位</div><div class="proc-desc">行业竞品分析、目标用户画像、品牌差异化定位。厘清「为什么选你」。</div></div><div class="proc-dot"></div><div class="proc-spacer"></div></div>
+      <div class="proc-step rev"><div class="proc-content"><div class="proc-num">Step 02</div><div class="proc-title">品牌策略与全定制设计</div><div class="proc-desc">品牌定位梳理 + 信息架构规划 + 全定制 UI/UX 设计——从零到品牌语言完成交付。</div></div><div class="proc-dot"></div><div class="proc-spacer"></div></div>
+      <div class="proc-step"><div class="proc-content"><div class="proc-num">Step 03</div><div class="proc-title">开发与 3D/AI 集成</div><div class="proc-desc">前后端开发 + 多语言架构 + Buildora 3D 模型嵌入 + AR 展示——建站即建展厅。</div></div><div class="proc-dot"></div><div class="proc-spacer"></div></div>
+      <div class="proc-step rev"><div class="proc-content"><div class="proc-num">Step 04</div><div class="proc-title">SEO + 内容部署</div><div class="proc-desc">技术 SEO 搭建 + AI 内容引擎多语言部署 + 结构化数据标记——上线即 SEO 就绪。</div></div><div class="proc-dot"></div><div class="proc-spacer"></div></div>
+      <div class="proc-step"><div class="proc-content"><div class="proc-num">Step 05</div><div class="proc-title">SEM 投放启动</div><div class="proc-desc">专属优化师搭建广告账户 + 关键词策略 + 首轮投放 + A/B 测试——搜索流量即时启动。</div></div><div class="proc-dot"></div><div class="proc-spacer"></div></div>
+      <div class="proc-step rev"><div class="proc-content"><div class="proc-num">Step 06</div><div class="proc-title">月度复盘与迭代</div><div class="proc-desc">月度 SEO 排名 + 广告效果 + 网站数据诊断——不是交钥匙工程，是持续增长陪伴。</div></div><div class="proc-dot"></div><div class="proc-spacer"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSIGHT CARD ===== -->
+<section style="background: var(--white); padding: 80px 0;">
+  <div class="container">
+    <a class="insight-feature-card reveal" href="insights/independent-site-asset.html">
+      <div class="insight-feature-tag">深度阅读 · 增长研究院</div>
+      <h3 class="insight-feature-title">独立站不是网站，是你的海外增长资产</h3>
+      <p class="insight-feature-excerpt">海外采购商的第一习惯——Google 搜索供应商品牌名，看官网是否专业。独立站 + Google 增长闭环让资产持续产生复利。深度阅读完整方法论 →</p>
+    </a>
+  </div>
+</section>
+
+<!-- ===== WHY US ===== -->
+<section class="dark-section" style="margin-top: 0;">
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="section-label teal light reveal">Why Us</div>
+    <h2 class="section-heading light reveal d1">为什么选择数漫极光的建站 + 运营？</h2>
+    <p class="section-desc light reveal d2">Google 一级代理 +  合作伙伴 + AI 驱动技术底座。</p>
+    <div class="advantage-grid">
+      <div class="advantage-card reveal d1" style="background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.08);">
+        <div class="advantage-icon line-icon icon-purple" style="background: rgba(199,107,240,.12);"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 16l8-8 3 3-8 8H6z"/><path d="M13 9l2 2"/><path d="M17 5l2 2"/></svg></div>
+        <h4 class="advantage-title" style="color: var(--white);">全定制品牌建站</h4>
+        <p class="advantage-desc" style="color: rgba(255,255,255,.5);">每个品牌都有独一无二的基因。我们坚持全定制开发——从品牌策略到交互细节，不和任何人撞脸。</p>
+      </div>
+      <div class="advantage-card reveal d2" style="background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.08);">
+        <div class="advantage-icon line-icon icon-teal" style="background: rgba(23,208,200,.12);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg></div>
+        <h4 class="advantage-title" style="color: var(--white);">AI + 3D 技术内置</h4>
+        <p class="advantage-desc" style="color: rgba(255,255,255,.5);">Buildora 3D 引擎·AR 全息展示·AI 内容引擎——独立站不只是网站，是你的数字展厅。</p>
+      </div>
+      <div class="advantage-card reveal d3" style="background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.08);">
+        <div class="advantage-icon line-icon icon-gold" style="background: rgba(245,196,0,.12);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.7 3.7 5.7 3.7 9S14.5 18.3 12 21"/><path d="M12 3c-2.5 2.7-3.7 5.7-3.7 9S9.5 18.3 12 21"/></svg></div>
+        <h4 class="advantage-title" style="color: var(--white);">建站 + 运营一体化</h4>
+        <p class="advantage-desc" style="color: rgba(255,255,255,.5);">Google 一级代理 + 专属优化师 + SEO 团队在同一体系内协作——建站就是增长的开始。</p>
+      </div>
+    </div>
+
+    <div class="case-cta reveal d4">
+      <h3>想看真实案例？</h3>
+      <p>100+ 独立站全案包括建材、工业设备、生活方式等多个行业。联系我们获取案例资料和效果数据。</p>
+      <a class="btn-primary" href="mailto:young@digitauro.com">获取案例资料 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div><div class="cta-glow-2"></div>
+  <div class="container">
+    <div class="cta-content reveal">
+      <div class="section-label teal light">Get Started</div>
+      <h2 class="cta-heading">准备好打造你的独立站了吗？</h2>
+      <p class="cta-desc">顾问 1V1 对接，3-5 天出方案，24 小时内回复。</p>
+      <div style="display: flex; gap: 16px; justify-content: center; margin-top: 28px;">
+        <a class="btn-primary" href="mailto:young@digitauro.com">获取建站 + 运营方案 →</a>
+        <a class="btn-secondary" href="index.html#business">查看其他业务</a>
+      </div>
+      <div class="cta-email"><a href="mailto:young@digitauro.com">young@digitauro.com</a> · 24 小时内回复</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro"><div class="footer-slogan" style="color: #fff;">你的全球增长合伙人</div><p class="footer-positioning" style="color: rgba(255,255,255,.5);">整合流量和技术，驱动品牌全球增长。</p></div>
+      <div class="footer-col"><h4>核心业务</h4><ul><li><a href="independent-site.html">独立站与 Google 增长</a></li><li><a href="social-media.html">社媒运营</a></li><li><a href="geo-ai.html">GEO AI 获客</a></li><li><a href="tiktok-europe.html">TikTok 欧洲</a></li><li><a href="content-production.html">内容素材制作</a></li><li><a href="amazon-erp.html">Amazon SPN 及 ERP</a></li></ul></div>
+      <div class="footer-col"><h4>产品与技术</h4><ul><li><a href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎协同</a></li></ul></div>
+      <div class="footer-col"><h4>公司</h4><ul><li><a href="index.html#business">关于我们</a></li><li><a href="insights.html">洞察</a></li><li><a href="mailto:young@digitauro.com">young@digitauro.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© DigitAuro 2026 · 深圳市数漫极光科技有限公司 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2025440301号-1</a></div>
+      <div class="footer-affiliates"><a class="footer-affiliate-link" href="#"><img src="assets/logos/jiumi_partner.png" alt="前海九米" style="height: 18px;">前海九米</a><span class="footer-affiliate-divider">·</span><a class="footer-affiliate-link" href="https://digitwalk.com" target="_blank" rel="noopener"><img src="assets/logos/digitwalk-new.png" alt="数字漫步">数字漫步 DigitWalk</a></div>
+    </div>
+  </div>
+</footer>
+
+<a class="float-contact" href="index.html#contact"><span>💬</span>聊聊你的出海计划</a>
+
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+
+// Enhanced reveal with staggered delays
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Parallax hero visual
+window.addEventListener('scroll',()=>{
+  const heroVisual=document.querySelector('.page-hero-visual');
+  if(heroVisual){
+    const rect=heroVisual.getBoundingClientRect();
+    const scrolled=Math.max(0,rect.top/2);
+    heroVisual.style.transform=`translateY(${scrolled*0.05}px)`;
+  }
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){
+  const h=this.getAttribute('href');
+  if(h==='#')return;
+  const t=document.querySelector(h);
+  if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+}));
+</script>
+</body>
+</html>

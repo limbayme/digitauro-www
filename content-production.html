@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>内容素材制作服务 | 数漫极光 DigitAuro</title>
+  <meta name="description" content="从 15 秒短视频到完整定制视频：故事板、分镜脚本、AI 视频生成、多语言配音，覆盖产品广告、品牌片、教程内容全场景。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/common.css?v=18">
+  <style>
+    .page-hero { background: radial-gradient(ellipse 70% 55% at 72% 22%, rgba(245,183,27,.18), transparent 68%), radial-gradient(ellipse 55% 42% at 18% 78%, rgba(155,77,237,.18), transparent 68%), var(--space-dark); overflow: hidden; }
+    .page-hero-content { align-items: center; }
+    .page-hero-kicker { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.72); font-size: .78rem; font-weight: 800; margin-bottom: 22px; }
+    .page-hero-kicker .dot { width: 8px; height: 8px; border-radius: 50%; background: #f5b71b; box-shadow: 0 0 18px rgba(245,183,27,.65); }
+    .hero-production-panel { position: relative; min-height: 430px; padding: 28px; border-radius: 26px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 28px 80px rgba(0,0,0,.28); backdrop-filter: blur(18px); overflow: hidden; }
+    .hero-production-panel::before { content: ''; position: absolute; inset: -30%; background: radial-gradient(circle at 20% 20%, rgba(245,183,27,.22), transparent 30%), radial-gradient(circle at 82% 70%, rgba(23,208,200,.16), transparent 34%); pointer-events: none; }
+    .hero-screen { position: relative; height: 210px; border-radius: 18px; background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03)); border: 1px solid rgba(255,255,255,.1); display: grid; place-items: center; overflow: hidden; }
+    .hero-screen::after { content: ''; position: absolute; inset: 18px; border-radius: 14px; border: 1px dashed rgba(255,255,255,.12); }
+    .play-ring { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; color: #f5b71b; background: rgba(245,183,27,.12); border: 1px solid rgba(245,183,27,.28); box-shadow: 0 14px 40px rgba(245,183,27,.14); animation: floatCard 4s ease-in-out infinite; }
+    .play-ring svg { width: 34px; height: 34px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .hero-strip { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
+    .hero-clip { min-height: 76px; border-radius: 14px; padding: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.82); display: flex; flex-direction: column; justify-content: space-between; transition: transform .35s, background .35s, border-color .35s; }
+    .hero-clip:hover { transform: translateY(-4px); background: rgba(255,255,255,.085); border-color: rgba(245,183,27,.28); }
+    .hero-clip span { font-size: .68rem; font-weight: 850; color: rgba(255,255,255,.52); }
+    .hero-clip strong { font-size: .82rem; }
+    .hero-stack { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+    .hero-chip { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.72); font-size: .78rem; font-weight: 800; transition: transform .35s, color .35s, border-color .35s; }
+    .hero-chip:hover { transform: translateX(4px); color: #fff; border-color: rgba(23,208,200,.24); }
+    .line-icon { color: var(--icon-color, #9b4ded); }
+    .line-icon svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .line-icon.lg svg { width: 34px; height: 34px; }
+    .icon-gold { --icon-color: #f5b71b; }
+    .icon-purple { --icon-color: #9b4ded; }
+    .icon-teal { --icon-color: #17d0c8; }
+    .icon-green { --icon-color: #16b981; }
+    .service-type-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 46px; }
+    .service-type-card { --card-color: #f5b71b; --card-soft: rgba(245,183,27,.12); position: relative; padding: 28px 24px 24px; border-radius: 18px; background: #fff; border: 1px solid rgba(10,14,30,.08); border-top: 4px solid var(--card-color); box-shadow: 0 14px 38px rgba(10,14,30,.045); overflow: hidden; transition: transform .35s cubic-bezier(.25,.6,.35,1), box-shadow .35s, border-color .35s; }
+    .service-type-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--card-soft), transparent 58%); pointer-events: none; }
+    .service-type-card:hover { transform: translateY(-7px); box-shadow: 0 26px 68px rgba(10,14,30,.09); border-color: rgba(10,14,30,.08); border-top-color: var(--card-color); }
+    .service-type-card:nth-child(2) { --card-color: #9b4ded; --card-soft: rgba(155,77,237,.1); }
+    .service-type-card:nth-child(3) { --card-color: #17d0c8; --card-soft: rgba(23,208,200,.1); }
+    .service-type-card:nth-child(4) { --card-color: #f05b78; --card-soft: rgba(240,91,120,.1); }
+    .service-type-card .line-icon { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; background: var(--card-soft); color: var(--card-color); border: 1px solid rgba(10,14,30,.06); margin-bottom: 18px; }
+    .service-type-card h4 { position: relative; font-size: 1.03rem; font-weight: 900; color: var(--ink-title); margin-bottom: 10px; }
+    .service-type-card p { position: relative; font-size: .88rem; color: var(--ink-body); line-height: 1.65; }
+    .service-meta { position: relative; display: grid; gap: 8px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(10,14,30,.08); font-size: .78rem; color: var(--ink-muted); }
+    .service-meta span { display: flex; justify-content: space-between; gap: 12px; }
+    .service-meta strong { color: var(--ink-title); }
+    .workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; counter-reset: step; }
+    .workflow-step { --step-color: #9b4ded; --step-soft: rgba(155,77,237,.1); min-height: 218px; padding: 24px; border-radius: 18px; background: #fff; border: 1px solid rgba(10,14,30,.08); box-shadow: 0 12px 34px rgba(10,14,30,.045); transition: transform .35s, box-shadow .35s; }
+    .workflow-step:hover { transform: translateY(-6px); box-shadow: 0 22px 58px rgba(10,14,30,.08); }
+    .workflow-step:nth-child(2), .workflow-step:nth-child(5) { --step-color: #17d0c8; --step-soft: rgba(23,208,200,.1); }
+    .workflow-step:nth-child(3), .workflow-step:nth-child(6) { --step-color: #f5b71b; --step-soft: rgba(245,183,27,.12); }
+    .workflow-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+    .workflow-num { font-size: .78rem; letter-spacing: .12em; color: var(--step-color); font-weight: 900; }
+    .workflow-step .line-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; color: var(--step-color); background: var(--step-soft); }
+    .workflow-step h4 { font-size: 1rem; font-weight: 900; color: var(--ink-title); margin-bottom: 8px; }
+    .workflow-step p { font-size: .86rem; line-height: 1.65; color: var(--ink-body); }
+    .dark-section .advantage-icon.line-icon { display: grid; place-items: center; }
+    @keyframes floatCard { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @media (max-width: 1024px) { .service-type-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 768px) { .page-hero-content { grid-template-columns: 1fr; } .hero-production-panel { min-height: auto; } .service-type-grid, .workflow-grid { grid-template-columns: 1fr; } .hero-strip { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img class="logo-dark" src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro">
+      <img class="logo-light" src="assets/logos/digitauro-logo-light.png" alt="数漫极光 DigitAuro">
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a class="nav-link active" href="index.html#business">核心业务 ▾</a>
+        <div class="nav-dropdown">
+          <a class="dropdown-card" href="independent-site.html"><img class="dropdown-icon-img" src="assets/logos/biz-independent.png" alt=""><div><div class="dropdown-title">独立站与 Google 全域增长</div><div class="dropdown-desc">建站 + Google SEM/SEO 全链路</div></div></a>
+          <a class="dropdown-card" href="social-media.html"><img class="dropdown-icon-img" src="assets/logos/biz-social.png" alt=""><div><div class="dropdown-title">社媒运营</div><div class="dropdown-desc">五平台内容 + 投放 + 舆情一体化</div></div></a>
+          <a class="dropdown-card" href="geo-ai.html"><img class="dropdown-icon-img" src="assets/logos/biz-geo-ai.png" alt=""><div><div class="dropdown-title">GEO 全球 AI 获客</div><div class="dropdown-desc">让 ChatGPT、Gemini 主动推荐你</div></div></a>
+          <a class="dropdown-card" href="tiktok-europe.html"><img class="dropdown-icon-img" src="assets/logos/biz-tiktok-eu.png" alt=""><div><div class="dropdown-title">TikTok 欧洲全域运营</div><div class="dropdown-desc">欧洲 TAP + 本土店 + 达人资源池</div></div></a>
+          <a class="dropdown-card active" href="content-production.html"><img class="dropdown-icon-img" src="assets/logos/biz-vdoo.png" alt=""><div><div class="dropdown-title">内容素材制作服务</div><div class="dropdown-desc">15秒短视频 / 故事板分镜 / 定制时长视频</div></div></a>
+          <a class="dropdown-card" href="amazon-erp.html"><img class="dropdown-icon-img" src="assets/logos/biz-amazon-erp.png" alt=""><div><div class="dropdown-title">Amazon SPN 及 ERP 服务</div><div class="dropdown-desc">Listing 优化 + 库存管理 + 订单履约</div></div></a>
+        </div>
+      </div>
+      <a class="nav-link" href="index.html#tech">增长技术</a>
+      <a class="nav-link" href="index.html#jiumai">前海玖麦</a>
+      <a class="nav-link" href="index.html#cases">案例</a>
+      <a class="nav-link" href="index.html#partners">生态伙伴</a>
+      <a class="nav-link" href="index.html#insights">洞察</a>
+      <a class="nav-link" href="index.html#about">关于</a>
+      <a class="btn-nav" href="index.html#contact">获取增长方案 →</a>
+    </div>
+    <button class="menu-toggle" aria-label="菜单">☰</button>
+  </div>
+</nav>
+
+
+
+<section class="page-hero" style="padding-top: var(--nav-height); padding-bottom: 80px;">
+  <div class="page-hero-mesh"></div><div class="page-hero-aurora-band"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-text reveal">
+        <div class="page-hero-kicker"><span class="dot"></span>火山引擎 Seedance · Noiz.ai 声音引擎 · 故事板分镜</div>
+        <h1 class="page-hero-title">内容素材制作服务 — <span class="gradient-text">15 秒到完整定制，全场景覆盖</span></h1>
+        <p class="page-hero-desc">不只是 15 秒短视频。从故事板策划、分镜脚本到 AI 视频生成、多语言配音，再到完整定制品牌片——一套流程，覆盖产品广告、品牌片、教程内容、社媒素材、跨境营销素材全场景。</p>
+        <div class="page-hero-actions">
+          <a class="btn-primary" href="index.html#contact">获取内容方案 →</a>
+          <a class="btn-secondary" href="#services">了解服务类型</a>
+        </div>
+      </div>
+      <div class="page-hero-image reveal d2">
+        <div class="hero-production-panel">
+          <div class="hero-screen">
+            <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M9 6l9 6-9 6z"/><path d="M4 5v14"/></svg></div>
+          </div>
+          <div class="hero-strip">
+            <div class="hero-clip"><span>SHORTS</span><strong>15s 批量短视频</strong></div>
+            <div class="hero-clip"><span>ADS</span><strong>30-60s 产品广告</strong></div>
+            <div class="hero-clip"><span>STORY</span><strong>分镜脚本</strong></div>
+            <div class="hero-clip"><span>BRAND</span><strong>完整品牌片</strong></div>
+          </div>
+          <div class="hero-stack">
+            <div class="hero-chip"><span class="line-icon icon-gold"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M7 7v10"/><path d="M17 7v10"/><path d="M4 17h16"/></svg></span>Seedance 画面生成</div>
+            <div class="hero-chip"><span class="line-icon icon-teal"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M7 9v6"/><path d="M17 9v6"/><path d="M4 11v2"/><path d="M20 11v2"/></svg></span>Noiz.ai 多语言配音</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-row" style="padding: 64px 0;">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="stat-value">15s-5min+</div><div class="stat-label">视频时长灵活</div></div>
+      <div class="stat-item reveal d1"><div class="stat-value">Seedance</div><div class="stat-label">企业级 AI 视频模型</div></div>
+      <div class="stat-item reveal d2"><div class="stat-value">Noiz.ai</div><div class="stat-label">多语言声音引擎</div></div>
+      <div class="stat-item reveal d3"><div class="stat-value">10x / 90%</div><div class="stat-label">效率提升 / 成本下降</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES TYPES ===== -->
+<section id="services" style="background: var(--white);">
+  <div class="container">
+    <div class="section-label gold reveal">Service Types</div>
+    <h2 class="section-heading reveal d1">四种内容形式，全场景覆盖</h2>
+    <p class="section-desc reveal d2">从批量产出到深度定制，按需选择最适合你的内容形态。</p>
+    <div class="service-type-grid">
+      <div class="service-type-card reveal d1">
+        <div class="line-icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 10-13h-7z"/></svg></div>
+        <h4 class="advantage-title">15 秒短视频批量产出</h4>
+        <p class="advantage-desc">产品图直接生成 15 秒带货短视频。适合 TikTok、Reels、Shorts 等平台批量投放，日产 100+ 条。</p>
+        <div class="service-meta">
+          <span><strong>交付周期</strong>2-3 天</span>
+          <span><strong>适用</strong>产品矩阵 / 电商带货</span>
+        </div>
+      </div>
+      <div class="service-type-card reveal d2">
+        <div class="line-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M8 6l2 4"/><path d="M14 6l2 4"/><path d="M4 10h16"/><path d="M10 13l4 2-4 2z"/></svg></div>
+        <h4 class="advantage-title">30-60 秒产品广告</h4>
+        <p class="advantage-desc">完整产品广告片，包含开场、卖点展示、使用场景、行动号召。适合广告投放、品牌宣传。</p>
+        <div class="service-meta">
+          <span><strong>交付周期</strong>5-7 天</span>
+          <span><strong>适用</strong>广告投放 / 官网展示</span>
+        </div>
+      </div>
+      <div class="service-type-card reveal d3">
+        <div class="line-icon"><svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/><path d="M4 8h2"/><path d="M18 8h2"/></svg></div>
+        <h4 class="advantage-title">故事板分镜定制</h4>
+        <p class="advantage-desc">专业分镜师 + AI 辅助，从创意概念到逐镜头脚本。适合需要深度表达的剧情广告、品牌故事。</p>
+        <div class="service-meta">
+          <span><strong>交付周期</strong>7-10 天</span>
+          <span><strong>适用</strong>品牌故事 / 剧情广告</span>
+        </div>
+      </div>
+      <div class="service-type-card reveal d1">
+        <div class="line-icon"><svg viewBox="0 0 24 24"><path d="M5 7h10v10H5z"/><path d="M15 10l5-3v10l-5-3z"/><path d="M8 11h4"/></svg></div>
+        <h4 class="advantage-title">完整定制品牌片</h4>
+        <p class="advantage-desc">3-5 分钟+ 完整品牌片/产品纪录片。专业团队 + AI 工具，从创意到成片全流程定制。</p>
+        <div class="service-meta">
+          <span><strong>交付周期</strong>15-30 天</span>
+          <span><strong>适用</strong>官网 / 展会 / 发布会</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORYBOARD WORKFLOW ===== -->
+<section style="background: var(--surface-light);">
+  <div class="container">
+    <div class="section-label purple reveal">Workflow</div>
+    <h2 class="section-heading reveal d1">故事板分镜工作流</h2>
+    <p class="section-desc reveal d2">从创意到成片，专业团队 + AI 工具高效协同。</p>
+    <div class="workflow-grid">
+      <div class="workflow-step reveal d1">
+        <div class="workflow-head"><div class="workflow-num">PHASE 01</div><div class="line-icon"><svg viewBox="0 0 24 24"><path d="M4 18l6-12 4 7 2-3 4 8z"/><path d="M7 18h10"/></svg></div></div>
+        <h4 class="process-step-title">创意概念</h4>
+        <p class="process-step-desc">需求沟通、受众分析、核心信息梳理、创意方向提案</p>
+      </div>
+      <div class="workflow-step reveal d2">
+        <div class="workflow-head"><div class="workflow-num">PHASE 02</div><div class="line-icon"><svg viewBox="0 0 24 24"><path d="M5 5h10l4 4v10H5z"/><path d="M15 5v4h4"/><path d="M8 13h8"/><path d="M8 16h5"/></svg></div></div>
+        <h4 class="process-step-title">脚本撰写</h4>
+        <p class="process-step-desc">文案撰写、多语言版本（英、日、德、法、西等）、卖点突出</p>
+      </div>
+      <div class="workflow-step reveal d3">
+        <div class="workflow-head"><div class="workflow-num">PHASE 03</div><div class="line-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/><path d="M8 4v16"/><path d="M16 4v16"/></svg></div></div>
+        <h4 class="process-step-title">分镜设计</h4>
+        <p class="process-step-desc">逐镜头分镜图、镜头运动、光影氛围、参考画面制作</p>
+      </div>
+      <div class="workflow-step reveal d4">
+        <div class="workflow-head"><div class="workflow-num">PHASE 04</div><div class="line-icon"><svg viewBox="0 0 24 24"><path d="M12 3v4"/><path d="M12 17v4"/><path d="M3 12h4"/><path d="M17 12h4"/><circle cx="12" cy="12" r="2"/></svg></div></div>
+        <h4 class="process-step-title">AI 视频生成</h4>
+        <p class="process-step-desc">Seedance 企业级模型生成、镜头拼接、转场调色</p>
+      </div>
+      <div class="workflow-step reveal d5">
+        <div class="workflow-head"><div class="workflow-num">PHASE 05</div><div class="line-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M7 9v6"/><path d="M17 9v6"/><path d="M4 11v2"/><path d="M20 11v2"/></svg></div></div>
+        <h4 class="process-step-title">配音配乐</h4>
+        <p class="process-step-desc">Noiz.ai 多语言配音、背景音乐、音效设计</p>
+      </div>
+      <div class="workflow-step reveal d6">
+        <div class="workflow-head"><div class="workflow-num">PHASE 06</div><div class="line-icon"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-6"/><path d="M6 6l4 3 4-4 4 3"/></svg></div></div>
+        <h4 class="process-step-title">后期交付</h4>
+        <p class="process-step-desc">多版本输出、字幕包装、平台适配、批量交付</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ADVANTAGES (DARK) ===== -->
+<section class="dark-section">
+  <div class="dark-glow"></div><div class="dark-glow-2"></div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <div class="section-label teal light reveal">Why Us</div>
+    <h2 class="section-heading light reveal d1">为什么选择我们的内容制作服务？</h2>
+    <p class="section-desc light reveal d2">不是模板套用，是创意 + 技术 + 品质的全维度交付。</p>
+    <div class="advantage-grid">
+      <div class="advantage-card reveal d1" style="background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.08);">
+        <div class="advantage-icon line-icon icon-gold" style="background: rgba(245,196,0,.12);"><svg viewBox="0 0 24 24"><path d="M12 3c2 3 .5 4.5-1 6.2C9.6 10.8 9 12 9.4 14c.4 2 2 3 3.8 3 2.5 0 4.8-2 4.8-5 0-3.4-2.7-5.7-6-9z"/><path d="M8 13c-1.2.8-2 2-2 3.5C6 19 8.2 21 12 21s6-2 6-4.5"/></svg></div>
+        <h4 class="advantage-title" style="color: var(--white);">Seedance 企业级</h4>
+        <p class="advantage-desc" style="color: rgba(255,255,255,.5);">不是简单调用 API，是与火山引擎 Seedance 深度协同，企业级画质和稳定性。</p>
+      </div>
+      <div class="advantage-card reveal d2" style="background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.08);">
+        <div class="advantage-icon line-icon icon-purple" style="background: rgba(199,107,240,.12);"><svg viewBox="0 0 24 24"><path d="M5 9v6h4l5 4V5L9 9z"/><path d="M17 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/></svg></div>
+        <h4 class="advantage-title" style="color: var(--white);">Noiz.ai 声音引擎</h4>
+        <p class="advantage-desc" style="color: rgba(255,255,255,.5);">接近母语者自然度的多语言配音，内容生产成本降 90%、效率提升 10 倍。</p>
+      </div>
+      <div class="advantage-card reveal d3" style="background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.08);">
+        <div class="advantage-icon line-icon icon-teal" style="background: rgba(23,208,200,.12);"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 10-13h-7z"/></svg></div>
+        <h4 class="advantage-title" style="color: var(--white);">全场景覆盖</h4>
+        <p class="advantage-desc" style="color: rgba(255,255,255,.5);">15 秒到 5 分钟+，从短视频到完整品牌片，一个团队全搞定。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div><div class="cta-glow-2"></div>
+  <div class="container">
+    <div class="cta-content reveal">
+      <div class="section-label teal light">Get Started</div>
+      <h2 class="cta-heading">准备好开始你的内容项目了吗？</h2>
+      <p class="cta-desc">免费样品视频试做，24 小时内回复，3-5 天出方案。</p>
+      <div class="page-hero-actions" style="justify-content: center;">
+        <a class="btn-primary" href="mailto:young@digitauro.com">获取内容方案 →</a>
+        <a class="btn-secondary" href="index.html#business">查看其他业务</a>
+      </div>
+      <div class="cta-email"><a href="mailto:young@digitauro.com">young@digitauro.com</a> · 24 小时内回复</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro"><div class="footer-slogan">你的全球增长合伙人</div><p class="footer-positioning">整合流量和技术，驱动品牌全球增长。</p></div>
+      <div class="footer-col"><h4>核心业务</h4><ul><li><a href="independent-site.html">独立站与 Google 增长</a></li><li><a href="social-media.html">社媒运营</a></li><li><a href="geo-ai.html">GEO AI 获客</a></li><li><a href="tiktok-europe.html">TikTok 欧洲</a></li><li><a href="content-production.html">内容素材制作</a></li><li><a href="amazon-erp.html">Amazon SPN 及 ERP</a></li></ul></div>
+      <div class="footer-col"><h4>产品与技术</h4><ul><li><a href="index.html#tech">VDOIT 智能体基座</a></li><li><a href="index.html#jiumai">前海玖麦工作台</a></li><li><a href="index.html#tech">Noiz.ai</a></li><li><a href="index.html#tech">火山引擎协同</a></li></ul></div>
+      <div class="footer-col"><h4>公司</h4><ul><li><a href="index.html#about">关于我们</a></li><li><a href="index.html#cases">案例</a></li><li><a href="index.html#insights">洞察</a></li><li><a href="index.html#partners">加入生态</a></li><li><a href="mailto:young@digitauro.com">young@digitauro.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© DigitAuro 2026 · 前海九米跨境 × 数字漫步 联合出品</div>
+      <div class="footer-affiliates">
+        <a class="footer-affiliate-link" href="https://digitwalk.com" target="_blank" rel="noopener"><img src="assets/logos/digitwalk-new.png" alt="数字漫步">数字漫步 DigitWalk</a>
+        <span class="footer-affiliate-divider">·</span>
+        <a class="footer-affiliate-link" href="#" rel="noopener"><img src="assets/logos/jiumi_partner.png" alt="九米跨境" style="height: 18px;">九米跨境</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="float-contact" href="#contact"><span>💬</span>聊聊你的出海计划</a>
+<script>
+const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const observer=new IntersectionObserver((e)=>{e.forEach(t=>{if(t.isIntersecting)t.target.classList.add('in')})},{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;const t=document.querySelector(h);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
+</script>
+</body>
+</html>

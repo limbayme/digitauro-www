@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEO 全球 AI 获客 | 数漫极光 DigitAuro</title>
+  <meta name="description" content="GEO 全球 AI 获客——让 ChatGPT、Gemini、Grok、AI Overview 主动推荐你的品牌。四大平台全覆盖。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/common.css?v=18">
+  <style>
+    .page-hero { background: var(--space-dark); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 80% 20%, rgba(199,107,240,.18), transparent 70%), radial-gradient(ellipse 60% 50% at 20% 80%, rgba(23,208,200,.12), transparent 70%); pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(199,107,240,.4), rgba(23,208,200,.4), transparent); }
+    .page-hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+    .page-hero-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; line-height: 1.15; margin-bottom: 20px; color: var(--white); }
+    .page-hero-desc { font-size: 1.05rem; color: rgba(255,255,255,.55); line-height: 1.8; margin-bottom: 32px; max-width: 520px; }
+    .page-hero-visual { position: relative; height: 380px; margin-top: 24px; }
+    .hero-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; height: 100%; }
+    .hero-feature { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); border-radius: var(--radius-md); backdrop-filter: blur(12px); padding: 28px 22px; transition: all .4s cubic-bezier(.25,.6,.35,1); }
+    .hero-feature:hover { transform: translateY(-4px); background: rgba(255,255,255,.08); }
+    .hero-feature-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .hero-feature-icon img { width: 24px; height: 24px; object-fit: contain; }
+    .hero-feature-title { font-size: .95rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+    .hero-feature-desc { font-size: .78rem; color: rgba(255,255,255,.4); line-height: 1.5; }
+
+    .service-section { padding: 100px 0; }
+    .service-section.alt { background: var(--surface-light); }
+    .service-tag { display: inline-block; font-size: .75rem; font-weight: 800; padding: 6px 16px; border-radius: 100px; margin-bottom: 16px; letter-spacing: .06em; }
+    .service-tag.geo { background: rgba(199,107,240,.1); color: var(--aurora-purple-2); }
+    .service-title { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 900; color: var(--ink-title) !important; line-height: 1.25; margin-bottom: 16px; }
+    .service-desc { font-size: 1.02rem; color: var(--ink-body) !important; line-height: 1.8; max-width: 680px; margin: 0 auto; }
+    .service-grid { display: grid; gap: 24px; margin-top: 48px; }
+    .service-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .service-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .service-card { background: white; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 32px; transition: all .35s cubic-bezier(.25,.6,.35,1); position: relative; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(10,14,30,.06); }
+    .service-card::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg); opacity: 0; transition: opacity .4s; background: linear-gradient(135deg, rgba(199,107,240,.08), rgba(23,208,200,.06)); pointer-events: none; }
+    .service-card:hover::before { opacity: 1; }
+    .service-card-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; transition: all .4s cubic-bezier(.25,.6,.35,1); }
+    .service-card-icon img { width: 28px; height: 28px; object-fit: contain; }
+    .line-icon { color: var(--icon-color, var(--aurora-purple-2)); }
+    .line-icon svg { width: 28px; height: 28px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .geo-step-icon.line-icon svg { width: 30px; height: 30px; }
+    .icon-green { --icon-color: #16b981; }
+    .icon-purple { --icon-color: #9b4ded; }
+    .icon-teal { --icon-color: #17d0c8; }
+    .icon-gold { --icon-color: #f5b71b; }
+    .service-card:hover .service-card-icon { transform: scale(1.1) rotate(-5deg); }
+    .service-card-title { font-size: 1.05rem; font-weight: 800; color: var(--ink-title) !important; margin-bottom: 10px; }
+    .service-card-desc { font-size: .9rem; color: var(--ink-body) !important; line-height: 1.7; }
+    .service-card:hover .service-card-title { color: var(--aurora-purple-2) !important; }
+
+    .geo-flow { display: flex; align-items: center; gap: 0; margin-top: 48px; justify-content: center; flex-wrap: wrap; }
+    .geo-step { text-align: center; padding: 32px 20px; background: white; border: 1px solid var(--border-light); min-width: 155px; flex: 1; max-width: 220px; transition: all .4s cubic-bezier(.25,.6,.35,1); position: relative; }
+    .geo-step:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .geo-step:last-child { border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+    .geo-step:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(199,107,240,.12); border-color: var(--aurora-purple-2); }
+    .geo-step::after { content: '→'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: var(--aurora-purple-2); font-weight: 900; z-index: 2; }
+    .geo-step:last-child::after { display: none; }
+    .geo-step-num { font-size: 2rem; font-weight: 900; color: var(--aurora-purple-2); margin-bottom: 8px; opacity: .3; }
+    .geo-step:hover .geo-step-num { opacity: .6; }
+    .geo-step-icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .geo-step-title { font-size: .92rem; font-weight: 700; color: var(--ink-title) !important; margin-bottom: 6px; }
+    .geo-step-desc { font-size: .76rem; color: var(--ink-muted) !important; line-height: 1.5; }
+
+    .platform-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+    .platform-card { text-align: center; padding: 36px 20px; background: white; border: 1px solid var(--border-light); border-radius: var(--radius-lg); transition: all .35s cubic-bezier(.25,.6,.35,1); }
+    .platform-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(199,107,240,.1); border-color: var(--aurora-purple-2); }
+    .platform-card-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 1px solid var(--border-light); }
+    .platform-card-icon img { width: 32px; height: 32px; object-fit: contain; }
+    .platform-card-icon.c1 { background: rgba(16,163,127,.1); }
+    .platform-card-icon.c2 { background: rgba(142,117,178,.12); }
+    .platform-card-icon.c3 { background: rgba(0,0,0,.05); }
+    .platform-card-icon.c4 { background: rgba(66,133,244,.1); }
+    .platform-card-name { font-size: 1.05rem; font-weight: 800; color: var(--ink-title) !important; margin-bottom: 8px; }
+    .platform-card-desc { font-size: .85rem; color: var(--ink-muted) !important; line-height: 1.6; }
+
+    .insight-feature-card { display: block; text-decoration: none; color: inherit; background: var(--surface-light); border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 48px; max-width: 800px; margin: 0 auto; transition: all .4s cubic-bezier(.25,.6,.35,1); }
+    .insight-feature-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(199,107,240,.12); border-color: var(--aurora-purple-2); }
+    .insight-feature-tag { font-size: .75rem; font-weight: 800; color: var(--aurora-purple-2); letter-spacing: .06em; margin-bottom: 16px; }
+    .insight-feature-title { font-size: 1.4rem; font-weight: 900; color: var(--ink-title) !important; line-height: 1.3; margin-bottom: 14px; }
+    .insight-feature-excerpt { font-size: .95rem; color: var(--ink-body) !important; line-height: 1.75; }
+
+    .gradient-text { color: var(--aurora-purple-2) !important; -webkit-text-fill-color: var(--aurora-purple-2) !important; }
+    .page-hero .gradient-text { color: var(--aurora-purple-1) !important; -webkit-text-fill-color: var(--aurora-purple-1) !important; }
+    .dark-section .gradient-text { color: var(--aurora-purple-1) !important; -webkit-text-fill-color: var(--aurora-purple-1) !important; }
+
+    @media (max-width: 768px) {
+      .page-hero-content { grid-template-columns: 1fr; }
+      .hero-feature-grid { grid-template-columns: 1fr; }
+      .service-grid.cols-3,.service-grid.cols-4 { grid-template-columns: 1fr; }
+      .platform-grid { grid-template-columns: 1fr 1fr; }
+      .geo-step { border-radius: var(--radius-md) !important; margin-bottom: 8px; max-width: none; flex: 1 1 100%; }
+      .geo-step::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="noise-overlay"></div>
+
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img class="logo-dark" src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro">
+      <img class="logo-light" src="assets/logos/digitauro-logo-light.png" alt="数漫极光 DigitAuro">
+    </a>
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a class="nav-link active" href="index.html#business">核心业务 ▾</a>
+        <div class="nav-dropdown">
+          <a class="dropdown-card" href="independent-site.html"><img class="dropdown-icon-img" src="assets/logos/biz-independent.png" alt=""><div><div class="dropdown-title">独立站与 Google 全域增长</div><div class="dropdown-desc">建站 + Google SEM/SEO 全链路</div></div></a>
+          <a class="dropdown-card" href="social-media.html"><img class="dropdown-icon-img" src="assets/logos/biz-social.png" alt=""><div><div class="dropdown-title">社媒运营</div><div class="dropdown-desc">五平台内容 + 投放 + 舆情一体化</div></div></a>
+          <a class="dropdown-card active" href="geo-ai.html"><img class="dropdown-icon-img" src="assets/logos/biz-geo-ai.png" alt=""><div><div class="dropdown-title">GEO 全球 AI 获客</div><div class="dropdown-desc">让 ChatGPT、Gemini 主动推荐你</div></div></a>
+          <a class="dropdown-card" href="tiktok-europe.html"><img class="dropdown-icon-img" src="assets/logos/biz-tiktok-eu.png" alt=""><div><div class="dropdown-title">TikTok 欧洲全域运营</div><div class="dropdown-desc">欧洲 TAP + 本土店 + 达人资源池</div></div></a>
+          <a class="dropdown-card" href="content-production.html"><img class="dropdown-icon-img" src="assets/logos/biz-vdoo.png" alt=""><div><div class="dropdown-title">内容素材制作服务</div><div class="dropdown-desc">15秒短视频 / 故事板分镜 / 定制时长视频</div></div></a>
+          <a class="dropdown-card" href="amazon-erp.html"><img class="dropdown-icon-img" src="assets/logos/biz-amazon-erp.png" alt=""><div><div class="dropdown-title">Amazon SPN 及 ERP 服务</div><div class="dropdown-desc">Listing 优化 + 库存管理 + 订单履约</div></div></a>
+        </div>
+      </div>
+      <a class="nav-link" href="index.html#tech">增长技术</a>
+      <a class="nav-link" href="index.html#jiumai">前海玖麦</a>
+      <a class="nav-link" href="index.html#partners">生态伙伴</a>
+      <a class="nav-link" href="insights.html">洞察</a>
+      <a class="nav-link" href="mailto:young@digitauro.com">联系</a>
+      <a class="btn-nav" href="index.html#contact">获取增长方案 →</a>
+    </div>
+    <button class="menu-toggle" aria-label="菜单">☰</button>
+  </div>
+</nav>
+
+<style>
+    .hero-breadcrumb { padding: 12px 0 0; position: relative; z-index: 5; }
+    .hero-breadcrumb a { color: rgba(255,255,255,.6); font-size: .82rem; font-weight: 500; text-decoration: none; transition: color .2s; }
+    .hero-breadcrumb a:hover { color: rgba(255,255,255,.9); }
+    .hero-breadcrumb span { color: rgba(255,255,255,.3); font-size: .82rem; }
+    .hero-breadcrumb .bc-current { color: rgba(255,255,255,.7); font-weight: 600; }
+</style>
+<div class="hero-breadcrumb"><div class="breadcrumb-inner"><a href="index.html">首页</a><span>/</span><a href="index.html#business">核心业务</a><span>/</span><span class="bc-current">GEO 全球 AI 获客</span></div></div>
+
+<section class="page-hero" style="padding-top: var(--nav-height); padding-bottom: 80px;">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-text reveal">
+        <h1 class="page-hero-title">GEO 全球 AI 获客 — <span class="gradient-text">让 AI 主动推荐你的品牌</span></h1>
+        <p class="page-hero-desc">60% 海外 AI 搜索用户不再点击网站。采购商"先问 AI，再找供应商"已成习惯——ChatGPT、Gemini、Grok、AI Overview 四大平台全覆盖，抢占 AI 时代的采购决策第一排。</p>
+        <div class="page-hero-actions">
+          <a class="btn-primary" href="index.html#contact">获取 GEO 增长方案 →</a>
+          <a class="btn-secondary" href="#platforms">了解覆盖平台</a>
+        </div>
+      </div>
+      <div class="page-hero-visual reveal d2">
+        <div class="hero-feature-grid">
+          <div class="hero-feature"><div class="hero-feature-icon" style="background: rgba(16,163,127,.2);"><img src="assets/logos/openai-logo.svg" alt=""></div><div class="hero-feature-title">ChatGPT</div><div class="hero-feature-desc">全球最大 AI 对话平台</div></div>
+          <div class="hero-feature"><div class="hero-feature-icon" style="background: rgba(142,117,178,.2);"><img src="assets/logos/gemini-logo.svg" alt=""></div><div class="hero-feature-title">Gemini</div><div class="hero-feature-desc">Google AI 生态深度整合</div></div>
+          <div class="hero-feature"><div class="hero-feature-icon" style="background: rgba(255,255,255,.12);"><img src="assets/logos/grok-logo.svg" alt=""></div><div class="hero-feature-title">Grok</div><div class="hero-feature-desc">X/Twitter 用户 AI 入口</div></div>
+          <div class="hero-feature"><div class="hero-feature-icon" style="background: rgba(66,133,244,.2);"><img src="assets/logos/google-ai-overview-logo.svg" alt=""></div><div class="hero-feature-title">AI Overview</div><div class="hero-feature-desc">Google 搜索结果首位</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="service-section" id="platforms">
+  <div class="container">
+    <div class="service-header reveal" style="text-align: center; margin-bottom: 48px;">
+      <span class="service-tag geo">Platform Coverage</span>
+      <h2 class="service-title">四大 AI 平台全覆盖 — <span class="gradient-text">你的品牌无处不在</span></h2>
+      <p class="service-desc">每个平台有不同的用户群体和推荐逻辑。我们针对每个平台独立优化品牌信息的可检索性、可理解性和可引用性。</p>
+    </div>
+    <div class="platform-grid reveal d2">
+      <div class="platform-card"><div class="platform-card-icon c1"><img src="assets/logos/openai-logo.svg" alt="ChatGPT"></div><div class="platform-card-name">ChatGPT</div><div class="platform-card-desc">全球 2 亿+ 月活用户，最广泛的 AI 采购对话场景</div></div>
+      <div class="platform-card"><div class="platform-card-icon c2"><img src="assets/logos/gemini-logo.svg" alt="Gemini"></div><div class="platform-card-name">Gemini</div><div class="platform-card-desc">Google 生态深度整合，搜索结果与 AI 回复融合</div></div>
+      <div class="platform-card"><div class="platform-card-icon c3"><img src="assets/logos/grok-logo.svg" alt="Grok"></div><div class="platform-card-name">Grok</div><div class="platform-card-desc">X 平台用户 AI 入口，实时信息检索与推荐</div></div>
+      <div class="platform-card"><div class="platform-card-icon c4"><img src="assets/logos/google-ai-overview-logo.svg" alt="AI Overview"></div><div class="platform-card-name">AI Overview</div><div class="platform-card-desc">Google 搜索结果顶部 AI 摘要，最高曝光位</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="service-section alt">
+  <div class="container">
+    <div class="service-header reveal" style="text-align: center; margin-bottom: 48px;">
+      <span class="service-tag geo">GEO Process</span>
+      <h2 class="service-title">GEO 四步增长体系 — <span class="gradient-text">被 AI 检索、理解、引用、优化</span></h2>
+      <p class="service-desc">GEO 不是蹭关键词——是让你的品牌信息在全网信源中做好被 AI 检索、理解和引用的准备。</p>
+    </div>
+    <div class="geo-flow reveal d2">
+      <div class="geo-step">
+        <div class="geo-step-num">01</div>
+        <div class="geo-step-icon line-icon icon-purple"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/><path d="M8 11h6"/><path d="M11 8v6"/></svg></div>
+        <div class="geo-step-title">可被检索</div>
+        <div class="geo-step-desc">结构化技术页面 + Schema标记 + 权威行业内容</div>
+      </div>
+      <div class="geo-step">
+        <div class="geo-step-num">02</div>
+        <div class="geo-step-icon line-icon icon-teal"><svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4"/><path d="M4 17l8 4 8-4"/></svg></div>
+        <div class="geo-step-title">可被理解</div>
+        <div class="geo-step-desc">内容实体化 + 语境管理 + LLM 友好语义结构</div>
+      </div>
+      <div class="geo-step">
+        <div class="geo-step-num">03</div>
+        <div class="geo-step-icon line-icon icon-green"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-2.8 8.3-7 10-4.2-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-5"/></svg></div>
+        <div class="geo-step-title">可被引用</div>
+        <div class="geo-step-desc">数字足迹总量 + 信任背书链路 + 引用网络</div>
+      </div>
+      <div class="geo-step">
+        <div class="geo-step-num">04</div>
+        <div class="geo-step-icon line-icon icon-gold"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-6"/><path d="M6 6l4 3 4-4 4 3"/></svg></div>
+        <div class="geo-step-title">持续优化</div>
+        <div class="geo-step-desc">AI 引用率追踪 + 竞品对比 + 月度迭代</div>
+      </div>
+    </div>
+    <div class="service-grid cols-4 reveal d3">
+      <div class="service-card"><div class="service-card-icon line-icon icon-purple" style="background: rgba(199,107,240,.08);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l4 4"/><path d="M8 11h6"/><path d="M11 8v6"/></svg></div><h3 class="service-card-title">全网信源治理</h3><p class="service-card-desc">品牌官网、行业媒体、社媒矩阵、数字足迹——构建 AI 可检索的品牌信源网络。</p></div>
+      <div class="service-card"><div class="service-card-icon line-icon icon-teal" style="background: rgba(23,208,200,.08);"><svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4"/><path d="M4 17l8 4 8-4"/></svg></div><h3 class="service-card-title">语义结构优化</h3><p class="service-card-desc">Schema 标记 + 内容实体化——让 LLM 准确理解你的产品、行业和优势。</p></div>
+      <div class="service-card"><div class="service-card-icon line-icon icon-green" style="background: rgba(74,222,128,.08);"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-2.8 8.3-7 10-4.2-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-5"/></svg></div><h3 class="service-card-title">权威背书构建</h3><p class="service-card-desc">行业报告引用 + 媒体曝光 + 客户评价网络——提升 AI 推荐可信度。</p></div>
+      <div class="service-card"><div class="service-card-icon line-icon icon-gold" style="background: rgba(251,191,36,.08);"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-6"/><path d="M6 6l4 3 4-4 4 3"/></svg></div><h3 class="service-card-title">引用率追踪</h3><p class="service-card-desc">四平台品牌提及监控 + 引用率月度报告——让 GEO 投入可衡量。</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--white); padding: 80px 0;">
+  <div class="container">
+    <a class="insight-feature-card reveal" href="insights/geo-ai-cut.html">
+      <div class="insight-feature-tag">深度阅读 · 增长研究院</div>
+      <h3 class="insight-feature-title">你的外贸客户，正在被 AI「三刀截流」</h3>
+      <p class="insight-feature-excerpt">60% 海外 AI 搜索用户不再点击网站；采购商「先问 AI，再找供应商」已成习惯。GEO 不是蹭关键词——是抢占采购决策的「第一排」。深度阅读完整方法论 →</p>
+    </a>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div><div class="cta-glow-2"></div>
+  <div class="container">
+    <div class="cta-content reveal">
+      <div class="section-label teal light">Get Started</div>
+      <h2 class="cta-heading">准备好让 AI 推荐你的品牌了吗？</h2>
+      <p class="cta-desc">24 小时内回复，免费诊断你的 GEO 增长方案。</p>
+      <div style="display: flex; gap: 16px; justify-content: center; margin-top: 28px;">
+        <a class="btn-primary" href="mailto:young@digitauro.com">获取 GEO 增长方案 →</a>
+        <a class="btn-secondary" href="index.html#business">查看其他业务</a>
+      </div>
+      <div class="cta-email"><a href="mailto:young@digitauro.com">young@digitauro.com</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro"><div class="footer-slogan" style="color: #fff;">你的全球增长合伙人</div><p class="footer-positioning" style="color: rgba(255,255,255,.5);">整合流量和技术，驱动品牌全球增长。</p></div>
+      <div class="footer-col"><h4>核心业务</h4><ul><li><a href="independent-site.html">独立站与 Google 增长</a></li><li><a href="social-media.html">社媒运营</a></li><li><a href="geo-ai.html">GEO AI 获客</a></li><li><a href="tiktok-europe.html">TikTok 欧洲</a></li><li><a href="content-production.html">内容素材制作</a></li><li><a href="amazon-erp.html">Amazon SPN 及 ERP</a></li></ul></div>
+      <div class="footer-col"><h4>产品与技术</h4><ul><li><a href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎协同</a></li></ul></div>
+      <div class="footer-col"><h4>公司</h4><ul><li><a href="index.html#business">关于我们</a></li><li><a href="insights.html">洞察</a></li><li><a href="mailto:young@digitauro.com">young@digitauro.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© DigitAuro 2026 · 深圳市数漫极光科技有限公司 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2025440301号-1</a></div>
+      <div class="footer-affiliates"><a class="footer-affiliate-link" href="#"><img src="assets/logos/jiumi_partner.png" alt="前海九米" style="height: 18px;">前海九米</a><span class="footer-affiliate-divider">·</span><a class="footer-affiliate-link" href="https://digitwalk.com" target="_blank" rel="noopener"><img src="assets/logos/digitwalk-new.png" alt="数字漫步">数字漫步 DigitWalk</a></div>
+    </div>
+  </div>
+</footer>
+<a class="float-contact" href="index.html#contact"><span>💬</span>聊聊你的出海计划</a>
+<script>
+const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>40)});
+const observer=new IntersectionObserver((e)=>{e.forEach(t=>{if(t.isIntersecting)t.target.classList.add('in')})},{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>observer.observe(e));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;const t=document.querySelector(h);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}}));
+</script>
+</body>
+</html>
