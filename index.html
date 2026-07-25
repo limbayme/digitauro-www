@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数漫极光 DigitAuro | 做你的全球增长合伙人</title>
+  <meta name="description" content="整合流量和技术，驱动品牌全球增长。Google 一级代理 · TikTok 欧洲全域运营 · Amazon SPN 与 GEO 增长。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Aurora Brand Palette (V2.0) */
+      --aurora-purple-1: #C76BF0;
+      --aurora-purple-2: #9B4DED;
+      --aurora-teal-1: #17D0C8;
+      --aurora-teal-2: #0E9BB8;
+      --aurora-gold: #F5C400;
+
+      --gradient-aurora: linear-gradient(135deg, #C76BF0, #9B4DED, #17D0C8, #0E9BB8, #F5C400);
+      --gradient-purple: linear-gradient(135deg, #C76BF0, #9B4DED);
+      --gradient-teal: linear-gradient(135deg, #17D0C8, #0E9BB8);
+      --gradient-aurora-text: linear-gradient(120deg, #C76BF0, #9B4DED 30%, #17D0C8 65%, #F5C400);
+
+      --space-dark: #0A0E1E;
+      --space-dark-2: #101830;
+      --surface-light: #F7F8FC;
+      --border-light: #E6EAF5;
+
+      --ink-title: #1A2140;
+      --ink-body: #4A5372;
+      --ink-muted: #8893B0;
+
+      --white: #fff;
+      --nav-height: 72px;
+      --max-width: 1200px;
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', -apple-system, "SF Pro Display", "PingFang SC", "Noto Sans SC", sans-serif;
+      color: var(--ink-body);
+      background: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 40px; }
+    section { padding: 110px 0; position: relative; }
+
+    /* ===== GLOBAL TEXTURES & EFFECTS ===== */
+    .noise-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .section-label {
+      font-size: .72rem; font-weight: 800; letter-spacing: .22em;
+      text-transform: uppercase; text-align: center; margin-bottom: 14px;
+    }
+    .section-label.purple { color: var(--aurora-purple-2); }
+    .section-label.teal { color: var(--aurora-teal-2); }
+    .section-label.gold { color: #C9A800; }
+    .section-label.light { color: rgba(255,255,255,.55); }
+
+    .section-heading {
+      font-size: clamp(1.8rem, 4.2vw, 2.8rem);
+      font-weight: 900; text-align: center; color: var(--ink-title);
+      letter-spacing: -.03em; margin-bottom: 18px; line-height: 1.15;
+    }
+    .section-heading.light { color: var(--white); }
+
+    .section-desc {
+      font-size: 1.05rem; color: var(--ink-muted);
+      text-align: center; max-width: 640px; margin: 0 auto 64px; line-height: 1.8;
+    }
+    .section-desc.light { color: rgba(255,255,255,.5); }
+
+    /* ===== AURORA GRADIENT TEXT ===== */
+    .gradient-text {
+      background: var(--gradient-aurora-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary {
+      background: var(--gradient-purple); color: white;
+      font-weight: 700; font-size: .95rem;
+      padding: 15px 34px; border-radius: var(--radius-sm);
+      transition: all .35s; box-shadow: 0 8px 32px rgba(155,77,237,.35);
+      display: inline-flex; align-items: center; gap: 8px; border: none;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+      transform: translateX(-100%); transition: transform .6s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 48px rgba(155,77,237,.5); }
+    .btn-primary:hover::before { transform: translateX(100%); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.06); color: white; font-weight: 600;
+      font-size: .95rem; padding: 15px 34px; border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,.18); transition: all .3s;
+      display: inline-flex; align-items: center; gap: 8px;
+      backdrop-filter: blur(10px);
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.12); transform: translateY(-2px); }
+
+    .btn-secondary-light {
+      background: var(--white); color: var(--ink-title); font-weight: 600;
+      font-size: .95rem; padding: 15px 34px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border-light); transition: all .3s;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 16px rgba(10,14,30,.04);
+    }
+    .btn-secondary-light:hover { border-color: var(--aurora-purple-2); color: var(--aurora-purple-2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(155,77,237,.1); }
+
+    .text-link {
+      font-size: .88rem; font-weight: 700; color: var(--aurora-purple-2);
+      display: inline-flex; align-items: center; gap: 4px;
+      transition: gap .25s;
+    }
+    .text-link:hover { gap: 8px; }
+
+    /* ===== AURORA BORDER UTILITY ===== */
+    .aurora-border {
+      position: relative; background: var(--white); border-radius: var(--radius-lg);
+    }
+    .aurora-border::before {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg);
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(199,107,240,.4), rgba(23,208,200,.3), rgba(245,196,0,.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity .3s;
+    }
+    .aurora-border:hover::before { opacity: 1; }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 40px; transition: all .4s cubic-bezier(.4,0,.2,1);
+      height: var(--nav-height);
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(24px) saturate(1.6);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.03);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1280px; margin: 0 auto; height: 100%;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-brand img { height: 36px; width: auto; transition: height .3s; }
+    .nav.scrolled .nav-brand img { height: 32px; }
+
+    .nav-menu { display: flex; align-items: center; gap: 2px; }
+    .nav-item { position: relative; }
+    .nav-link {
+      font-size: .85rem; color: var(--ink-body); font-weight: 600;
+      padding: 8px 14px; border-radius: 10px; transition: all .25s;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .nav-link:hover { color: var(--aurora-purple-2); background: rgba(199,107,240,.07); }
+
+    /* Dropdown */
+    .nav-dropdown {
+      position: absolute; top: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: rgba(255,255,255,.98); border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg); padding: 10px;
+      box-shadow: 0 32px 80px rgba(10,14,30,.14);
+      opacity: 0; visibility: hidden; transition: all .35s cubic-bezier(.25,.6,.35,1);
+      min-width: 620px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+      backdrop-filter: blur(20px);
+    }
+    .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+    .dropdown-card {
+      display: flex; gap: 14px; padding: 16px; border-radius: var(--radius-sm);
+      transition: all .2s; align-items: flex-start;
+    }
+    .dropdown-card:hover { background: var(--surface-light); transform: translateY(-2px); }
+    .dropdown-icon {
+      width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 800; color: white;
+    }
+    .dropdown-title { font-size: .88rem; font-weight: 800; color: var(--ink-title); margin-bottom: 3px; }
+    .dropdown-desc { font-size: .78rem; color: var(--ink-muted); line-height: 1.5; }
+
+    .btn-nav {
+      background: var(--gradient-purple); color: white; font-weight: 700; font-size: .82rem;
+      padding: 11px 24px; border-radius: 10px;
+      transition: all .3s; box-shadow: 0 4px 18px rgba(155,77,237,.3);
+      margin-left: 10px;
+    }
+    .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(155,77,237,.45); }
+
+    .menu-toggle { display: none; font-size: 1.5rem; color: var(--ink-title); background: none; border: none; cursor: pointer; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding-top: var(--nav-height);
+      position: relative; overflow: hidden;
+      background: var(--space-dark);
+    }
+    .hero-mesh {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(at 20% 25%, rgba(199,107,240,.18) 0%, transparent 45%),
+        radial-gradient(at 80% 30%, rgba(23,208,200,.14) 0%, transparent 40%),
+        radial-gradient(at 50% 75%, rgba(245,196,0,.1) 0%, transparent 35%),
+        radial-gradient(at 30% 80%, rgba(155,77,237,.12) 0%, transparent 40%);
+      animation: mesh-shift 15s ease-in-out infinite;
+    }
+    @keyframes mesh-shift {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      33% { transform: scale(1.1) rotate(2deg); opacity: .9; }
+      66% { transform: scale(.95) rotate(-1deg); opacity: 1; }
+    }
+    .hero-grid-pattern {
+      position: absolute; inset: 0; opacity: .025;
+      background-image: 
+        linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+    }
+    .hero-aurora-band {
+      position: absolute; top: 45%; left: -20%; right: -20%; height: 220px;
+      background: linear-gradient(90deg, transparent, rgba(199,107,240,.08), rgba(23,208,200,.08), rgba(245,196,0,.05), transparent);
+      filter: blur(50px); transform: rotate(-6deg);
+      animation: aurora-band-move 8s ease-in-out infinite;
+    }
+    @keyframes aurora-band-move {
+      0%, 100% { transform: rotate(-6deg) translateY(0); }
+      50% { transform: rotate(-3deg) translateY(-30px); }
+    }
+    .hero-spotlight {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 800px; height: 500px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(255,255,255,.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-float {
+      position: absolute; border-radius: var(--radius-lg);
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hero-float.f1 { top: 18%; left: 10%; width: 140px; height: 180px; border: 1px solid rgba(199,107,240,.12); background: linear-gradient(180deg, rgba(199,107,240,.06), transparent); animation-delay: 0s; }
+    .hero-float.f2 { top: 25%; right: 12%; width: 110px; height: 140px; border: 1px solid rgba(23,208,200,.12); background: linear-gradient(180deg, rgba(23,208,200,.06), transparent); animation-delay: -3s; }
+    .hero-float.f3 { bottom: 22%; left: 14%; width: 90px; height: 90px; border-radius: 50%; border: 1px solid rgba(245,196,0,.12); background: linear-gradient(180deg, rgba(245,196,0,.06), transparent); animation-delay: -5s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-24px) rotate(2deg); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; max-width: 900px; margin: 0 auto;
+      padding: 0 20px;
+    }
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      padding: 10px 22px; border-radius: 100px; font-size: .78rem;
+      font-weight: 700; color: rgba(255,255,255,.65); margin-bottom: 36px;
+      backdrop-filter: blur(12px);
+    }
+    .hero-kicker .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--aurora-teal-1);
+      box-shadow: 0 0 12px var(--aurora-teal-1);
+      animation: pulse-dot 2.5s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(1.2); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5.8vw, 4.2rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -.04em;
+      margin-bottom: 22px; color: var(--white);
+    }
+    .hero-slogan {
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 800; margin-bottom: 32px; letter-spacing: -.02em;
+    }
+    .hero-desc {
+      font-size: 1.12rem; color: rgba(255,255,255,.45);
+      max-width: 720px; margin: 0 auto 44px; line-height: 1.85;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .hero-trust {
+      margin-top: 64px; display: flex; gap: 0; justify-content: center;
+      flex-wrap: wrap; align-items: center;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 100px; padding: 16px 24px;
+      backdrop-filter: blur(10px);
+      max-width: fit-content; margin-left: auto; margin-right: auto;
+    }
+    .trust-item {
+      font-size: .8rem; color: rgba(255,255,255,.4); font-weight: 500;
+      padding: 0 18px; position: relative;
+    }
+    .trust-item:not(:last-child)::after {
+      content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+      width: 1px; height: 12px; background: rgba(255,255,255,.12);
+    }
+
+    /* ===== DATA BAND ===== */
+    .data-band {
+      background: var(--surface-light); padding: 80px 0;
+      position: relative;
+    }
+    .data-band::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+    }
+    .data-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+    }
+    .data-item {
+      text-align: center; padding: 24px 16px;
+      background: rgba(255,255,255,.6); border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      transition: all .3s;
+    }
+    .data-item:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(10,14,30,.05); }
+    .data-value {
+      font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 900;
+      background: var(--gradient-aurora-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1; margin-bottom: 14px;
+    }
+    .data-label { font-size: .88rem; color: var(--ink-body); line-height: 1.6; max-width: 220px; margin: 0 auto; }
+
+    /* ===== CORE BUSINESS ===== */
+    .business { background: var(--white); }
+    .business-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
+    }
+    .biz-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 38px 34px; transition: all .45s cubic-bezier(.25,.6,.35,1);
+      border: 1px solid var(--border-light);
+      position: relative; overflow: hidden;
+    }
+    .biz-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      transition: all .35s; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .biz-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg);
+      padding: 1px; opacity: 0; transition: opacity .35s;
+      background: linear-gradient(135deg, rgba(199,107,240,.35), rgba(23,208,200,.25), rgba(245,196,0,.15));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .biz-card:nth-child(1)::before { background: var(--gradient-purple); }
+    .biz-card:nth-child(2)::before { background: linear-gradient(90deg, #4285F4, #34A853, #FBBC04, #EA4335); }
+    .biz-card:nth-child(3)::before { background: var(--gradient-teal); }
+    .biz-card:nth-child(4)::before { background: linear-gradient(90deg, var(--aurora-purple-1), var(--aurora-teal-1)); }
+    .biz-card:nth-child(5)::before { background: linear-gradient(90deg, #25F4EE, #000, #FE2C55); }
+    .biz-card:nth-child(6)::before { background: linear-gradient(90deg, var(--aurora-gold), #F59E0B); }
+
+    .biz-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 70px rgba(10,14,30,.1);
+      border-color: transparent;
+    }
+    .biz-card:hover::before { height: 6px; }
+    .biz-card:hover::after { opacity: 1; }
+
+    .biz-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px; font-size: 1.5rem; font-weight: 900;
+      transition: transform .3s;
+    }
+    .biz-card:hover .biz-icon { transform: scale(1.08); }
+    .biz-card:nth-child(1) .biz-icon { background: rgba(199,107,240,.1); color: var(--aurora-purple-2); }
+    .biz-card:nth-child(2) .biz-icon { background: rgba(66,133,244,.1); color: #4285F4; }
+    .biz-card:nth-child(3) .biz-icon { background: rgba(23,208,200,.1); color: var(--aurora-teal-2); }
+    .biz-card:nth-child(4) .biz-icon { background: rgba(155,77,237,.1); color: var(--aurora-purple-2); }
+    .biz-card:nth-child(5) .biz-icon { background: rgba(37,244,238,.1); color: #25F4EE; }
+    .biz-card:nth-child(6) .biz-icon { background: rgba(245,196,0,.12); color: #C9A800; }
+
+    .biz-name { font-size: 1.22rem; font-weight: 900; color: var(--ink-title); margin-bottom: 12px; }
+    .biz-desc { font-size: .9rem; color: var(--ink-body); line-height: 1.75; margin-bottom: 20px; }
+
+    /* ===== TECH ENGINE (DARK) ===== */
+    .tech-engine {
+      background: var(--space-dark); position: relative; overflow: hidden;
+    }
+    .tech-engine::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(199,107,240,.4), rgba(23,208,200,.4), rgba(245,196,0,.25), transparent);
+    }
+    .tech-glow {
+      position: absolute; top: 10%; right: -15%; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(199,107,240,.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .tech-glow-2 {
+      position: absolute; bottom: -10%; left: -10%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(23,208,200,.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .tech-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
+      position: relative; z-index: 2;
+    }
+    .tech-card {
+      background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius-lg); padding: 40px 34px;
+      transition: all .45s; position: relative; overflow: hidden;
+    }
+    .tech-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .tech-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg);
+      padding: 1px; opacity: 0; transition: opacity .35s;
+      background: linear-gradient(135deg, rgba(199,107,240,.4), rgba(23,208,200,.3), rgba(245,196,0,.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .tech-card:hover::before { opacity: 1; }
+    .tech-card:hover::after { opacity: 1; }
+    .tech-card:hover { transform: translateY(-6px); background: rgba(255,255,255,.05); box-shadow: 0 24px 60px rgba(0,0,0,.2); }
+    .tech-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;
+      transition: transform .3s;
+    }
+    .tech-card:hover .tech-icon { transform: scale(1.1); }
+    .tech-card:nth-child(1) .tech-icon { background: rgba(199,107,240,.12); color: var(--aurora-purple-1); }
+    .tech-card:nth-child(2) .tech-icon { background: rgba(245,196,0,.1); color: var(--aurora-gold); }
+    .tech-card:nth-child(3) .tech-icon { background: rgba(23,208,200,.1); color: var(--aurora-teal-1); }
+
+    .tech-name { font-size: 1.15rem; font-weight: 900; color: var(--white); margin-bottom: 12px; }
+    .tech-desc { font-size: .88rem; color: rgba(255,255,255,.48); line-height: 1.75; }
+
+    /* ===== CASES ===== */
+    .cases { background: linear-gradient(180deg, var(--surface-light), var(--white)); }
+    .case-featured {
+      background: var(--white); border-radius: var(--radius-xl);
+      padding: 44px; margin-bottom: 36px;
+      border: 1px solid var(--border-light);
+      display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center;
+      transition: all .4s; position: relative; overflow: hidden;
+    }
+    .case-featured::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--gradient-aurora);
+    }
+    .case-featured:hover { transform: translateY(-4px); box-shadow: 0 28px 80px rgba(10,14,30,.08); }
+    .case-featured-icon {
+      width: 72px; height: 72px; border-radius: 18px;
+      background: linear-gradient(135deg, rgba(245,196,0,.12), rgba(245,196,0,.05));
+      border: 1px solid rgba(245,196,0,.15);
+      display: flex; align-items: center; justify-content: center; font-size: 2rem;
+    }
+    .case-featured-tag {
+      background: rgba(245,196,0,.1); color: #C9A800;
+      font-size: .72rem; font-weight: 800; padding: 5px 14px;
+      border-radius: 100px; display: inline-block; margin-bottom: 12px;
+    }
+    .case-featured-title { font-size: 1.35rem; font-weight: 900; color: var(--ink-title); margin-bottom: 12px; }
+    .case-featured-desc { font-size: .95rem; color: var(--ink-body); line-height: 1.75; }
+
+    .case-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .case-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      padding: 30px; border: 1px solid var(--border-light);
+      transition: all .4s; position: relative; overflow: hidden;
+    }
+    .case-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg);
+      padding: 1px; opacity: 0; transition: opacity .35s;
+      background: linear-gradient(135deg, rgba(199,107,240,.3), rgba(23,208,200,.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .case-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(10,14,30,.08); }
+    .case-card:hover::after { opacity: 1; }
+    .case-card-name { font-size: 1.05rem; font-weight: 900; color: var(--ink-title); margin-bottom: 6px; }
+    .case-card-type { font-size: .78rem; color: var(--ink-muted); margin-bottom: 14px; }
+    .case-card-result {
+      font-size: .85rem; color: var(--ink-body); line-height: 1.65;
+      padding-top: 14px; border-top: 1px solid var(--border-light);
+    }
+    .case-card-result strong { color: var(--aurora-purple-2); font-weight: 800; }
+    .case-card-link { font-size: .8rem; color: var(--aurora-teal-2); font-weight: 700; margin-top: 10px; display: inline-flex; align-items: center; gap: 4px; transition: gap .25s; }
+    .case-card-link:hover { gap: 8px; }
+
+    /* ===== JIUMAI BANNER ===== */
+    .jiumai-banner { background: var(--white); }
+    .jiumai-card {
+      background: linear-gradient(135deg, var(--space-dark), var(--space-dark-2));
+      border-radius: var(--radius-xl); padding: 64px;
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center;
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .jiumai-card::before {
+      content: ''; position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+      background: radial-gradient(circle at top right, rgba(23,208,200,.1), transparent 65%);
+    }
+    .jiumai-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-xl);
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(199,107,240,.25), rgba(23,208,200,.25), transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .jiumai-tag {
+      font-size: .72rem; font-weight: 800; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--aurora-teal-1); margin-bottom: 18px;
+    }
+    .jiumai-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; color: var(--white); margin-bottom: 18px; line-height: 1.25; }
+    .jiumai-desc { font-size: .96rem; color: rgba(255,255,255,.5); line-height: 1.85; margin-bottom: 28px; }
+    .jiumai-visual {
+      position: relative; z-index: 2;
+      height: 280px; border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .jiumai-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: 
+        linear-gradient(135deg, rgba(199,107,240,.05), transparent),
+        linear-gradient(225deg, rgba(23,208,200,.05), transparent);
+    }
+    .jiumai-dual-logo {
+      display: flex; align-items: center; gap: 20px;
+      font-size: .9rem; font-weight: 800;
+    }
+    .jiumai-dual-logo img { height: 32px; width: auto; filter: brightness(0) invert(1); }
+    .jiumai-dual-logo span { color: rgba(255,255,255,.35); font-size: 1.2rem; }
+
+    /* ===== PARTNERS WALL (NEW DESIGN) ===== */
+    .partners {
+      background: linear-gradient(180deg, var(--white) 0%, var(--space-dark) 100px, var(--space-dark) calc(100% - 100px), var(--space-dark-2) 100%);
+      padding: 110px 0 0;
+    }
+    .partners-header { margin-bottom: 56px; }
+    .partners-grid {
+      display: grid; gap: 48px;
+      background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius-xl); padding: 56px;
+      backdrop-filter: blur(10px);
+      position: relative; overflow: hidden;
+    }
+    .partners-grid::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(199,107,240,.4), rgba(23,208,200,.4), rgba(245,196,0,.25), transparent);
+    }
+    .partner-group {}
+    .partner-group-label {
+      font-size: .72rem; font-weight: 800; letter-spacing: .2em;
+      text-transform: uppercase; color: rgba(255,255,255,.35);
+      margin-bottom: 20px; text-align: center;
+    }
+    .partner-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .partner-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius-md); padding: 22px 28px;
+      min-width: 150px; height: 76px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .4s cubic-bezier(.25,.6,.35,1);
+      position: relative; overflow: hidden;
+    }
+    .partner-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-md);
+      padding: 1px; opacity: 0; transition: opacity .35s;
+      background: linear-gradient(135deg, rgba(199,107,240,.4), rgba(23,208,200,.3), rgba(245,196,0,.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .partner-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 16px 40px rgba(0,0,0,.2);
+    }
+    .partner-card:hover::before { opacity: 1; }
+    .partner-card img {
+      max-height: 36px; width: auto; object-fit: contain;
+      transition: all .35s; opacity: .8;
+    }
+    .partner-card:hover img { opacity: 1; transform: scale(1.05); }
+    .partner-card.light-bg {
+      background: rgba(255,255,255,.92);
+    }
+    .partner-card.light-bg img { opacity: .9; }
+    .partner-card-text {
+      font-size: .95rem; font-weight: 800; color: rgba(255,255,255,.6);
+      transition: color .3s;
+    }
+    .partner-card:hover .partner-card-text { color: var(--white); }
+
+    /* ===== INSIGHTS ===== */
+    .insights { background: var(--white); }
+    .insight-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px;
+    }
+    .insight-card {
+      background: var(--surface-light); border-radius: var(--radius-lg);
+      padding: 34px; border: 1px solid var(--border-light);
+      transition: all .4s; cursor: pointer; position: relative; overflow: hidden;
+    }
+    .insight-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg);
+      padding: 1px; opacity: 0; transition: opacity .35s;
+      background: linear-gradient(135deg, rgba(199,107,240,.35), rgba(23,208,200,.25));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .insight-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(10,14,30,.08); }
+    .insight-card:hover::after { opacity: 1; }
+    .insight-tag {
+      font-size: .72rem; font-weight: 800; padding: 5px 12px;
+      border-radius: 100px; display: inline-block; margin-bottom: 18px;
+    }
+    .insight-tag.purple { background: rgba(199,107,240,.1); color: var(--aurora-purple-2); }
+    .insight-tag.teal { background: rgba(23,208,200,.1); color: var(--aurora-teal-2); }
+    .insight-tag.gold { background: rgba(245,196,0,.12); color: #C9A800; }
+    .insight-title { font-size: 1.15rem; font-weight: 900; color: var(--ink-title); line-height: 1.4; margin-bottom: 14px; }
+    .insight-excerpt { font-size: .88rem; color: var(--ink-body); line-height: 1.75; }
+
+    /* ===== CTA SECTION (DARK) ===== */
+    .cta-section {
+      background: var(--space-dark-2); overflow: hidden; position: relative;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--aurora-purple-1), var(--aurora-teal-1), var(--aurora-gold), transparent);
+    }
+    .cta-glow {
+      position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 600px;
+      background: radial-gradient(ellipse, rgba(199,107,240,.12) 0%, transparent 60%);
+    }
+    .cta-glow-2 {
+      position: absolute; bottom: -30%; left: 20%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(23,208,200,.08) 0%, transparent 60%);
+    }
+    .cta-content {
+      position: relative; z-index: 2; text-align: center; max-width: 680px; margin: 0 auto;
+    }
+    .cta-heading {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900; color: var(--white); margin-bottom: 20px; line-height: 1.15;
+    }
+    .cta-desc {
+      font-size: 1.08rem; color: rgba(255,255,255,.45);
+      max-width: 500px; margin: 0 auto 40px; line-height: 1.8;
+    }
+    .cta-email {
+      font-size: .95rem; color: rgba(255,255,255,.35); margin-top: 24px;
+    }
+    .cta-email a { color: var(--aurora-teal-1); font-weight: 600; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--space-dark-2); color: rgba(255,255,255,.45);
+      padding: 80px 0 32px;
+      border-top: 1px solid rgba(255,255,255,.05);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px;
+      margin-bottom: 56px;
+    }
+    .footer-brand img { height: 38px; margin-bottom: 18px; filter: brightness(0) invert(1); }
+    .footer-slogan { font-size: 1.1rem; font-weight: 900; color: var(--white); margin-bottom: 8px; }
+    .footer-positioning { font-size: .88rem; color: rgba(255,255,255,.35); line-height: 1.75; max-width: 280px; }
+    .footer-col h4 {
+      color: var(--white); font-size: .82rem; font-weight: 800;
+      margin-bottom: 20px; letter-spacing: .02em;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 11px; }
+    .footer-col a { font-size: .85rem; color: rgba(255,255,255,.4); transition: color .2s; }
+    .footer-col a:hover { color: var(--aurora-teal-1); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copy { font-size: .8rem; color: rgba(255,255,255,.25); }
+    .footer-affiliates {
+      display: flex; align-items: center; gap: 16px;
+      font-size: .8rem;
+    }
+    .footer-affiliate-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 100px;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.5); font-weight: 500;
+      transition: all .25s;
+    }
+    .footer-affiliate-link:hover {
+      background: rgba(23,208,200,.08); border-color: rgba(23,208,200,.2);
+      color: var(--aurora-teal-1);
+    }
+    .footer-affiliate-link img {
+      height: 16px; width: auto;
+      filter: brightness(0) invert(.6);
+      transition: filter .25s;
+    }
+    .footer-affiliate-link:hover img { filter: brightness(0) invert(1); }
+    .footer-affiliate-divider { color: rgba(255,255,255,.12); }
+
+    /* ===== FLOATING CONTACT ===== */
+    .float-contact {
+      position: fixed; bottom: 32px; right: 32px; z-index: 900;
+      background: var(--gradient-purple); color: white;
+      padding: 15px 22px; border-radius: 100px;
+      font-size: .88rem; font-weight: 700;
+      box-shadow: 0 10px 36px rgba(155,77,237,.4);
+      display: flex; align-items: center; gap: 8px;
+      transition: all .3s;
+    }
+    .float-contact:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 14px 48px rgba(155,77,237,.55); }
+
+    /* ===== REVEAL ANIMATIONS ===== */
+    .reveal {
+      opacity: 0; transform: translateY(44px);
+      transition: opacity .9s cubic-bezier(.25,.6,.35,1),
+                 transform .9s cubic-bezier(.25,.6,.35,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: .1s; }
+    .reveal.d2 { transition-delay: .2s; }
+    .reveal.d3 { transition-delay: .3s; }
+    .reveal.d4 { transition-delay: .4s; }
+    .reveal.d5 { transition-delay: .5s; }
+    .reveal.d6 { transition-delay: .6s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .data-grid { grid-template-columns: repeat(2, 1fr); }
+      .business-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid { grid-template-columns: 1fr; }
+      .case-grid { grid-template-columns: repeat(2, 1fr); }
+      .insight-grid { grid-template-columns: 1fr 1fr; }
+      .jiumai-card { grid-template-columns: 1fr; padding: 48px; }
+      .jiumai-visual { height: 220px; }
+      .partners-grid { padding: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      section { padding: 80px 0; }
+      .nav-menu { display: none; }
+      .menu-toggle { display: block; }
+      .data-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .business-grid { grid-template-columns: 1fr; }
+      .case-grid { grid-template-columns: 1fr; }
+      .insight-grid { grid-template-columns: 1fr; }
+      .case-featured { grid-template-columns: 1fr; padding: 32px; }
+      .partners-grid { padding: 32px 24px; }
+      .partner-card { min-width: 130px; padding: 18px 22px; height: 68px; }
+      .partner-card img { max-height: 28px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-trust { border-radius: 20px; padding: 14px 16px; }
+      .trust-item { padding: 0 10px; font-size: .7rem; }
+      .float-contact { bottom: 20px; right: 20px; padding: 12px 18px; font-size: .82rem; }
+      .footer-affiliates { flex-direction: column; gap: 10px; align-items: flex-start; }
+      .footer-affiliate-divider { display: none; }
+    }
+    @media (max-width: 480px) {
+      .data-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions .btn-primary, .hero-actions .btn-secondary { justify-content: center; }
+      .partner-card { min-width: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#home">
+      <img src="assets/logos/digitauro-logo-nobg.png" alt="数漫极光 DigitAuro">
+    </a>
+
+    <div class="nav-menu">
+      <div class="nav-item">
+        <a class="nav-link" href="#business">核心业务 ▾</a>
+        <div class="nav-dropdown">
+          <a class="dropdown-card" href="#business">
+            <div class="dropdown-icon" style="background: var(--gradient-purple);">站</div>
+            <div>
+              <div class="dropdown-title">海外独立站全案</div>
+              <div class="dropdown-desc">顾问式 1V1 建站 + 全链路运营</div>
+            </div>
+          </a>
+          <a class="dropdown-card" href="#business">
+            <div class="dropdown-icon" style="background: linear-gradient(135deg, #4285F4, #34A853, #FBBC04, #EA4335);">G</div>
+            <div>
+              <div class="dropdown-title">Google 全域增长</div>
+              <div class="dropdown-desc">一级代理，SEM 代投 + SEO 技术优化</div>
+            </div>
+          </a>
+          <a class="dropdown-card" href="#business">
+            <div class="dropdown-icon" style="background: var(--gradient-teal);">媒</div>
+            <div>
+              <div class="dropdown-title">社媒运营</div>
+              <div class="dropdown-desc">五平台内容 + 投放 + 舆情一体化</div>
+            </div>
+          </a>
+          <a class="dropdown-card" href="#business">
+            <div class="dropdown-icon" style="background: linear-gradient(135deg, var(--aurora-purple-1), var(--aurora-teal-1));">AI</div>
+            <div>
+              <div class="dropdown-title">GEO 全球 AI 获客</div>
+              <div class="dropdown-desc">让 ChatGPT、Gemini 主动推荐你</div>
+            </div>
+          </a>
+          <a class="dropdown-card" href="#business">
+            <div class="dropdown-icon" style="background: linear-gradient(135deg, #25F4EE, #FE2C55);">♪</div>
+            <div>
+              <div class="dropdown-title">TikTok 欧洲全域运营</div>
+              <div class="dropdown-desc">欧洲 TAP + 本土店 + 达人资源池</div>
+            </div>
+          </a>
+          <a class="dropdown-card" href="#business">
+            <div class="dropdown-icon" style="background: linear-gradient(135deg, var(--aurora-gold), #F59E0B);">▶</div>
+            <div>
+              <div class="dropdown-title">VDOO AI 视频</div>
+              <div class="dropdown-desc">15 秒产品短视频批量产出</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <a class="nav-link" href="#tech">增长技术</a>
+      <a class="nav-link" href="#jiumai">前海玖麦</a>
+      <a class="nav-link" href="#cases">案例</a>
+      <a class="nav-link" href="#partners">生态伙伴</a>
+      <a class="nav-link" href="#insights">洞察</a>
+      <a class="nav-link" href="#about">关于</a>
+      <a class="btn-nav" href="#contact">获取增长方案 →</a>
+    </div>
+
+    <button class="menu-toggle" aria-label="菜单">☰</button>
+  </div>
+</nav>
+
+<!-- ===== S1 · HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid-pattern"></div>
+  <div class="hero-aurora-band"></div>
+  <div class="hero-spotlight"></div>
+  <div class="hero-float f1"></div>
+  <div class="hero-float f2"></div>
+  <div class="hero-float f3"></div>
+
+  <div class="hero-content">
+    <div class="hero-kicker reveal">
+      <span class="dot"></span>
+      Google 一级代理 · TikTok 欧洲 TAP · Amazon SPN · GEO 先行者
+    </div>
+
+    <h1 class="hero-title reveal d1">
+      整合流量和技术，<br>驱动品牌全球增长
+    </h1>
+
+    <div class="hero-slogan gradient-text reveal d2">
+      做你的全球增长合伙人
+    </div>
+
+    <p class="hero-desc reveal d3">
+      聚焦 Google 一级代理、TikTok 欧洲全域运营、Amazon SPN 与 GEO 增长，输出可落地策略、精细化运营与增长技术闭环——构建从 AI 洞察到全球交易增长的执行链路。
+    </p>
+
+    <div class="hero-actions reveal d4">
+      <a class="btn-primary" href="#contact">获取增长方案 →</a>
+      <a class="btn-secondary" href="#business">了解核心业务</a>
+    </div>
+
+    <div class="hero-trust reveal d5">
+      <span class="trust-item">Google 一级代理</span>
+      <span class="trust-item">TikTok for Business / TikTok Shop 服务商（欧洲 TAP）</span>
+      <span class="trust-item">Amazon SPN</span>
+      <span class="trust-item">Shopify Plus Partner</span>
+      <span class="trust-item">前海九米跨境合资</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S2 · DATA BAND ===== -->
+<section class="data-band" id="data">
+  <div class="container">
+    <div class="data-grid">
+      <div class="data-item reveal">
+        <div class="data-value" data-target="13">13 国+</div>
+        <div class="data-label">TikTok Shop 欧洲已覆盖核心国家，触达当地 87% 电商流量</div>
+      </div>
+      <div class="data-item reveal d1">
+        <div class="data-value" data-target="2">2 亿+</div>
+        <div class="data-label">欧洲电商买家月活规模，Z 世代占比 70%</div>
+      </div>
+      <div class="data-item reveal d2">
+        <div class="data-value">4 大平台</div>
+        <div class="data-label">GEO 覆盖 ChatGPT · Gemini · Grok · AI Overview</div>
+      </div>
+      <div class="data-item reveal d3">
+        <div class="data-value">24h 响应</div>
+        <div class="data-label">增长顾问 1V1 对接，方案 3–5 天交付</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S3 · CORE BUSINESS ===== -->
+<section class="business" id="business">
+  <div class="container">
+    <div class="section-label purple reveal">Core Business</div>
+    <h2 class="section-heading reveal d1">核心业务 — 从流量入口到交易增长，四条链路一站打通</h2>
+    <p class="section-desc reveal d2">每条业务线都有独立方法论、独立团队、独立交付标准——点击深入。</p>
+
+    <div class="business-grid">
+      <div class="biz-card reveal d1">
+        <div class="biz-icon">站</div>
+        <h3 class="biz-name">海外独立站全案</h3>
+        <p class="biz-desc">不做被动建站者，做你的海外增长合伙人。顾问式 1V1 建站 + 调研、策划、设计、投流、迭代全链路运营。</p>
+        <a class="text-link" href="#contact">了解独立站全案 →</a>
+      </div>
+
+      <div class="biz-card reveal d2">
+        <div class="biz-icon" style="background: rgba(66,133,244,.1); color: #4285F4;">G</div>
+        <h3 class="biz-name">Google 全域增长</h3>
+        <p class="biz-desc">Google 一级代理资质。SEM 代投、SEO 技术优化、再营销与转化跟踪，官方通道直连，账户诊断免费。</p>
+        <a class="text-link" href="#contact">了解 Google 增长 →</a>
+      </div>
+
+      <div class="biz-card reveal d3">
+        <div class="biz-icon">媒</div>
+        <h3 class="biz-name">社媒运营</h3>
+        <p class="biz-desc">72% 的 B2B 采购商联系供应商前，先查社交媒体。YouTube/TikTok/Instagram/Facebook/LinkedIn 五平台内容+投放+舆情一体化。</p>
+        <a class="text-link" href="#contact">了解社媒运营 →</a>
+      </div>
+
+      <div class="biz-card reveal d4">
+        <div class="biz-icon">AI</div>
+        <h3 class="biz-name">GEO · 全球 AI 获客</h3>
+        <p class="biz-desc">流量 3.0 时代，让 ChatGPT、Gemini、Grok、AI Overview 主动推荐你的品牌。四大平台全覆盖，引用率可监测。</p>
+        <a class="text-link" href="#contact">了解 GEO 增长 →</a>
+      </div>
+
+      <div class="biz-card reveal d5">
+        <div class="biz-icon" style="background: rgba(37,244,238,.1); color: #25F4EE;">♪</div>
+        <h3 class="biz-name">TikTok 欧洲全域运营</h3>
+        <p class="biz-desc">欧洲 TAP 资质 + 本土店矩阵 + 达人资源池。全托管、联营、本土店租赁三种模式，掘金万亿欧洲蓝海。</p>
+        <a class="text-link" href="#contact">了解 TikTok 欧洲 →</a>
+      </div>
+
+      <div class="biz-card reveal d6">
+        <div class="biz-icon" style="background: rgba(245,196,0,.12); color: #C9A800;">▶</div>
+        <h3 class="biz-name">VDOO AI 视频</h3>
+        <p class="biz-desc">自研接入火山 Seedance 2.0 企业级模型，15 秒高清产品短视频批量产出，性价比远超人工拍摄。</p>
+        <a class="text-link" href="#contact">了解 VDOO AI 视频 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S4 · TECH ENGINE ===== -->
+<section class="tech-engine" id="tech">
+  <div class="tech-glow"></div>
+  <div class="tech-glow-2"></div>
+  <div class="container">
+    <div class="section-label teal light reveal">Technology</div>
+    <h2 class="section-heading light reveal d1">为什么我们的运营比别人快一步？——技术底座</h2>
+    <p class="section-desc light reveal d2">不是采购来的工具，是自己长出来的能力。</p>
+
+    <div class="tech-grid">
+      <div class="tech-card reveal d1">
+        <div class="tech-icon">VDOIT</div>
+        <h3 class="tech-name">VDOIT 智能体生态</h3>
+        <p class="tech-desc">自研多 Agent 协作系统：市场调研、内容策划、多渠道分发自动完成，运营流程全面数字化。</p>
+      </div>
+      <div class="tech-card reveal d2">
+        <div class="tech-icon">🔥</div>
+        <h3 class="tech-name">火山引擎 Seedance 深度协同</h3>
+        <p class="tech-desc">AI 视频与 3D 商品内容生成：过去数周的专业内容，现在数小时交付。</p>
+      </div>
+      <div class="tech-card reveal d3">
+        <div class="tech-icon">🔊</div>
+        <h3 class="tech-name">Noiz.ai 声音引擎</h3>
+        <p class="tech-desc">接近母语者自然度的多语言配音，内容生产成本降 90%、效率提升 10 倍。</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 52px;" class="reveal d4">
+      <a class="btn-secondary" href="#contact">探索增长技术引擎 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S5 · CASES ===== -->
+<section class="cases" id="cases">
+  <div class="container">
+    <div class="section-label gold reveal">Cases</div>
+    <h2 class="section-heading reveal d1">飞轮正在转动——这些品牌是我们模型的活证据</h2>
+    <p class="section-desc reveal d2">从政府项目到产业带工厂，每个案例都承载着流量注入、数字化运营和深度绑定。</p>
+
+    <!-- Government Featured Case -->
+    <div class="case-featured reveal d3">
+      <div class="case-featured-icon">🏛</div>
+      <div>
+        <span class="case-featured-tag">政府标杆案例</span>
+        <h3 class="case-featured-title">圳品出海 · 深农集团 × 盐田区政府</h3>
+        <p class="case-featured-desc">基于农业部 <strong>RCEP 框架</strong>打造的农产品和食品出海平台，独立站 + Google SEO + 社媒矩阵全链路服务——农产品出海数字营销标杆案例。</p>
+      </div>
+    </div>
+
+    <!-- Brand Cases -->
+    <div class="case-grid">
+      <div class="case-card reveal d1">
+        <div class="case-card-name">Reego Denim</div>
+        <div class="case-card-type">牛仔工厂 B2B</div>
+        <div class="case-card-result">独立站+SEO+社媒全链路<br><strong>3 个月自然流量 +300%</strong> · 月均询盘 50+<br><a class="case-card-link" href="https://reegodem.com" target="_blank" rel="noopener">reegodem.com →</a></div>
+      </div>
+      <div class="case-card reveal d2">
+        <div class="case-card-name">Bterlif</div>
+        <div class="case-card-type">膳食营养 DTC</div>
+        <div class="case-card-result">Amazon + 独立站双引擎<br>50+ SKU · 5 国 · <strong>300% 年增长</strong><br><a class="case-card-link" href="https://bterlif.com" target="_blank" rel="noopener">bterlif.com →</a></div>
+      </div>
+      <div class="case-card reveal d3">
+        <div class="case-card-name">Kinet Houses</div>
+        <div class="case-card-type">模块化建筑</div>
+        <div class="case-card-result">北美/澳洲出海<br>12 房型 · 3 大洲 · <strong>4 万+ 询盘</strong></div>
+      </div>
+      <div class="case-card reveal d1">
+        <div class="case-card-name">Movotex</div>
+        <div class="case-card-type">模块化卫浴 B2B</div>
+        <div class="case-card-result">海外独立站+多语言 SEO+YouTube 矩阵<br><strong>月均千级访问</strong> · 对接多个海外工程<br><a class="case-card-link" href="https://movotex.com" target="_blank" rel="noopener">movotex.com →</a></div>
+      </div>
+      <div class="case-card reveal d2">
+        <div class="case-card-name">Omnifir</div>
+        <div class="case-card-type">消防出海 B2B</div>
+        <div class="case-card-result">UL/FM 认证合规<br>50+ 品类一站式体系<br><a class="case-card-link" href="https://omnifir.com" target="_blank" rel="noopener">omnifir.com →</a></div>
+      </div>
+      <div class="case-card reveal d3">
+        <div class="case-card-name">Awada Outdoors</div>
+        <div class="case-card-type">户外装备 DTC</div>
+        <div class="case-card-result">Shopify 品牌站+SEM+SNS 引流全链路<br><a class="case-card-link" href="https://awadaoutdoors.shop" target="_blank" rel="noopener">awadaoutdoors.shop →</a></div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 52px;" class="reveal d4">
+      <a class="btn-secondary-light" href="#contact">查看全部案例 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S6 · JIUMAI BANNER ===== -->
+<section class="jiumai-banner" id="jiumai">
+  <div class="container">
+    <div class="jiumai-card reveal">
+      <div>
+        <div class="jiumai-tag">联合产品 · JiuMai</div>
+        <h3 class="jiumai-title">前海玖麦 — 跨境企业的关汇税 × 营销一体化工作流</h3>
+        <p class="jiumai-desc">与前海九米跨境联合开发：把合规报关、退税办理与数字营销放进同一条流水线。一个后台，看清从流量到退税的每一分钱。</p>
+        <a class="btn-primary" href="#contact">了解前海玖麦 →</a>
+      </div>
+      <div class="jiumai-visual">
+        <div class="jiumai-dual-logo">
+          <img src="assets/logos/digitauro-logo-nobg.png" alt="数漫极光" style="height: 28px;">
+          <span>×</span>
+          <img src="assets/logos/jiumi_partner.png" alt="前海九米" style="height: 30px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S7 · PARTNERS WALL (NEW) ===== -->
+<section class="partners" id="partners">
+  <div class="container">
+    <div class="partners-header">
+      <div class="section-label teal light reveal">Ecosystem</div>
+      <h2 class="section-heading light reveal d1">单一平台做不到的增长，网络可以</h2>
+      <p class="section-desc light reveal d2">全球顶级流量、AI 技术与跨境基建，编织成一张为你所用的网。</p>
+    </div>
+
+    <div class="partners-grid reveal d3">
+      <!-- 流量平台 -->
+      <div class="partner-group">
+        <div class="partner-group-label">流量平台</div>
+        <div class="partner-row">
+          <a class="partner-card" href="https://ads.google.com" target="_blank" rel="noopener">
+            <picture>
+              <source srcset="assets/logos/google_partner.avif" type="image/avif">
+              <img src="assets/logos/google.png" alt="Google" style="filter: brightness(0) invert(1); max-height: 30px;">
+            </picture>
+          </a>
+          <a class="partner-card" href="https://www.tiktok.com/business" target="_blank" rel="noopener">
+            <img src="assets/logos/tiktok_partner.webp" alt="TikTok" style="max-height: 34px;">
+          </a>
+          <a class="partner-card light-bg" href="https://www.amazon.com" target="_blank" rel="noopener">
+            <img src="assets/logos/amazon.png" alt="Amazon" style="max-height: 32px;">
+          </a>
+          <a class="partner-card light-bg" href="https://www.shopify.com" target="_blank" rel="noopener">
+            <img src="assets/logos/shopify_partner.webp" alt="Shopify Plus" style="max-height: 32px;">
+          </a>
+          <span class="partner-card">
+            <img src="assets/logos/jiumi_partner.png" alt="九米跨境" style="max-height: 30px;">
+          </span>
+        </div>
+      </div>
+
+      <!-- AI 技术 -->
+      <div class="partner-group">
+        <div class="partner-group-label">AI 技术</div>
+        <div class="partner-row">
+          <a class="partner-card" href="https://www.volcengine.com" target="_blank" rel="noopener">
+            <img src="assets/logos/volcano_partner.png" alt="火山引擎" style="max-height: 34px;">
+          </a>
+          <span class="partner-card">
+            <img src="assets/logos/noiz.png" alt="Noiz.ai" style="max-height: 28px;">
+          </span>
+          <span class="partner-card">
+            <span class="partner-card-text">VDOIT</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 跨境基建 -->
+      <div class="partner-group">
+        <div class="partner-group-label">跨境基建</div>
+        <div class="partner-row">
+          <span class="partner-card"><span class="partner-card-text">PayPal</span></span>
+          <span class="partner-card"><span class="partner-card-text">Antom Pay</span></span>
+          <span class="partner-card"><span class="partner-card-text">谷仓海外仓</span></span>
+          <span class="partner-card">
+            <img src="assets/logos/vechain_icon.png" alt="VeChain" style="max-height: 34px;">
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 48px;" class="reveal d4">
+      <a class="btn-secondary" href="#contact">查看生态合作 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S8 · INSIGHTS ===== -->
+<section class="insights" id="insights">
+  <div class="container">
+    <div class="section-label purple reveal">Insights</div>
+    <h2 class="section-heading reveal d1">洞察 — 我们如何理解跨境增长</h2>
+    <p class="section-desc reveal d2">来自一线实战的方法论沉淀与趋势研判。</p>
+
+    <div class="insight-grid">
+      <div class="insight-card reveal d1">
+        <span class="insight-tag purple">GEO</span>
+        <h3 class="insight-title">你的外贸客户，正在被 AI「三刀截流」</h3>
+        <p class="insight-excerpt">60% 海外 AI 搜索用户不再点击网站；采购商「先问 AI，再找供应商」已成习惯——品牌若被 AI 屏蔽，就缺席了决策起点。</p>
+      </div>
+      <div class="insight-card reveal d2">
+        <span class="insight-tag teal">TikTok 欧洲</span>
+        <h3 class="insight-title">万亿欧洲蓝海：TikTok Shop 的窗口期还有多久？</h3>
+        <p class="insight-excerpt">欧洲电商市场规模 7000 亿+，TikTok Shop GMV 同比增速 180%。EU4 国电商渗透率仅 13%——天花板远未触顶。</p>
+      </div>
+      <div class="insight-card reveal d3">
+        <span class="insight-tag gold">独立站</span>
+        <h3 class="insight-title">独立站不是网站，是你的海外增长资产</h3>
+        <p class="insight-excerpt">海外采购商的第一习惯——Google 搜索供应商品牌名，看官网是否专业。独立站是客户判断「靠不靠谱」的第一印象。</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 52px;" class="reveal d4">
+      <a class="btn-secondary-light" href="#contact">进入洞察频道 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S9 · CTA ===== -->
+<section class="cta-section" id="contact">
+  <div class="cta-glow"></div>
+  <div class="cta-glow-2"></div>
+  <div class="container">
+    <div class="cta-content reveal">
+      <div class="section-label teal light">Get Started</div>
+      <h2 class="cta-heading">准备好启动你的全球增长了吗？</h2>
+      <p class="cta-desc">无论你需要流量渠道、技术能力还是合规落地——我们先聊聊。</p>
+
+      <div class="hero-actions" style="justify-content: center;">
+        <a class="btn-primary" href="mailto:leo@digitauro.com">获取增长方案 →</a>
+      </div>
+      <div class="cta-email">
+        <a href="mailto:leo@digitauro.com">leo@digitauro.com</a> · 24 小时内回复
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="about">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logos/digitauro-logo-nobg.png" alt="数漫极光 DigitAuro">
+        <div class="footer-slogan">做你的全球增长合伙人</div>
+        <p class="footer-positioning">整合流量和技术，驱动品牌全球增长。</p>
+      </div>
+      <div class="footer-col">
+        <h4>核心业务</h4>
+        <ul>
+          <li><a href="#business">独立站全案</a></li>
+          <li><a href="#business">Google 全域增长</a></li>
+          <li><a href="#business">TikTok 欧洲</a></li>
+          <li><a href="#business">GEO AI 获客</a></li>
+          <li><a href="#business">社媒运营</a></li>
+          <li><a href="#business">VDOO AI 视频</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>产品与技术</h4>
+        <ul>
+          <li><a href="#tech">VDOIT 智能体</a></li>
+          <li><a href="#jiumai">前海玖麦</a></li>
+          <li><a href="#tech">Noiz.ai</a></li>
+          <li><a href="#tech">火山引擎协同</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>公司</h4>
+        <ul>
+          <li><a href="#about">关于我们</a></li>
+          <li><a href="#cases">案例</a></li>
+          <li><a href="#insights">洞察</a></li>
+          <li><a href="#partners">加入生态</a></li>
+          <li><a href="mailto:leo@digitauro.com">leo@digitauro.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© DigitAuro 2026 · 前海九米跨境 × 数字漫步 联合出品</div>
+      <div class="footer-affiliates">
+        <a class="footer-affiliate-link" href="https://digitwalk.com" target="_blank" rel="noopener">
+          <img src="assets/logos/digitwalk-new.png" alt="数字漫步">
+          数字漫步 DigitWalk
+        </a>
+        <span class="footer-affiliate-divider">·</span>
+        <a class="footer-affiliate-link" href="#" rel="noopener">
+          <img src="assets/logos/jiumi_partner.png" alt="九米跨境" style="height: 18px;">
+          九米跨境
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== FLOATING CONTACT ===== -->
+<a class="float-contact" href="#contact">
+  <span>💬</span>
+  聊聊你的出海计划
+</a>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Scroll Reveal with IntersectionObserver
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('in');
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Data band count-up animation
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+      entry.target.classList.add('counted');
+      const target = parseInt(entry.target.dataset.target);
+      if (!target) return;
+      const suffix = entry.target.textContent.replace(/[0-9]/g, '');
+      let current = 0;
+      const duration = 1800;
+      const step = target / (duration / 16);
+      const animate = () => {
+        current += step;
+        if (current < target) {
+          entry.target.textContent = Math.floor(current) + suffix;
+          requestAnimationFrame(animate);
+        } else {
+          entry.target.textContent = target + suffix;
+        }
+      };
+      animate();
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.data-value[data-target]').forEach(el => countObserver.observe(el));
+</script>
+
+</body>
+</html>
