@@ -239,4 +239,13 @@ main {
     background: var(--gradient-purple);
     box-shadow: 0 10px 28px rgba(155,77,237,.25);
   }
+
+  .float-contact {
+    right: 16px !important;
+    bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+    padding: 10px 14px !important;
+    max-width: calc(100vw - 32px);
+    font-size: .78rem !important;
+    box-shadow: 0 10px 28px rgba(155,77,237,.32) !important;
+  }
 }

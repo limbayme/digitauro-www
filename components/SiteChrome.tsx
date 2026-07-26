@@ -14,7 +14,7 @@ const businessItems = [
 
 const homeLinks = [
   ["增长技术", "/#tech"],
-  ["前海玖麦", "/#jiumai"],
+  ["前海玖麦", "https://jmai.digitwalk.co"],
   ["生态伙伴", "/#partners"],
   ["洞察", "/insights"],
   ["联系", "mailto:young@digitauro.com"]
@@ -124,7 +124,7 @@ function Footer() {
             <p className="footer-positioning" style={{ color: "rgba(255,255,255,.5)" }}>整合流量和技术，驱动品牌全球增长。</p>
           </div>
           <div className="footer-col"><h4>核心业务</h4><ul>{businessItems.map(([title, , href]) => <li key={href}><a href={href}>{title.replace("全域", "")}</a></li>)}</ul></div>
-          <div className="footer-col"><h4>产品与技术</h4><ul><li><a href="/#jiumai">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎协同</a></li></ul></div>
+          <div className="footer-col"><h4>产品与技术</h4><ul><li><a href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎</a></li></ul></div>
           <div className="footer-col"><h4>公司</h4><ul><li><a href="/#about">关于我们</a></li><li><a href="/insights">洞察</a></li><li><a href="/#partners">加入生态</a></li><li><a href="mailto:young@digitauro.com">young@digitauro.com</a></li></ul></div>
         </div>
         <div className="footer-bottom">
@@ -173,7 +173,6 @@ function ClientEffects() {
 
     const sectionLinks = [
       { id: "tech", selector: '.nav-link[href="/#tech"]' },
-      { id: "jiumai", selector: '.nav-link[href="/#jiumai"]' },
       { id: "partners", selector: '.nav-link[href="/#partners"]' }
     ];
 

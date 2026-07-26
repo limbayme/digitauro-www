@@ -88,12 +88,108 @@
     .dark-section .gradient-text { color: var(--aurora-purple-1) !important; -webkit-text-fill-color: var(--aurora-purple-1) !important; }
 
     @media (max-width: 768px) {
-      .page-hero-content { grid-template-columns: 1fr; }
-      .hero-feature-grid { grid-template-columns: 1fr; }
+      .hero-breadcrumb { display: none; }
+      .page-hero {
+        padding-top: calc(var(--nav-height) + 34px) !important;
+        padding-bottom: 56px !important;
+      }
+      .page-hero-content {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+      .page-hero-title {
+        font-size: clamp(2rem, 9vw, 2.75rem);
+        line-height: 1.12;
+      }
+      .page-hero-desc {
+        font-size: .98rem;
+        line-height: 1.7;
+        margin-bottom: 26px;
+      }
+      .page-hero-actions {
+        display: grid;
+        gap: 12px;
+      }
+      .page-hero-actions .btn-primary,
+      .page-hero-actions .btn-secondary {
+        justify-content: center;
+        min-height: 52px;
+        border-radius: 14px;
+      }
+      .page-hero-visual {
+        height: auto;
+        margin-top: 0;
+      }
+      .hero-feature-grid {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        gap: 12px;
+      }
+      .hero-feature {
+        min-height: 150px;
+        padding: 18px 16px;
+        border-radius: 18px;
+      }
+      .hero-feature-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
+      }
+      .hero-feature-title {
+        font-size: .92rem;
+      }
+      .hero-feature-desc {
+        font-size: .72rem;
+        line-height: 1.45;
+      }
+      .service-section {
+        padding: 72px 0;
+      }
       .service-grid.cols-3,.service-grid.cols-4 { grid-template-columns: 1fr; }
       .platform-grid { grid-template-columns: 1fr 1fr; }
       .geo-step { border-radius: var(--radius-md) !important; margin-bottom: 8px; max-width: none; flex: 1 1 100%; }
       .geo-step::after { display: none; }
+    }
+    @media (max-width: 480px) {
+      .page-hero {
+        padding-top: calc(var(--nav-height) + 26px) !important;
+        padding-bottom: 48px !important;
+      }
+      .page-hero-content {
+        gap: 28px;
+      }
+      .hero-feature {
+        min-height: 136px;
+        padding: 16px 14px;
+      }
+      .hero-feature-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+      }
+      .hero-feature-icon img {
+        width: 22px;
+        height: 22px;
+      }
+      .hero-feature-desc {
+        font-size: .68rem;
+      }
+      .service-header {
+        margin-bottom: 34px !important;
+      }
+      .platform-grid {
+        gap: 12px;
+      }
+      .platform-card {
+        padding: 22px 12px;
+        border-radius: 18px;
+      }
+      .platform-card-name {
+        font-size: .94rem;
+      }
+      .platform-card-desc {
+        font-size: .72rem;
+      }
     }
   </style>
 </head>
@@ -250,7 +346,7 @@
     <div class="footer-grid">
       <div class="footer-brand"><img src="assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro"><div class="footer-slogan" style="color: #fff;">你的全球增长合伙人</div><p class="footer-positioning" style="color: rgba(255,255,255,.5);">整合流量和技术，驱动品牌全球增长。</p></div>
       <div class="footer-col"><h4>核心业务</h4><ul><li><a href="independent-site.html">独立站与 Google 增长</a></li><li><a href="social-media.html">社媒运营</a></li><li><a href="geo-ai.html">GEO AI 获客</a></li><li><a href="tiktok-europe.html">TikTok 欧洲</a></li><li><a href="content-production.html">内容素材制作</a></li><li><a href="amazon-erp.html">Amazon SPN 及 ERP</a></li></ul></div>
-      <div class="footer-col"><h4>产品与技术</h4><ul><li><a href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎协同</a></li></ul></div>
+      <div class="footer-col"><h4>产品与技术</h4><ul><li><a href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎</a></li></ul></div>
       <div class="footer-col"><h4>公司</h4><ul><li><a href="index.html#business">关于我们</a></li><li><a href="insights.html">洞察</a></li><li><a href="mailto:young@digitauro.com">young@digitauro.com</a></li></ul></div>
     </div>
     <div class="footer-bottom">
