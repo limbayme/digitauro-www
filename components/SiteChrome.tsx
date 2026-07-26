@@ -4,13 +4,15 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 const businessItems = [
-  ["独立站与 Google 全域增长", "建站 + Google SEM/SEO 全链路", "/independent-site", "/assets/logos/biz-independent.png"],
-  ["社媒运营", "五平台内容 + 投放 + 舆情一体化", "/social-media", "/assets/logos/biz-social.png"],
+  ["品牌独立站及 Google 增长", "建站 + Google SEM/SEO 全链路", "/independent-site", "/assets/logos/biz-independent.png"],
+  ["全球社交媒体运营", "五平台内容 + 投放 + 舆情一体化", "/social-media", "/assets/logos/biz-social.png"],
   ["GEO 全球 AI 获客", "让 ChatGPT、Gemini 主动推荐你", "/geo-ai", "/assets/logos/biz-geo-ai.png"],
-  ["TikTok 欧洲全域运营", "欧洲 TAP + 本土店 + 达人资源池", "/tiktok-europe", "/assets/logos/biz-tiktok-eu.png"],
+  ["TikTok 欧洲本土店及达人分发", "欧洲 TAP + 本土店 + 达人资源池", "/tiktok-europe", "/assets/logos/biz-tiktok-eu.png"],
   ["内容素材制作服务", "15秒短视频 / 故事板分镜 / 定制时长视频", "/content-production", "/assets/logos/biz-vdoo.png"],
   ["Amazon SPN 及 ERP 服务", "Listing 优化 + 库存管理 + 订单履约", "/amazon-erp", "/assets/logos/biz-amazon-erp.png"]
 ];
+
+const growthFormUrl = "https://page.looyucdn.cn/mall/subpages/view/pages/article/article?id=2213782&cid=80058651&advId=18680672652&promote=18680672652&pacId=8d293a481c425ed62e63bc064e80c5106e727237a7b3c4b9535a476ff58112c0593fa4414ca43b530865491f622adf18";
 
 const homeLinks = [
   ["增长技术", "/#tech"],
@@ -76,7 +78,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
             {homeLinks.map(([label, href]) => (
               <a className={`nav-link${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>{label}</a>
             ))}
-            <a className="btn-nav" href="/#contact">获取增长方案 →</a>
+            <a className="btn-nav" href={growthFormUrl} target="_blank" rel="noopener">获取增长方案 →</a>
           </div>
 
           <button className="menu-toggle" aria-label={open ? "关闭菜单" : "打开菜单"} aria-expanded={open} onClick={() => setOpen((value) => !value)}>
@@ -100,7 +102,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
               {homeLinks.map(([label, href]) => (
                 <a className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</a>
               ))}
-              <a className="mobile-nav-cta" href="/#contact">获取增长方案 →</a>
+              <a className="mobile-nav-cta" href={growthFormUrl} target="_blank" rel="noopener">获取增长方案 →</a>
             </div>
           </div>
         </div>
@@ -125,7 +127,7 @@ function Footer() {
           </div>
           <div className="footer-col"><h4>核心业务</h4><ul>{businessItems.map(([title, , href]) => <li key={href}><a href={href}>{title.replace("全域", "")}</a></li>)}</ul></div>
           <div className="footer-col"><h4>产品与技术</h4><ul><li><a href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦工作台</a></li><li><a href="https://www.noiz.ai" target="_blank" rel="noopener">Noiz.ai</a></li><li><a href="https://www.volcengine.com" target="_blank" rel="noopener">火山引擎</a></li></ul></div>
-          <div className="footer-col"><h4>公司</h4><ul><li><a href="/#about">关于我们</a></li><li><a href="/insights">洞察</a></li><li><a href="/#partners">加入生态</a></li><li><a href="mailto:young@digitauro.com">young@digitauro.com</a></li></ul></div>
+          <div className="footer-col"><h4>公司</h4><ul><li><a href="/#about">关于我们</a></li><li><a href="/insights">洞察</a></li><li><a href="/#partners">加入生态</a></li><li><a href={growthFormUrl} target="_blank" rel="noopener">获取增长方案</a></li></ul></div>
         </div>
         <div className="footer-bottom">
           <div className="footer-copy">© DigitAuro 2026 · 深圳市数漫极光科技有限公司 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2025440301号-1</a></div>
