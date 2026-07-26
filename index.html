@@ -1153,6 +1153,54 @@
       .hero-float.f1 { top: 27%; left: 10%; width: 118px; height: 180px; }
       .hero-float.f2 { top: 31%; right: 9%; width: 110px; height: 150px; }
       .hero-float.f3 { display: none; }
+      .jiumai-banner {
+        padding: 70px 0 78px;
+      }
+      .jiumai-card {
+        padding: 34px 28px 30px;
+        gap: 28px;
+        border-radius: 28px;
+      }
+      .jiumai-tag {
+        margin-bottom: 14px;
+        font-size: .68rem;
+      }
+      .jiumai-title {
+        font-size: clamp(1.65rem, 8vw, 2.05rem);
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+      .jiumai-desc {
+        font-size: .92rem;
+        line-height: 1.75;
+        margin-bottom: 22px;
+      }
+      .jiumai-card .btn-primary {
+        width: 100%;
+        min-height: 54px;
+        justify-content: center;
+        border-radius: 14px;
+      }
+      .jiumai-visual {
+        height: 178px;
+        border-radius: 22px;
+      }
+      .jiumai-dual-logo {
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        padding: 0 16px;
+      }
+      .jiumai-dual-logo img {
+        max-width: 42%;
+        height: auto !important;
+        max-height: 28px;
+        object-fit: contain;
+      }
+      .jiumai-dual-logo span {
+        flex: 0 0 auto;
+        font-size: 1rem;
+      }
       .data-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
       .business-grid { grid-template-columns: 1fr; }
       .case-grid { grid-template-columns: 1fr; }
@@ -1193,6 +1241,26 @@
       .hero-trust {
         width: calc(100vw - 36px);
         margin-top: 30px;
+      }
+      .jiumai-banner {
+        padding: 62px 0 72px;
+      }
+      .jiumai-card {
+        padding: 30px 22px 26px;
+        border-radius: 26px;
+        gap: 24px;
+      }
+      .jiumai-title {
+        font-size: clamp(1.52rem, 8.5vw, 1.92rem);
+      }
+      .jiumai-desc {
+        font-size: .88rem;
+      }
+      .jiumai-visual {
+        height: 154px;
+      }
+      .jiumai-dual-logo img {
+        max-height: 24px;
       }
       .float-contact {
         right: 18px;
@@ -1248,7 +1316,7 @@
         </div>
       </div>
       <a class="nav-link" href="#tech">增长技术</a>
-      <a class="nav-link" href="https://jmai.digitwalk.co" target="_blank" rel="noopener">前海玖麦</a>
+      <a class="nav-link" href="#jiumai">前海玖麦</a>
       <a class="nav-link" href="#partners">生态伙伴</a>
       <a class="nav-link" href="insights.html">洞察</a>
       <a class="nav-link" href="mailto:young@digitauro.com">联系</a>
@@ -1693,6 +1761,7 @@ document.querySelectorAll('.data-value[data-target]').forEach(el => countObserve
 const sections = [
   { id: 'business', nav: 'a[href="#business"]' },
   { id: 'tech', nav: 'a[href="#tech"]' },
+  { id: 'jiumai', nav: 'a[href="#jiumai"]' },
   { id: 'partners', nav: 'a[href="#partners"]' },
   { id: 'insights', nav: 'a[href="#insights"]' },
   { id: 'contact', nav: 'a[href="#contact"]' },

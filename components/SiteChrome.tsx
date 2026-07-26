@@ -14,7 +14,7 @@ const businessItems = [
 
 const homeLinks = [
   ["增长技术", "/#tech"],
-  ["前海玖麦", "https://jmai.digitwalk.co"],
+  ["前海玖麦", "/#jiumai"],
   ["生态伙伴", "/#partners"],
   ["洞察", "/insights"],
   ["联系", "mailto:young@digitauro.com"]
@@ -173,6 +173,7 @@ function ClientEffects() {
 
     const sectionLinks = [
       { id: "tech", selector: '.nav-link[href="/#tech"]' },
+      { id: "jiumai", selector: '.nav-link[href="/#jiumai"]' },
       { id: "partners", selector: '.nav-link[href="/#partners"]' }
     ];
 
