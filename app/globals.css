@@ -18,6 +18,17 @@ main {
   padding-bottom: calc(32px + env(safe-area-inset-bottom));
 }
 
+.footer.site-footer .footer-col a:hover,
+.footer.site-footer .footer-copy a:hover,
+.footer.site-footer .footer-affiliate-link:hover {
+  color: var(--aurora-gold) !important;
+}
+
+.footer.site-footer .footer-affiliate-link:hover {
+  background: rgba(245,196,0,.1) !important;
+  border-color: rgba(245,196,0,.24) !important;
+}
+
 .nav.home-nav:not(.scrolled):not(.mobile-open) {
   background: transparent;
   backdrop-filter: none;
