@@ -729,6 +729,7 @@
     .jiumai-card::before {
       content: ''; position: absolute; top: 0; right: 0; width: 55%; height: 100%;
       background: radial-gradient(circle at top right, rgba(23,208,200,.1), transparent 65%);
+      pointer-events: none;
     }
     .jiumai-card::after {
       content: ''; position: absolute; inset: 0; border-radius: var(--radius-xl);
@@ -736,7 +737,9 @@
       background: linear-gradient(135deg, rgba(199,107,240,.25), rgba(23,208,200,.25), transparent 60%);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor; mask-composite: exclude;
+      pointer-events: none;
     }
+    .jiumai-card > * { position: relative; z-index: 2; }
     .jiumai-tag {
       font-size: .72rem; font-weight: 800; letter-spacing: .15em;
       text-transform: uppercase; color: var(--aurora-gold); margin-bottom: 18px;
@@ -755,6 +758,7 @@
       background: 
         linear-gradient(135deg, rgba(199,107,240,.05), transparent),
         linear-gradient(225deg, rgba(23,208,200,.05), transparent);
+      pointer-events: none;
     }
     .jiumai-dual-logo {
       display: flex; align-items: center; gap: 20px;
