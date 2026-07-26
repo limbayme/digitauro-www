@@ -1,6 +1,7 @@
 .DS_Store
 .workbuddy/
 node_modules/
+.next/
 *.log
 gen_*.py
 generate_images.py
