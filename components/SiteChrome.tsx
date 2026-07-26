@@ -130,7 +130,7 @@ function Footer() {
         <div className="footer-bottom">
           <div className="footer-copy">© DigitAuro 2026 · 深圳市数漫极光科技有限公司 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2025440301号-1</a></div>
           <div className="footer-affiliates">
-            <a className="footer-affiliate-link" href="https://www.jiumi.com.cn" target="_blank" rel="noopener"><img src="/assets/logos/jiumi_partner.png" alt="前海九米" style={{ height: 18 }} />前海九米</a>
+            <a className="footer-affiliate-link" href="https://jiumi.com.cn" target="_blank" rel="noopener"><img src="/assets/logos/jiumi_partner.png" alt="前海九米" style={{ height: 18 }} />前海九米</a>
             <span className="footer-affiliate-divider">·</span>
             <a className="footer-affiliate-link" href="https://www.digitwalk.co" target="_blank" rel="noopener"><img src="/assets/logos/digitwalk-new.png" alt="数字漫步" />数字漫步 DigitWalk</a>
           </div>
