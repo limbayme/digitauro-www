@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { StaticHtmlPage } from "@/components/StaticHtmlPage";
-import { findInsightPage } from "@/lib/routes";
+import { findInsightPage, insightPages } from "@/lib/routes";
 import { readStaticPage } from "@/lib/static-page";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return insightPages.map((page) => ({ slug: page.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

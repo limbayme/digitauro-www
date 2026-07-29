@@ -3,7 +3,7 @@ import { StaticHtmlPage } from "@/components/StaticHtmlPage";
 import { readStaticPage } from "@/lib/static-page";
 import { rootPage } from "@/lib/routes";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export function generateMetadata(): Metadata {
   const page = readStaticPage(rootPage);

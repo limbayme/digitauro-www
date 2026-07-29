@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 const businessItems = [
@@ -20,6 +22,17 @@ const homeLinks = [
   ["生态伙伴", "/#partners"],
   ["洞察", "/insights"],
   ["联系", "mailto:young@digitauro.com"]
+];
+
+const prefetchPaths = [
+  "/",
+  "/independent-site",
+  "/social-media",
+  "/geo-ai",
+  "/tiktok-europe",
+  "/content-production",
+  "/amazon-erp",
+  "/insights"
 ];
 
 function isActive(pathname: string, href: string) {
@@ -57,26 +70,26 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <div className="noise-overlay" />
       <nav className={navClassName} id="navbar">
         <div className="nav-inner">
-          <a className="nav-brand" href="/">
+          <Link className="nav-brand" href="/">
             <img className="logo-dark" src="/assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro" />
             <img className="logo-light" src="/assets/logos/digitauro-logo-light.png" alt="数漫极光 DigitAuro" />
             <img className="logo-symbol" src="/assets/logos/digitauro-symbol.png" alt="数漫极光 DigitAuro" />
-          </a>
+          </Link>
 
           <div className="nav-menu">
             <div className="nav-item">
-              <a className={`nav-link${businessItems.some(([, , href]) => isActive(pathname, href)) ? " active" : ""}`} href="/#business">核心业务 ▾</a>
+              <Link className={`nav-link${businessItems.some(([, , href]) => isActive(pathname, href)) ? " active" : ""}`} href="/#business">核心业务 ▾</Link>
               <div className="nav-dropdown">
                 {businessItems.map(([title, desc, href, icon]) => (
-                  <a className={`dropdown-card${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>
+                  <Link className={`dropdown-card${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>
                     <img className="dropdown-icon-img" src={icon} alt="" />
                     <div><div className="dropdown-title">{title}</div><div className="dropdown-desc">{desc}</div></div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
             {homeLinks.map(([label, href]) => (
-              <a className={`nav-link${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>{label}</a>
+              href.startsWith("/") ? <Link className={`nav-link${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>{label}</Link> : <a className={`nav-link${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>{label}</a>
             ))}
             <a className="btn-nav" href={growthFormUrl} target="_blank" rel="noopener">获取增长方案 →</a>
           </div>
@@ -91,16 +104,16 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
             <div className="mobile-nav-label">核心业务</div>
             <div className="mobile-business-grid">
               {businessItems.map(([title, desc, href, icon]) => (
-                <a className={`mobile-business-card${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>
+                <Link className={`mobile-business-card${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>
                   <img src={icon} alt="" />
                   <span><strong>{title}</strong><em>{desc}</em></span>
-                </a>
+                </Link>
               ))}
             </div>
             <div className="mobile-nav-label">导航</div>
             <div className="mobile-nav-links">
               {homeLinks.map(([label, href]) => (
-                <a className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</a>
+                href.startsWith("/") ? <Link className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</Link> : <a className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</a>
               ))}
               <a className="mobile-nav-cta" href={growthFormUrl} target="_blank" rel="noopener">获取增长方案 →</a>
             </div>
@@ -110,9 +123,31 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
       <Footer />
       <a className="float-contact" href={floatHref}><span>💬</span>聊聊你的出海计划</a>
+      <RoutePrefetcher />
       <ClientEffects />
     </>
   );
+}
+
+function RoutePrefetcher() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const prefetch = () => prefetchPaths.forEach((path) => router.prefetch(path));
+    let cancelPrefetch = () => {};
+
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(prefetch, { timeout: 1800 });
+      cancelPrefetch = () => window.cancelIdleCallback(idleId);
+    } else {
+      const timeoutId = globalThis.setTimeout(prefetch, 900);
+      cancelPrefetch = () => globalThis.clearTimeout(timeoutId);
+    }
+
+    return cancelPrefetch;
+  }, [router]);
+
+  return null;
 }
 
 function Footer() {
@@ -143,6 +178,27 @@ function Footer() {
 }
 
 function ClientEffects() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      const anchor = (event.target as Element | null)?.closest("a[href]") as HTMLAnchorElement | null;
+      if (!anchor) return;
+      if (anchor.target || anchor.hasAttribute("download")) return;
+
+      const url = new URL(anchor.href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+      if (!["", "/"].some((prefix) => url.pathname === prefix || url.pathname.startsWith(prefix))) return;
+
+      event.preventDefault();
+      router.push(`${url.pathname}${url.search}${url.hash}`);
+    };
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, [router]);
+
   useEffect(() => {
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
