@@ -812,3 +812,11 @@ section:not(.hero):not(.page-hero):not(.cta-section):not(.footer)::after {
     line-height: 1.42 !important;
   }
 }
+
+/* Keep SSR content visible even when hydration or observers are delayed. */
+.reveal,
+.reveal.in {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}

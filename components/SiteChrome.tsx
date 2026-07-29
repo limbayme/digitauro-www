@@ -73,7 +73,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
           <Link className="nav-brand" href="/">
             <img className="logo-dark" src="/assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro" />
             <img className="logo-light" src="/assets/logos/digitauro-logo-light.png" alt="数漫极光 DigitAuro" />
-            <img className="logo-symbol" src="/assets/logos/digitauro-symbol.png" alt="数漫极光 DigitAuro" />
+            <img className="logo-symbol" src="/assets/logos/digitauro-symbol.png" alt="数漫极光 DigitAuro" style={{ display: "none" }} />
           </Link>
 
           <div className="nav-menu">
@@ -99,7 +99,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
           </button>
         </div>
 
-        <div className="mobile-nav-panel" aria-hidden={!open}>
+        <div className="mobile-nav-panel" aria-hidden={!open} hidden={!open}>
           <div className="mobile-nav-scroll">
             <div className="mobile-nav-label">核心业务</div>
             <div className="mobile-business-grid">
