@@ -251,6 +251,14 @@ main {
   }
 }
 
+/* SSR first paint must never depend on hydration or IntersectionObserver. */
+.reveal,
+.reveal.in {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
 /* ===== DigitAuro V2 Visual System ===== */
 :root {
   --v2-night: #080d1c;

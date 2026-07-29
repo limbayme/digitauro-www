@@ -464,10 +464,15 @@ section { padding: 110px 0; position: relative; }
 }
 .float-contact:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 14px 48px rgba(155,77,237,.55); }
 
-/* Reveal animations */
+/* Reveal animations — SSR-safe: visible by default, only hidden when JS is active */
 .reveal {
-  opacity: 0; transform: translateY(44px);
+  opacity: 1; transform: none;
   transition: opacity .9s cubic-bezier(.25,.6,.35,1), transform .9s cubic-bezier(.25,.6,.35,1);
+}
+/* Only hide content pre-hydration when JS is confirmed running, to avoid
+   permanently-invisible text if scripts/chunks fail to load. */
+html.js .reveal:not(.in) {
+  opacity: 0; transform: translateY(44px);
 }
 .reveal.in { opacity: 1; transform: translateY(0); }
 .reveal.d1 { transition-delay: .1s; }
