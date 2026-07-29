@@ -599,8 +599,7 @@ section:not(.hero):not(.page-hero):not(.cta-section):not(.footer)::after {
     linear-gradient(180deg, #ffffff 0%, #f8faff 100%) !important;
 }
 
-.service-section.alt,
-.ai-section {
+.service-section.alt {
   background:
     radial-gradient(circle at 80% 12%, rgba(245, 196, 0, .075), transparent 23rem),
     linear-gradient(180deg, #f5f8ff 0%, #ffffff 100%) !important;
