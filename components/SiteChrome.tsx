@@ -24,17 +24,6 @@ const homeLinks = [
   ["联系", "mailto:young@digitauro.com"]
 ];
 
-const prefetchPaths = [
-  "/",
-  "/independent-site",
-  "/social-media",
-  "/geo-ai",
-  "/tiktok-europe",
-  "/content-production",
-  "/amazon-erp",
-  "/insights"
-];
-
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   if (href.startsWith("/#")) return false;
@@ -50,10 +39,35 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   const navClassName = useMemo(() => `nav${pathname === "/" ? " home-nav" : ""}${scrolled || open ? " scrolled" : ""}${open ? " mobile-open" : ""}`, [pathname, scrolled, open]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
+    let animationFrame = 0;
+    let isScrolled = window.scrollY > 40;
+    setScrolled(isScrolled);
+
+    const update = () => {
+      animationFrame = 0;
+      const nextScrolled = window.scrollY > 40;
+      if (nextScrolled === isScrolled) return;
+      isScrolled = nextScrolled;
+      setScrolled(nextScrolled);
+    };
+
+    const onScroll = () => {
+      if (!animationFrame) animationFrame = window.requestAnimationFrame(update);
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!window.matchMedia("(min-width: 769px)").matches) return;
+    const lightLogo = new Image();
+    lightLogo.decoding = "async";
+    lightLogo.src = "/assets/logos/digitauro-logo-light.png";
+    lightLogo.decode?.().catch(() => undefined);
   }, []);
 
   useEffect(() => {
@@ -70,27 +84,27 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <div className="noise-overlay" />
       <nav className={navClassName} id="navbar">
         <div className="nav-inner">
-          <Link className="nav-brand" href="/">
+          <Link className="nav-brand" href="/" prefetch={false}>
             <picture className="nav-logo-picture">
               <source media="(max-width: 768px)" srcSet="/assets/logos/digitauro-symbol.png" />
-              <img src={scrolled ? "/assets/logos/digitauro-logo-light.png" : "/assets/logos/digitauro-logo-dark.png"} alt="数漫极光 DigitAuro" />
+              <img src={scrolled ? "/assets/logos/digitauro-logo-light.png" : "/assets/logos/digitauro-logo-dark.png"} alt="数漫极光 DigitAuro" loading="eager" decoding="sync" fetchPriority="high" />
             </picture>
           </Link>
 
           <div className="nav-menu">
             <div className="nav-item">
-              <Link className={`nav-link${businessItems.some(([, , href]) => isActive(pathname, href)) ? " active" : ""}`} href="/#business">核心业务 ▾</Link>
+              <Link className={`nav-link${businessItems.some(([, , href]) => isActive(pathname, href)) ? " active" : ""}`} href="/#business" prefetch={false}>核心业务 ▾</Link>
               <div className="nav-dropdown">
                 {businessItems.map(([title, desc, href, icon]) => (
-                  <Link className={`dropdown-card${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>
-                    <img className="dropdown-icon-img" src={icon} alt="" />
+                  <Link className={`dropdown-card${isActive(pathname, href) ? " active" : ""}`} href={href} prefetch={false} key={href}>
+                    <img className="dropdown-icon-img" src={icon} alt="" loading="lazy" decoding="async" fetchPriority="low" />
                     <div><div className="dropdown-title">{title}</div><div className="dropdown-desc">{desc}</div></div>
                   </Link>
                 ))}
               </div>
             </div>
             {homeLinks.map(([label, href]) => (
-              href.startsWith("/") ? <Link className={`nav-link${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>{label}</Link> : <a className={`nav-link${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>{label}</a>
+              href.startsWith("/") ? <Link className={`nav-link${isActive(pathname, href) ? " active" : ""}`} href={href} prefetch={false} key={href}>{label}</Link> : <a className={`nav-link${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>{label}</a>
             ))}
             <a className="btn-nav" href={growthFormUrl} target="_blank" rel="noopener">获取增长方案 →</a>
           </div>
@@ -106,8 +120,8 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
               <div className="mobile-nav-label">核心业务</div>
               <div className="mobile-business-grid">
                 {businessItems.map(([title, desc, href, icon]) => (
-                  <Link className={`mobile-business-card${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>
-                    <img src={icon} alt="" />
+                  <Link className={`mobile-business-card${isActive(pathname, href) ? " active" : ""}`} href={href} prefetch={false} key={href}>
+                    <img src={icon} alt="" loading="lazy" decoding="async" fetchPriority="low" />
                     <span><strong>{title}</strong><em>{desc}</em></span>
                   </Link>
                 ))}
@@ -115,7 +129,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
               <div className="mobile-nav-label">导航</div>
               <div className="mobile-nav-links">
                 {homeLinks.map(([label, href]) => (
-                  href.startsWith("/") ? <Link className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</Link> : <a className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</a>
+                  href.startsWith("/") ? <Link className={isActive(pathname, href) ? "active" : ""} href={href} prefetch={false} key={href}>{label}</Link> : <a className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</a>
                 ))}
                 <a className="mobile-nav-cta" href={growthFormUrl} target="_blank" rel="noopener">获取增长方案 →</a>
               </div>
@@ -126,31 +140,9 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
       <Footer />
       <a className="float-contact" href={floatHref}><span>💬</span>聊聊你的出海计划</a>
-      <RoutePrefetcher />
       <ClientEffects />
     </>
   );
-}
-
-function RoutePrefetcher() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const prefetch = () => prefetchPaths.forEach((path) => router.prefetch(path));
-    let cancelPrefetch = () => {};
-
-    if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(prefetch, { timeout: 1800 });
-      cancelPrefetch = () => window.cancelIdleCallback(idleId);
-    } else {
-      const timeoutId = globalThis.setTimeout(prefetch, 900);
-      cancelPrefetch = () => globalThis.clearTimeout(timeoutId);
-    }
-
-    return cancelPrefetch;
-  }, [router]);
-
-  return null;
 }
 
 function Footer() {
@@ -159,7 +151,7 @@ function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <img src="/assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro" />
+            <img src="/assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro" loading="lazy" decoding="async" fetchPriority="low" />
             <div className="footer-slogan" style={{ color: "#fff" }}>你的全球增长合伙人</div>
             <p className="footer-positioning" style={{ color: "rgba(255,255,255,.5)" }}>整合流量和技术，驱动品牌全球增长。</p>
           </div>
@@ -170,9 +162,9 @@ function Footer() {
         <div className="footer-bottom">
           <div className="footer-copy">© DigitAuro 2026 · 深圳市数漫极光科技有限公司 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2025440301号-1</a></div>
           <div className="footer-affiliates">
-            <a className="footer-affiliate-link" href="https://jiumi.com.cn" target="_blank" rel="noopener"><img src="/assets/logos/jiumi_partner.png" alt="前海九米" style={{ height: 18 }} />前海九米</a>
+            <a className="footer-affiliate-link" href="https://jiumi.com.cn" target="_blank" rel="noopener"><img src="/assets/logos/jiumi_partner.png" alt="前海九米" style={{ height: 18 }} loading="lazy" decoding="async" fetchPriority="low" />前海九米</a>
             <span className="footer-affiliate-divider">·</span>
-            <a className="footer-affiliate-link" href="https://www.digitwalk.co" target="_blank" rel="noopener"><img src="/assets/logos/digitwalk-new.png" alt="数字漫步" />数字漫步 DigitWalk</a>
+            <a className="footer-affiliate-link" href="https://www.digitwalk.co" target="_blank" rel="noopener"><img src="/assets/logos/digitwalk-new.png" alt="数字漫步" loading="lazy" decoding="async" fetchPriority="low" />数字漫步 DigitWalk</a>
           </div>
         </div>
       </div>
@@ -182,6 +174,34 @@ function Footer() {
 
 function ClientEffects() {
   const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const prefetchedRoutes = new Set<string>();
+    const prefetchFromTarget = (target: EventTarget | null) => {
+      const anchor = (target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!anchor || anchor.target || anchor.hasAttribute("download")) return;
+
+      const url = new URL(anchor.href, window.location.href);
+      if (url.origin !== window.location.origin || url.pathname === window.location.pathname) return;
+
+      const route = `${url.pathname}${url.search}`;
+      if (prefetchedRoutes.has(route)) return;
+      prefetchedRoutes.add(route);
+      router.prefetch(route);
+    };
+
+    const onIntent = (event: Event) => prefetchFromTarget(event.target);
+    document.addEventListener("pointerover", onIntent, { passive: true });
+    document.addEventListener("focusin", onIntent);
+    document.addEventListener("touchstart", onIntent, { passive: true });
+
+    return () => {
+      document.removeEventListener("pointerover", onIntent);
+      document.removeEventListener("focusin", onIntent);
+      document.removeEventListener("touchstart", onIntent);
+    };
+  }, [router]);
 
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
@@ -192,7 +212,7 @@ function ClientEffects() {
 
       const url = new URL(anchor.href, window.location.href);
       if (url.origin !== window.location.origin) return;
-      if (!["", "/"].some((prefix) => url.pathname === prefix || url.pathname.startsWith(prefix))) return;
+      if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
 
       event.preventDefault();
       router.push(`${url.pathname}${url.search}${url.hash}`);
@@ -203,9 +223,12 @@ function ClientEffects() {
   }, [router]);
 
   useEffect(() => {
+    const animationFrames = new Set<number>();
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("in");
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        revealObserver.unobserve(entry.target);
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
 
@@ -216,43 +239,62 @@ function ClientEffects() {
         const el = entry.target as HTMLElement;
         if (!entry.isIntersecting || el.classList.contains("counted")) return;
         el.classList.add("counted");
+        countObserver.unobserve(el);
         const target = Number.parseInt(el.dataset.target ?? "", 10);
         if (!target) return;
         const suffix = el.textContent?.replace(/[0-9]/g, "") ?? "";
-        let current = 0;
-        const step = target / (1800 / 16);
-        const animate = () => {
-          current += step;
-          el.textContent = `${Math.min(Math.floor(current), target)}${suffix}`;
-          if (current < target) requestAnimationFrame(animate);
+        const startedAt = performance.now();
+        let previousStep = -1;
+        const animate = (now: number) => {
+          const progress = Math.min((now - startedAt) / 900, 1);
+          const step = Math.floor(progress * 30);
+          if (step !== previousStep) {
+            previousStep = step;
+            el.textContent = `${Math.floor(target * progress)}${suffix}`;
+          }
+          if (progress < 1) {
+            const frame = requestAnimationFrame(animate);
+            animationFrames.add(frame);
+          }
         };
-        animate();
+        const frame = requestAnimationFrame(animate);
+        animationFrames.add(frame);
       });
     }, { threshold: 0.5 });
 
     document.querySelectorAll(".data-value[data-target]").forEach((el) => countObserver.observe(el));
 
-    const sectionLinks = [
-      { id: "tech", selector: '.nav-link[href="/#tech"]' },
-      { id: "jiumai", selector: '.nav-link[href="/#jiumai"]' },
-      { id: "partners", selector: '.nav-link[href="/#partners"]' }
-    ];
-
-    const updateScrollSpy = () => {
-      if (window.location.pathname !== "/") return;
-      const navLinks = document.querySelectorAll('.nav-link[href^="/#"]');
+    const sectionLinks = new Map([
+      ["tech", '.nav-link[href="/#tech"]'],
+      ["jiumai", '.nav-link[href="/#jiumai"]'],
+      ["partners", '.nav-link[href="/#partners"]']
+    ]);
+    const navLinks = document.querySelectorAll('.nav-link[href^="/#"]');
+    const visibleSections = new Set<string>();
+    const setActiveSection = () => {
       navLinks.forEach((link) => link.classList.remove("active"));
-
-      const scrollY = window.scrollY + 120;
-      let currentSelector: string | null = null;
-      sectionLinks.forEach((section) => {
-        const el = document.getElementById(section.id);
-        if (el && el.offsetTop <= scrollY) currentSelector = section.selector;
+      let activeId: string | null = null;
+      sectionLinks.forEach((_selector, id) => {
+        if (visibleSections.has(id)) activeId = id;
       });
-
-      if (window.scrollY < 200) currentSelector = null;
-      if (currentSelector) document.querySelector<HTMLElement>(currentSelector)?.classList.add("active");
+      const selector = activeId ? sectionLinks.get(activeId) : null;
+      if (selector) document.querySelector<HTMLElement>(selector)?.classList.add("active");
     };
+
+    const sectionObserver = pathname === "/" ? new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) visibleSections.add(entry.target.id);
+        else visibleSections.delete(entry.target.id);
+      });
+      setActiveSection();
+    }, { rootMargin: "-112px 0px -58% 0px", threshold: 0 }) : null;
+
+    if (sectionObserver) {
+      sectionLinks.forEach((_selector, id) => {
+        const section = document.getElementById(id);
+        if (section) sectionObserver.observe(section);
+      });
+    }
 
     const onClick = (event: MouseEvent) => {
       const anchor = (event.target as Element).closest?.('a[href^="#"]') as HTMLAnchorElement | null;
@@ -266,16 +308,15 @@ function ClientEffects() {
     };
 
     document.addEventListener("click", onClick);
-    window.addEventListener("scroll", updateScrollSpy, { passive: true });
-    updateScrollSpy();
 
     return () => {
       revealObserver.disconnect();
       countObserver.disconnect();
+      sectionObserver?.disconnect();
+      animationFrames.forEach((frame) => cancelAnimationFrame(frame));
       document.removeEventListener("click", onClick);
-      window.removeEventListener("scroll", updateScrollSpy);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

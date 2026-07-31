@@ -2,6 +2,7 @@
 .workbuddy/
 node_modules/
 .next/
+*.tsbuildinfo
 *.log
 gen_*.py
 generate_images.py
