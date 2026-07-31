@@ -71,9 +71,10 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <nav className={navClassName} id="navbar">
         <div className="nav-inner">
           <Link className="nav-brand" href="/">
-            <img className="logo-dark" src="/assets/logos/digitauro-logo-dark.png" alt="数漫极光 DigitAuro" />
-            <img className="logo-light" src="/assets/logos/digitauro-logo-light.png" alt="数漫极光 DigitAuro" />
-            <img className="logo-symbol" src="/assets/logos/digitauro-symbol.png" alt="数漫极光 DigitAuro" style={{ display: "none" }} />
+            <picture className="nav-logo-picture">
+              <source media="(max-width: 768px)" srcSet="/assets/logos/digitauro-symbol.png" />
+              <img src={scrolled ? "/assets/logos/digitauro-logo-light.png" : "/assets/logos/digitauro-logo-dark.png"} alt="数漫极光 DigitAuro" />
+            </picture>
           </Link>
 
           <div className="nav-menu">
@@ -99,26 +100,28 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
           </button>
         </div>
 
-        <div className="mobile-nav-panel" aria-hidden={!open} hidden={!open}>
-          <div className="mobile-nav-scroll">
-            <div className="mobile-nav-label">核心业务</div>
-            <div className="mobile-business-grid">
-              {businessItems.map(([title, desc, href, icon]) => (
-                <Link className={`mobile-business-card${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>
-                  <img src={icon} alt="" />
-                  <span><strong>{title}</strong><em>{desc}</em></span>
-                </Link>
-              ))}
-            </div>
-            <div className="mobile-nav-label">导航</div>
-            <div className="mobile-nav-links">
-              {homeLinks.map(([label, href]) => (
-                href.startsWith("/") ? <Link className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</Link> : <a className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</a>
-              ))}
-              <a className="mobile-nav-cta" href={growthFormUrl} target="_blank" rel="noopener">获取增长方案 →</a>
+        {open ? (
+          <div className="mobile-nav-panel" aria-hidden="false">
+            <div className="mobile-nav-scroll">
+              <div className="mobile-nav-label">核心业务</div>
+              <div className="mobile-business-grid">
+                {businessItems.map(([title, desc, href, icon]) => (
+                  <Link className={`mobile-business-card${isActive(pathname, href) ? " active" : ""}`} href={href} key={href}>
+                    <img src={icon} alt="" />
+                    <span><strong>{title}</strong><em>{desc}</em></span>
+                  </Link>
+                ))}
+              </div>
+              <div className="mobile-nav-label">导航</div>
+              <div className="mobile-nav-links">
+                {homeLinks.map(([label, href]) => (
+                  href.startsWith("/") ? <Link className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</Link> : <a className={isActive(pathname, href) ? "active" : ""} href={href} key={href}>{label}</a>
+                ))}
+                <a className="mobile-nav-cta" href={growthFormUrl} target="_blank" rel="noopener">获取增长方案 →</a>
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </nav>
       <main>{children}</main>
       <Footer />

@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import "../assets/css/common.css";
-import "./globals.css";
+import fs from "node:fs";
+import path from "node:path";
 import { SiteChrome } from "@/components/SiteChrome";
+
+const rootDir = process.cwd();
+const criticalStyles = [
+  fs.readFileSync(path.join(rootDir, "assets/css/common.css"), "utf8"),
+  fs.readFileSync(path.join(rootDir, "app/globals.css"), "utf8")
+].join("\n");
 
 export const metadata: Metadata = {
   title: "数漫极光 DigitAuro",
@@ -19,6 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="zh-CN">
       <head>
+        <style data-site-styles dangerouslySetInnerHTML={{ __html: criticalStyles }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
