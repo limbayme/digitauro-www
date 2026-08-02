@@ -34,8 +34,8 @@ ssh "$REMOTE" "set -e
   npm run build
   echo '$REVISION' > REVISION
   chmod 755 '$REMOTE_DIR'
-  find '$REMOTE_DIR' -type d -exec chmod 755 {} +
-  find '$REMOTE_DIR' -type f -exec chmod 644 {} +
+  find public app .next/static -type d -exec chmod 755 {} +
+  find public app .next/static -type f -exec chmod 644 {} +
   PORT='$PORT' HOSTNAME='$HOSTNAME' pm2 restart '$PM2_NAME' --update-env || PORT='$PORT' HOSTNAME='$HOSTNAME' pm2 start npm --name '$PM2_NAME' -- start
   pm2 save
   nginx -t
