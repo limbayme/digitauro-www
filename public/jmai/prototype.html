@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>九米AI Amazon工作台原型</title>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #667085;
+      --line: #e6eaf0;
+      --canvas: #f5f7fa;
+      --surface: #ffffff;
+      --nav: #14233a;
+      --nav-soft: #223653;
+      --orange: #f47a00;
+      --orange-soft: #fff1e2;
+      --green: #147a55;
+      --green-soft: #e9f7f0;
+      --blue: #2563eb;
+      --blue-soft: #eaf0ff;
+      --red: #c53b3e;
+      --red-soft: #fff0f0;
+      --amber: #a05d00;
+      --amber-soft: #fff5de;
+      --shadow: 0 10px 30px rgba(20, 35, 58, .06);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    button, select { font: inherit; }
+    button { cursor: pointer; }
+    .app-shell { min-height: 100vh; display: grid; grid-template-columns: 238px minmax(0, 1fr); }
+    .sidebar {
+      background: var(--nav);
+      color: #d6e0ec;
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .brand { padding: 2px 10px 14px; border-bottom: 1px solid rgba(255,255,255,.13); }
+    .brand img { width: 121px; height: auto; display: block; filter: brightness(0) invert(1); }
+    .brand span { display: block; margin-top: 8px; font-size: 12px; color: #9fb0c4; }
+    .nav-group { display: grid; gap: 4px; }
+    .nav-label { padding: 0 11px 6px; color: #8ea1b8; font-size: 11px; }
+    .nav-item {
+      border: 0;
+      display: flex;
+      width: 100%;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 11px;
+      border-radius: 6px;
+      background: transparent;
+      color: #d6e0ec;
+      text-align: left;
+    }
+    .nav-item:hover, .nav-item.is-active { background: var(--nav-soft); color: #fff; }
+    .nav-item.is-active { box-shadow: inset 3px 0 0 var(--orange); }
+    .nav-item i { width: 17px; height: 17px; }
+    .profile { margin-top: auto; padding: 12px 10px 2px; border-top: 1px solid rgba(255,255,255,.13); }
+    .profile-name { color: #fff; font-weight: 600; }
+    .profile-detail { margin-top: 3px; color: #9fb0c4; font-size: 12px; }
+
+    .main { min-width: 0; }
+    .topbar {
+      height: 66px;
+      padding: 0 30px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .crumb { font-weight: 650; font-size: 16px; }
+    .topbar-spacer { flex: 1; }
+    .context-select { min-width: 190px; height: 34px; border: 1px solid var(--line); border-radius: 5px; background: #fff; color: var(--ink); padding: 0 9px; }
+    .icon-button { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 5px; background: #fff; color: var(--muted); display: grid; place-items: center; }
+    .icon-button i { width: 17px; height: 17px; }
+    .content { padding: 28px 30px 36px; max-width: 1530px; }
+    .page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 18px; margin-bottom: 22px; }
+    h1 { margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: 0; }
+    .subline { color: var(--muted); margin: 7px 0 0; }
+    .date-control { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
+    .date-control select { border: 1px solid var(--line); border-radius: 5px; padding: 7px 28px 7px 9px; color: var(--ink); background: #fff; }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .metric { background: var(--surface); border: 1px solid var(--line); border-radius: 7px; padding: 17px; box-shadow: var(--shadow); min-height: 126px; }
+    .metric-top { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 13px; }
+    .metric-icon { width: 29px; height: 29px; display: grid; place-items: center; border-radius: 5px; }
+    .metric-icon i { width: 16px; height: 16px; }
+    .metric-icon.orange { background: var(--orange-soft); color: var(--orange); }
+    .metric-icon.green { background: var(--green-soft); color: var(--green); }
+    .metric-icon.blue { background: var(--blue-soft); color: var(--blue); }
+    .metric-icon.red { background: var(--red-soft); color: var(--red); }
+    .metric-value { margin-top: 15px; font-size: 25px; font-weight: 700; letter-spacing: 0; }
+    .metric-note { margin-top: 5px; color: var(--muted); font-size: 12px; }
+    .delta.up { color: var(--green); } .delta.down { color: var(--red); }
+    .workspace-grid { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(330px, .85fr); gap: 18px; }
+    .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 7px; box-shadow: var(--shadow); }
+    .panel-header { min-height: 57px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); }
+    .panel-title { font-size: 15px; font-weight: 700; }
+    .panel-sub { color: var(--muted); font-size: 12px; }
+    .text-button { border: 0; background: transparent; padding: 5px 0; color: var(--blue); font-weight: 600; }
+    .chart-wrap { padding: 20px 18px 15px; }
+    .chart-legend { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: 12px; }
+    .legend-dot { width: 8px; height: 8px; display: inline-block; border-radius: 50%; margin-right: 5px; }
+    .chart { margin-top: 16px; height: 210px; position: relative; border-bottom: 1px solid var(--line); background: repeating-linear-gradient(to bottom, transparent 0, transparent 51px, #eef1f5 52px); }
+    .chart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .x-axis { display: flex; justify-content: space-between; margin-top: 8px; color: var(--muted); font-size: 11px; }
+    .analysis { padding: 14px 18px 18px; border-top: 1px solid var(--line); display: grid; gap: 9px; }
+    .analysis-label { color: var(--muted); font-size: 12px; }
+    .analysis-copy { margin: 0; font-size: 13px; }
+    .risk-list { padding: 4px 18px 16px; }
+    .risk-item { border-bottom: 1px solid var(--line); padding: 15px 0; display: grid; grid-template-columns: 30px minmax(0,1fr) auto; gap: 10px; align-items: start; }
+    .risk-item:last-child { border-bottom: 0; }
+    .risk-icon { width: 28px; height: 28px; border-radius: 5px; display: grid; place-items: center; }
+    .risk-icon i { width: 15px; height: 15px; }
+    .risk-icon.high { color: var(--red); background: var(--red-soft); }
+    .risk-icon.mid { color: var(--amber); background: var(--amber-soft); }
+    .risk-name { font-weight: 650; }
+    .risk-copy { margin-top: 3px; color: var(--muted); font-size: 12px; }
+    .status { border-radius: 999px; padding: 3px 7px; font-size: 11px; white-space: nowrap; }
+    .status.high { background: var(--red-soft); color: var(--red); }
+    .status.mid { background: var(--amber-soft); color: var(--amber); }
+    .bottom-grid { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, .9fr); gap: 18px; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 660px; }
+    th { padding: 11px 18px; color: var(--muted); background: #fbfcfd; font-size: 12px; text-align: left; font-weight: 600; border-bottom: 1px solid var(--line); }
+    td { padding: 13px 18px; border-bottom: 1px solid var(--line); font-size: 13px; }
+    tr:last-child td { border-bottom: 0; }
+    .sku-row { cursor: pointer; }
+    .sku-row:hover { background: #fafcff; }
+    .product-cell { font-weight: 650; }
+    .product-sku { display: block; color: var(--muted); font-weight: 400; font-size: 11px; margin-top: 2px; }
+    .negative { color: var(--red); font-weight: 650; } .positive { color: var(--green); font-weight: 650; }
+    .evidence { padding: 15px 18px 16px; }
+    .evidence-step { display: grid; grid-template-columns: 20px minmax(0,1fr); gap: 10px; padding: 10px 0; position: relative; }
+    .evidence-step:not(:last-child)::after { content: ""; position: absolute; left: 9px; top: 31px; height: 24px; border-left: 1px solid var(--line); }
+    .step-dot { width: 19px; height: 19px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 10px; font-weight: 700; }
+    .step-dot.done { background: var(--green); }.step-dot.pending { background: var(--amber); }
+    .step-name { font-weight: 650; }.step-desc { margin-top: 2px; color: var(--muted); font-size: 12px; }
+    .view { display: none; }.view.is-active { display: block; }
+    .single-panel { background: var(--surface); border: 1px solid var(--line); border-radius: 7px; box-shadow: var(--shadow); }
+    .empty-view { padding: 46px 30px; text-align: center; color: var(--muted); }
+    .empty-view i { display: block; margin: 0 auto 12px; width: 30px; height: 30px; color: var(--orange); }
+    .insight-toast { display: none; margin-top: 18px; padding: 13px 15px; color: #174c3a; background: var(--green-soft); border: 1px solid #c9ecdb; border-radius: 6px; }
+    .insight-toast.is-visible { display: flex; gap: 9px; align-items: center; }
+    .insight-toast i { width: 17px; height: 17px; }
+    @media (max-width: 1050px) {
+      .metric-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .workspace-grid, .bottom-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .sidebar { padding: 12px; gap: 10px; }
+      .brand, .profile, .nav-label { display: none; }
+      .nav-group { display: flex; overflow-x: auto; }
+      .nav-item { flex: 0 0 auto; width: auto; padding: 9px 10px; }
+      .nav-item span { display: none; }
+      .nav-item.is-active { box-shadow: inset 0 -3px 0 var(--orange); }
+      .topbar { height: 58px; padding: 0 16px; }.topbar .context-select { min-width: 0; width: 150px; }
+      .content { padding: 20px 16px 28px; }.page-head { display: block; }.date-control { margin-top: 13px; }
+      .metric-grid { grid-template-columns: 1fr 1fr; gap: 10px; }.metric { padding: 13px; min-height: 112px; }.metric-value { font-size: 21px; }
+      .panel-header { padding: 0 14px; }.chart-wrap, .analysis, .risk-list, .evidence { padding-left: 14px; padding-right: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><img src="assets/jiumi-logo.png" alt="九米"><span>Amazon 合规经营工作台</span></div>
+      <nav class="nav-group" aria-label="主要功能">
+        <div class="nav-label">经营管理</div>
+        <button class="nav-item is-active" data-view="overview"><i data-lucide="layout-dashboard"></i><span>经营总览</span></button>
+        <button class="nav-item" data-view="profit"><i data-lucide="chart-no-axes-combined"></i><span>SKU真实利润</span></button>
+        <button class="nav-item" data-view="fulfillment"><i data-lucide="truck"></i><span>FBA履约协同</span></button>
+        <button class="nav-item" data-view="compliance"><i data-lucide="shield-check"></i><span>合规证据链</span></button>
+      </nav>
+      <nav class="nav-group" aria-label="服务交付">
+        <div class="nav-label">服务交付</div>
+        <button class="nav-item" data-view="advisor"><i data-lucide="bot-message-square"></i><span>AI顾问工作台</span></button>
+        <button class="nav-item" data-view="reports"><i data-lucide="file-bar-chart"></i><span>客户月报</span></button>
+      </nav>
+      <div class="profile"><div class="profile-name">九米服务顾问</div><div class="profile-detail">中国跨境卖家业务组</div></div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb" id="crumb">经营总览</div>
+        <div class="topbar-spacer"></div>
+        <select class="context-select" aria-label="店铺切换"><option>Northwind | 美国站</option><option>Northwind | 英国站</option><option>Northwind | 德国站</option></select>
+        <button class="icon-button" aria-label="通知"><i data-lucide="bell"></i></button>
+      </header>
+      <div class="content">
+        <section id="overview" class="view is-active">
+          <div class="page-head"><div><h1>经营总览</h1><p class="subline">美国站 · 已授权数据 · 经营与合规情况截至 2026-07-16</p></div><label class="date-control">周期<select><option>最近 30 天</option><option>本月</option><option>上月</option></select></label></div>
+          <div class="metric-grid">
+            <article class="metric"><div class="metric-top"><span>平台净销售额</span><span class="metric-icon orange"><i data-lucide="shopping-bag"></i></span></div><div class="metric-value">$186,420</div><div class="metric-note"><span class="delta up">+12.8%</span> 较上一周期</div></article>
+            <article class="metric"><div class="metric-top"><span>真实利润率</span><span class="metric-icon green"><i data-lucide="circle-dollar-sign"></i></span></div><div class="metric-value">8.6%</div><div class="metric-note"><span class="delta down">-2.1pt</span> 广告与头程影响</div></article>
+            <article class="metric"><div class="metric-top"><span>预计可售天数</span><span class="metric-icon blue"><i data-lucide="boxes"></i></span></div><div class="metric-value">24 天</div><div class="metric-note">3 个 SKU 低于补货线</div></article>
+            <article class="metric"><div class="metric-top"><span>待复核合规事项</span><span class="metric-icon red"><i data-lucide="shield-alert"></i></span></div><div class="metric-value">6 项</div><div class="metric-note">2 项影响本月申报资料</div></article>
+          </div>
+          <div class="workspace-grid">
+            <section class="panel"><div class="panel-header"><div><div class="panel-title">销售与真实利润趋势</div><div class="panel-sub">已扣除平台费、广告、头程、关税及税务成本</div></div><button class="text-button" data-show-view="profit">查看利润账本</button></div>
+              <div class="chart-wrap"><div class="chart-legend"><span><i class="legend-dot" style="background:#2563eb"></i>平台净销售额</span><span><i class="legend-dot" style="background:#147a55"></i>真实利润</span></div><div class="chart"><svg viewBox="0 0 700 210" preserveAspectRatio="none" aria-label="销售与真实利润趋势图" role="img"><path d="M0,148 C35,131 55,142 88,124 S138,115 170,125 S218,90 250,101 S303,119 338,86 S388,74 420,91 S473,65 505,72 S554,41 587,58 S640,37 700,24" fill="none" stroke="#2563eb" stroke-width="3"/><path d="M0,181 C40,172 56,177 88,165 S137,163 170,168 S220,139 250,151 S305,152 338,131 S387,128 420,142 S472,113 505,122 S552,102 587,109 S647,92 700,78" fill="none" stroke="#147a55" stroke-width="3"/><circle cx="700" cy="24" r="4" fill="#2563eb"/><circle cx="700" cy="78" r="4" fill="#147a55"/></svg></div><div class="x-axis"><span>06/17</span><span>06/23</span><span>06/29</span><span>07/05</span><span>07/11</span><span>07/16</span></div></div>
+              <div class="analysis"><div class="analysis-label">九米AI经营判断</div><p class="analysis-copy">销售额增长 12.8%，但真实利润率下降 2.1 个百分点。优先核对 Aurora Lamp 的广告 CPC 与 FBA 费率变化，再决定是否扩预算。</p></div>
+            </section>
+            <section class="panel"><div class="panel-header"><div><div class="panel-title">优先处理事项</div><div class="panel-sub">AI已按经营影响排序</div></div><button class="text-button" data-show-view="advisor">进入工作台</button></div><div class="risk-list">
+              <div class="risk-item"><div class="risk-icon high"><i data-lucide="triangle-alert"></i></div><div><div class="risk-name">Aurora Lamp 真实利润跌破红线</div><div class="risk-copy">广告后利润率 1.8%，预计影响 $3,420</div></div><span class="status high">高影响</span></div>
+              <div class="risk-item"><div class="risk-icon high"><i data-lucide="file-warning"></i></div><div><div class="risk-name">回款与结算差异待核对</div><div class="risk-copy">6 月德国站存在 $2,160 跨期差异</div></div><span class="status high">高影响</span></div>
+              <div class="risk-item"><div class="risk-icon mid"><i data-lucide="package-open"></i></div><div><div class="risk-name">FBA 库存将在 11 天后告急</div><div class="risk-copy">Breeze Fan 当前在途无法覆盖预测销量</div></div><span class="status mid">需确认</span></div>
+            </div></section>
+          </div>
+          <div class="bottom-grid">
+            <section class="panel"><div class="panel-header"><div><div class="panel-title">重点 SKU 真实利润</div><div class="panel-sub">点击 SKU 查看九米AI解释</div></div><button class="text-button" data-show-view="profit">全部 SKU</button></div><div class="table-scroll"><table><thead><tr><th>商品</th><th>净销售额</th><th>广告后利润率</th><th>合规后利润率</th><th>状态</th></tr></thead><tbody><tr class="sku-row" data-sku="Aurora Lamp"><td class="product-cell">Aurora Lamp<span class="product-sku">SKU: AU-LAMP-01</span></td><td>$28,640</td><td class="positive">8.2%</td><td class="negative">1.8%</td><td><span class="status high">需处理</span></td></tr><tr class="sku-row" data-sku="Breeze Fan"><td class="product-cell">Breeze Fan<span class="product-sku">SKU: BR-FAN-02</span></td><td>$19,830</td><td class="positive">12.1%</td><td class="positive">9.4%</td><td><span class="status mid">库存风险</span></td></tr><tr class="sku-row" data-sku="Cloud Mug"><td class="product-cell">Cloud Mug<span class="product-sku">SKU: CL-MUG-03</span></td><td>$14,260</td><td class="positive">16.4%</td><td class="positive">13.7%</td><td><span class="status" style="background:var(--green-soft);color:var(--green)">健康</span></td></tr></tbody></table></div></section>
+            <section class="panel"><div class="panel-header"><div><div class="panel-title">本月合规证据链</div><div class="panel-sub">美国站 · 6 月结算批次</div></div><button class="text-button" data-show-view="compliance">核对详情</button></div><div class="evidence"><div class="evidence-step"><div class="step-dot done">1</div><div><div class="step-name">订单与结算</div><div class="step-desc">订单净额与平台结算已匹配</div></div></div><div class="evidence-step"><div class="step-dot done">2</div><div><div class="step-name">FBA入仓与物流</div><div class="step-desc">2 个入仓批次已关联头程单据</div></div></div><div class="evidence-step"><div class="step-dot pending">3</div><div><div class="step-name">回款与结汇</div><div class="step-desc">存在 1 笔跨期差异，等待顾问复核</div></div></div><div class="evidence-step"><div class="step-dot pending">4</div><div><div class="step-name">税务资料包</div><div class="step-desc">2 项商品申报要素待补全</div></div></div></div></section>
+          </div>
+          <div class="insight-toast" id="insight-toast"><i data-lucide="sparkles"></i><span id="insight-text"></span></div>
+        </section>
+        <section id="profit" class="view"><div class="page-head"><div><h1>SKU真实利润</h1><p class="subline">将平台收入、广告、履约、关税、税费与汇率纳入同一口径</p></div></div><div class="single-panel"><div class="panel-header"><div class="panel-title">Aurora Lamp · 利润拆解</div><button class="text-button" data-show-view="overview">返回总览</button></div><div class="table-scroll"><table><thead><tr><th>利润层级</th><th>金额</th><th>计算口径</th><th>九米AI判断</th></tr></thead><tbody><tr><td>平台净收入</td><td>$28,640</td><td>销售额 - 退款 - 促销</td><td>销售贡献稳定</td></tr><tr><td>平台后毛利</td><td>$10,714</td><td>净收入 - 佣金 - FBA费用</td><td>FBA费较上期增加 $690</td></tr><tr><td>广告后利润</td><td>$2,349</td><td>平台后毛利 - 广告花费</td><td class="negative">CPC上升使利润率降至 8.2%</td></tr><tr><td>合规后利润</td><td>$516</td><td>广告后利润 - 头程 - 税费</td><td class="negative">低于 5% 经营红线，建议人审调价与预算</td></tr></tbody></table></div></div></section>
+        <section id="fulfillment" class="view"><div class="page-head"><div><h1>FBA履约协同</h1><p class="subline">库存预警与补货、清关、入仓资料在同一工作台协同</p></div></div><div class="single-panel"><div class="panel-header"><div class="panel-title">补货风险队列</div></div><div class="table-scroll"><table><thead><tr><th>SKU</th><th>可售天数</th><th>在途覆盖</th><th>建议动作</th><th>负责人</th></tr></thead><tbody><tr><td>Breeze Fan</td><td class="negative">11 天</td><td>不足</td><td>核实空运兜底成本并确认清关资料</td><td>物流顾问</td></tr><tr><td>Aurora Lamp</td><td>18 天</td><td>部分覆盖</td><td>按利润修订补货量，避免高成本补货</td><td>运营顾问</td></tr><tr><td>Cloud Mug</td><td class="positive">42 天</td><td>充足</td><td>维持当前补货节奏</td><td>无需处理</td></tr></tbody></table></div></div></section>
+        <section id="compliance" class="view"><div class="page-head"><div><h1>合规证据链</h1><p class="subline">按订单、货物流、资金与票据形成可复核的关汇税资料链路</p></div></div><div class="single-panel"><div class="panel-header"><div class="panel-title">德国站 · 2026年6月资料核对</div></div><div class="table-scroll"><table><thead><tr><th>检查项</th><th>状态</th><th>差异说明</th><th>下一步</th></tr></thead><tbody><tr><td>订单与平台结算</td><td class="positive">已匹配</td><td>无异常</td><td>归档</td></tr><tr><td>FBA入仓与物流</td><td class="positive">已匹配</td><td>2 批次已关联清关记录</td><td>归档</td></tr><tr><td>回款与结汇</td><td class="negative">待复核</td><td>$2,160 为退款、平台扣费与跨期结算组合差异</td><td>生成顾问复核说明</td></tr><tr><td>商品申报要素</td><td style="color:var(--amber);font-weight:650">待补充</td><td>2 个SKU的材质与用途描述不完整</td><td>向客户发起资料补齐</td></tr></tbody></table></div></div></section>
+        <section id="advisor" class="view"><div class="page-head"><div><h1>AI顾问工作台</h1><p class="subline">AI输出结论、依据与建议，顾问审核后形成客户服务动作</p></div></div><div class="single-panel"><div class="panel-header"><div class="panel-title">今日待审核任务</div></div><div class="table-scroll"><table><thead><tr><th>任务</th><th>数据依据</th><th>建议动作</th><th>审核状态</th></tr></thead><tbody><tr><td>Aurora Lamp 利润下滑</td><td>广告CPC、FBA费、头程成本</td><td>确认 $1.50 调价模拟与预算上限</td><td><span class="status high">待顾问确认</span></td></tr><tr><td>德国站回款差异</td><td>结算报告、银行回款、结汇单</td><td>向客户发送差异解释与资料清单</td><td><span class="status mid">待复核</span></td></tr><tr><td>Breeze Fan 断货风险</td><td>库存、预测销量、清关节点</td><td>确认空运兜底与补货数量</td><td><span class="status mid">待客户确认</span></td></tr></tbody></table></div></div></section>
+        <section id="reports" class="view"><div class="page-head"><div><h1>客户月报</h1><p class="subline">已将平台经营、履约和合规服务事项合并为可交付摘要</p></div></div><div class="single-panel empty-view"><i data-lucide="file-text"></i><div style="font-weight:650;color:var(--ink)">2026年7月客户经营报告草稿已生成</div><div style="margin-top:6px">包含真实利润、重点SKU、FBA风险、合规事项与下月建议。</div></div></section>
+      </div>
+    </main>
+  </div>
+  <script>
+    const labels = { overview: '经营总览', profit: 'SKU真实利润', fulfillment: 'FBA履约协同', compliance: '合规证据链', advisor: 'AI顾问工作台', reports: '客户月报' };
+    const switchView = (view) => {
+      document.querySelectorAll('.view').forEach((item) => item.classList.toggle('is-active', item.id === view));
+      document.querySelectorAll('.nav-item').forEach((item) => item.classList.toggle('is-active', item.dataset.view === view));
+      document.getElementById('crumb').textContent = labels[view];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    document.querySelectorAll('[data-view], [data-show-view]').forEach((button) => button.addEventListener('click', () => switchView(button.dataset.view || button.dataset.showView)));
+    document.querySelectorAll('.sku-row').forEach((row) => row.addEventListener('click', () => {
+      const toast = document.getElementById('insight-toast');
+      document.getElementById('insight-text').textContent = `${row.dataset.sku}：九米AI已准备利润拆解与可执行建议，正在打开SKU真实利润。`;
+      toast.classList.add('is-visible');
+      setTimeout(() => switchView('profit'), 500);
+    }));
+    lucide.createIcons();
+  </script>
+</body>
+</html>
