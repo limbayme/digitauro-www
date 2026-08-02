@@ -2,6 +2,7 @@
 .workbuddy/
 node_modules/
 .next/
+dist-static/
 *.tsbuildinfo
 *.log
 gen_*.py

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static-release": "node scripts/build-static-release.mjs",
     "start": "next start",
     "lint": "next lint"
   },
