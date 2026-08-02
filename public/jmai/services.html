@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="DigitWalk 数字漫步 — AI 解决方案 · 数字化转型咨询 · 战略咨询。为企业提供从战略到落地的全链路增长服务。">
+<title>核心服务 — DigitWalk 数字漫步</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Services Hero */
+.services-hero{
+  min-height:50vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:140px 40px 80px;position:relative;overflow:hidden;
+}
+.services-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,var(--green-glow) 0%,transparent 55%),
+             radial-gradient(ellipse 50% 40% at 30% 80%,var(--blue-glow) 0%,transparent 55%);
+}
+.services-hero>*{position:relative;z-index:1}
+.services-hero h1{
+  font-size:clamp(2rem,5vw,3.25rem);font-weight:900;
+  letter-spacing:-.03em;margin-bottom:16px;line-height:1.15;
+}
+.services-hero h1 .accent{
+  background:var(--gradient-accent);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.services-hero .sub{
+  font-size:1.0625rem;color:var(--gray-500);max-width:560px;line-height:1.8;
+}
+
+/* Services Grid */
+.svcs-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  max-width:1120px;margin:0 auto;padding:0 40px 120px;
+}
+.svc-card{
+  background:var(--white);border-radius:var(--radius-lg);
+  padding:32px 24px;border:1px solid var(--gray-100);
+  transition:all .45s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:flex-start;
+}
+.svc-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 24px 56px rgba(0,0,0,.06);
+  border-color:#ddd;
+}
+.svc-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:0 0 3px 3px;transition:height .3s;
+}
+.svc-card:hover::before{height:5px}
+.svc-card:nth-child(1)::before{background:var(--green)}
+.svc-card:nth-child(2)::before{background:var(--blue)}
+.svc-card:nth-child(3)::before{background:var(--amber)}
+.svc-card:nth-child(4)::before{background:var(--green)}
+.svc-card:nth-child(5)::before{background:var(--blue)}
+.svc-card:nth-child(6)::before{background:var(--amber)}
+.svc-card:nth-child(7)::before{background:var(--green)}
+.svc-card:nth-child(8)::before{background:var(--blue)}
+.svc-card .svc-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:20px;
+}
+.svc-card:nth-child(1) .svc-icon{background:#E8F5E9;color:var(--green)}
+.svc-card:nth-child(2) .svc-icon{background:var(--blue-subtle);color:var(--blue)}
+.svc-card:nth-child(3) .svc-icon{background:var(--amber-subtle);color:var(--amber)}
+.svc-card:nth-child(4) .svc-icon{background:#E8F5E9;color:var(--green-dark)}
+.svc-card:nth-child(5) .svc-icon{background:var(--blue-subtle);color:var(--blue-dark)}
+.svc-card:nth-child(6) .svc-icon{background:var(--amber-subtle);color:var(--amber)}
+.svc-card:nth-child(7) .svc-icon{background:#E8F5E9;color:var(--green)}
+.svc-card:nth-child(8) .svc-icon{background:var(--blue-subtle);color:var(--blue)}
+.svc-card h3{
+  font-size:1.0625rem;font-weight:800;margin-bottom:10px;
+  letter-spacing:-.02em;color:var(--gray-900);
+}
+.svc-card p{
+  font-size:.8125rem;color:var(--gray-500);line-height:1.8;flex:1;
+}
+.svc-card .svc-tags{
+  display:flex;gap:6px;flex-wrap:wrap;margin-top:18px;
+}
+.svc-card .svc-tag{
+  font-size:.625rem;font-weight:600;padding:4px 10px;
+  border-radius:6px;background:var(--gray-100);color:var(--gray-400);
+}
+
+/* Why Us */
+.why-section{
+  background:var(--bg-tint);padding:120px 0;position:relative;overflow:hidden;
+}
+.why-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 20%,rgba(var(--green-rgb),.03) 0%,transparent 50%),
+             radial-gradient(circle at 70% 80%,rgba(var(--blue-rgb),.03) 0%,transparent 50%);
+}
+.why-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  max-width:1060px;margin:0 auto;
+}
+.why-card{
+  background:var(--white);border-radius:var(--radius-md);
+  padding:32px;border:1px solid var(--gray-100);
+  transition:all .4s;
+}
+.why-card:hover{
+  transform:translateY(-4px);box-shadow:var(--shadow-md);
+}
+.why-card .why-num{
+  font-size:2rem;font-weight:900;color:var(--green);margin-bottom:12px;
+  letter-spacing:-.03em;
+}
+.why-card h3{
+  font-size:1rem;font-weight:700;margin-bottom:8px;
+  letter-spacing:-.02em;
+}
+.why-card p{
+  font-size:.8125rem;color:var(--gray-500);line-height:1.8;
+}
+
+/* CTA Strip */
+.svc-cta{
+  text-align:center;padding:100px 0;position:relative;overflow:hidden;
+}
+.svc-cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 50%,var(--green-glow) 0%,transparent 60%);
+}
+.svc-cta>*{position:relative;z-index:1}
+.svc-cta h2{
+  font-size:clamp(1.75rem,4vw,2.5rem);
+  font-weight:900;margin-bottom:16px;letter-spacing:-.03em;
+}
+.svc-cta p{
+  font-size:1rem;color:var(--gray-400);margin-bottom:36px;
+}
+
+@media(max-width:1024px){
+  .svcs-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .services-hero{padding:120px 24px 60px}
+  .svcs-grid{grid-template-columns:1fr;padding:0 24px 80px}
+  .why-section{padding:80px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/logos/digitwalk-nav-new.png" alt="DigitWalk" width="120" height="34">
+    </a>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html#flywheel" class="nav-link">增长飞轮</a>
+      <a href="index.html#brands" class="nav-link">联营品牌</a>
+      <a href="services.html" class="nav-link active">核心服务</a>
+      <a href="solutions.html" class="nav-link">解决方案</a>
+      <a href="index.html#stories" class="nav-link">品牌叙事</a>
+      <a href="about.html" class="nav-link">关于我们</a>
+      <a href="index.html#cta" class="nav-cta">预约咨询</a>
+    </div>
+    <button class="nav-hamburger" id="navToggle" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-overlay" id="navOverlay"></div>
+
+<!-- Hero -->
+<section class="services-hero">
+  <div class="container">
+    <div class="section-label green">What We Do</div>
+    <h1>以<span class="accent">AI 与战略</span>驱动增长</h1>
+    <p class="sub">从战略洞察到技术落地的全链路解决方案——让 AI 真正成为企业的增长引擎</p>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<div class="svcs-grid">
+
+  <div class="svc-card reveal d1">
+    <div class="svc-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    </div>
+    <h3>AI 解决方案</h3>
+    <p>端到端的 AI 落地服务：从需求诊断、模型选型到系统集成。覆盖声音 AI、视频生成、智能客服、内容自动化等核心场景，让 AI 从概念变成实际生产力。</p>
+    <div class="svc-tags">
+      <span class="svc-tag">VDOIT 智能体</span><span class="svc-tag">声音AI</span><span class="svc-tag">视频生成</span><span class="svc-tag">No-Code AI</span>
+    </div>
+  </div>
+
+  <div class="svc-card reveal d1">
+    <div class="svc-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+    </div>
+    <h3>企业数字化转型咨询</h3>
+    <p>不是卖软件的咨询，而是从业务诊断出发的转型方案。数据中台架构、业务流程再造、组织数字化能力建设——帮助传统企业构建可持续的数字化运营体系。</p>
+    <div class="svc-tags">
+      <span class="svc-tag">数据中台</span><span class="svc-tag">流程再造</span><span class="svc-tag">技术架构</span><span class="svc-tag">组织变革</span>
+    </div>
+  </div>
+
+  <div class="svc-card reveal d2">
+    <div class="svc-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    </div>
+    <h3>战略咨询</h3>
+    <p>出海战略、品牌定位、增长路径设计——基于我们亲身验证的飞轮模型。不是PPT上的理论，是每天都在运营中迭代的实战方法论。</p>
+    <div class="svc-tags">
+      <span class="svc-tag">出海战略</span><span class="svc-tag">品牌定位</span><span class="svc-tag">增长模型</span><span class="svc-tag">市场进入</span>
+    </div>
+  </div>
+
+  <div class="svc-card reveal d2">
+    <div class="svc-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    </div>
+    <h3>AI Agent 系统部署</h3>
+    <p>基于「牧场主-牛马-草料」范式的多 Agent 协作系统。从市场调研到内容生产到多渠道分发，AI Agent 自主协作完成复杂任务链路，真正实现智能化运营。</p>
+    <div class="svc-tags">
+      <span class="svc-tag">多Agent协作</span><span class="svc-tag">工作流自动化</span><span class="svc-tag">内容中台</span>
+    </div>
+  </div>
+
+  <div class="svc-card reveal d3">
+    <div class="svc-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+    </div>
+    <h3>全球市场技术架构</h3>
+    <p>多语言、多币种、多时区的分布式技术方案。覆盖欧美、东南亚、中东等核心市场的合规部署与运维保障，为全球化业务提供坚实的技术底座。</p>
+    <div class="svc-tags">
+      <span class="svc-tag">多语言架构</span><span class="svc-tag">全球部署</span><span class="svc-tag">合规</span><span class="svc-tag">运维</span>
+    </div>
+  </div>
+
+  <div class="svc-card reveal d3">
+    <div class="svc-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <h3>数字化营销引擎</h3>
+    <p>基于 Google 一级代理和 TikTok TAP 资质的全渠道流量运营。不卖流量，卖增长——从投放策略到素材生产到数据归因的完整闭环。</p>
+    <div class="svc-tags">
+      <span class="svc-tag">Google Ads</span><span class="svc-tag">TikTok</span><span class="svc-tag">素材AI化</span><span class="svc-tag">归因分析</span>
+    </div>
+  </div>
+
+  <div class="svc-card reveal d4">
+    <div class="svc-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    <h3>AI 软硬件一体化</h3>
+    <p>AI 硬件集成与软件方案的全栈交付。从智能终端到云端推理，从声音克隆设备到视频生成工作站——软硬协同，开箱即用的 AI 生产力方案。</p>
+    <div class="svc-tags">
+      <span class="svc-tag">硬件集成</span><span class="svc-tag">云端推理</span><span class="svc-tag">边缘计算</span><span class="svc-tag">私有化部署</span>
+    </div>
+  </div>
+
+  <div class="svc-card reveal d4">
+    <div class="svc-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    </div>
+    <h3>跨境增长陪跑</h3>
+    <p>深度绑定的长期增长合作模式。我们不只是交付方案——我们投入流量、技术和时间，与品牌一起把增长做起来、做持久。品牌资产、数据资产、用户信任，这些才是真正的复利。</p>
+    <div class="svc-tags">
+      <span class="svc-tag">深度绑定</span><span class="svc-tag">增长陪跑</span><span class="svc-tag">联营模式</span><span class="svc-tag">长期共赢</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Why Us -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-label amber">Why DigitWalk</div>
+    <h2 class="section-heading reveal">为什么选择我们</h2>
+    <p class="section-desc reveal d1">我们不只是服务商，我们是下场做增长的实践者</p>
+    <div class="why-grid">
+      <div class="why-card reveal d1">
+        <div class="why-num">01</div>
+        <h3>亲手验证的增长模型</h3>
+        <p>四大联营品牌是我们的活证据。每一个品牌都承载着我们自己的流量、供应链和 AI 投入 — 我们和你一样承担风险。</p>
+      </div>
+      <div class="why-card reveal d2">
+        <div class="why-num">02</div>
+        <h3>技术自研 + 战略合作</h3>
+        <p>VDOIT 智能体自研，Noiz.ai 战略合作，火山引擎深度协同 — 不是采购来的能力，是我们自己长出来的护城河。</p>
+      </div>
+      <div class="why-card reveal d3">
+        <div class="why-num">03</div>
+        <h3>全球化网络效应</h3>
+        <p>Google 一级代理、TikTok TAP、Shopify Plus Partner — 我们将全球顶级流量、AI 技术与供应链资源编织成一张增长网络。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="svc-cta" id="cta">
+  <div class="container">
+    <h2 class="reveal">准备好让 AI 真正为你的业务创造增长了吗？</h2>
+    <p class="reveal d1">无论你需要战略咨询还是技术落地，我们先聊聊你的业务场景</p>
+    <div class="reveal d2">
+      <a href="index.html#cta" class="btn btn-primary">预约咨询 <span class="btn-arrow">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="ftr">
+  <div class="ftr-grid">
+    <div class="ftr-brand">
+      <img src="assets/logos/digitwalk-nav-new.png" alt="DigitWalk" width="120" height="32" loading="lazy">
+      <p class="ftr-desc">数字漫步（深圳）管理咨询有限公司<br>跨境增长实践者 · 聚合流量×AI×供应链</p>
+    </div>
+    <div class="ftr-col">
+      <h4>业务</h4>
+      <a href="index.html#flywheel">跨境数字营销</a>
+      <a href="services.html">核心服务</a>
+      <a href="solutions.html">解决方案</a>
+      <a href="index.html#brands">联营品牌</a>
+    </div>
+    <div class="ftr-col">
+      <h4>品牌</h4>
+      <a href="https://bterlif.com" target="_blank" rel="noopener">Bterlif</a>
+      <a href="https://kinethouses.com" target="_blank" rel="noopener">Kinet Houses</a>
+      <a href="https://pawsbubu.com" target="_blank" rel="noopener">Pawsbubu</a>
+      <a href="https://www.omnifir.com" target="_blank" rel="noopener">Omnifir</a>
+    </div>
+    <div class="ftr-col">
+      <h4>联系</h4>
+      <p class="lnk">中国深圳</p>
+      <a href="mailto:leo@digitauro.com">leo@digitauro.com</a>
+      <a href="index.html#stories">品牌叙事</a>
+      <a href="about.html">关于我们</a>
+    </div>
+  </div>
+  <div class="ftr-bottom">
+    <span>&copy; 2024–2026 DigitWalk</span>
+    <span>粤ICP备2025366134号-1</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav'),navMenu=document.getElementById('navMenu'),
+      navToggle=document.getElementById('navToggle'),navOverlay=document.getElementById('navOverlay');
+  function onScroll(){nav.classList.toggle('scrolled',window.scrollY>20)}
+  function openMenu(){navMenu.classList.add('open');navToggle.classList.add('open');navOverlay.classList.add('show');document.body.style.overflow='hidden'}
+  function closeMenu(){navMenu.classList.remove('open');navToggle.classList.remove('open');navOverlay.classList.remove('show');document.body.style.overflow=''}
+  navToggle.addEventListener('click',function(){navMenu.classList.contains('open')?closeMenu():openMenu()});
+  navOverlay.addEventListener('click',closeMenu);
+  navMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(navMenu.classList.contains('open'))closeMenu()})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&navMenu.classList.contains('open'))closeMenu()});
+  var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');observer.unobserve(e.target)}})},{threshold:0.08,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();var top=t.getBoundingClientRect().top+window.pageYOffset-90;window.scrollTo({top:top,behavior:'smooth'})}})});
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>九米AI × Amazon SP-API 服务方案</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --ink: #1d2430;
+      --muted: #657181;
+      --line: #dde3ea;
+      --orange: #f47a00;
+      --orange-soft: #fff0df;
+      --blue: #2563eb;
+      --blue-soft: #e7efff;
+      --green: #178a5a;
+      --green-soft: #e6f5ee;
+      --amber: #b56b00;
+      --amber-soft: #fff2d8;
+      --purple: #6d4aff;
+      --purple-soft: #eee9ff;
+      --rose: #c24168;
+      --rose-soft: #ffe7ef;
+      --cyan: #087f8c;
+      --cyan-soft: #e3f7f9;
+      --shadow: 0 16px 42px rgba(22, 32, 48, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero,
+    .panel,
+    .metric,
+    .node,
+    .scenario,
+    .phase,
+    .package {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .hero {
+      padding: 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-top: 6px solid var(--orange);
+      pointer-events: none;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: min(210px, 44vw);
+      height: auto;
+      display: block;
+      object-fit: contain;
+      flex: 0 1 auto;
+    }
+
+    .brand-line {
+      width: 1px;
+      height: 42px;
+      background: var(--line);
+      flex: 0 0 auto;
+    }
+
+    .brand-text {
+      min-width: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--orange);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 14px;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      color: #394455;
+      font-size: 18px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #f9fafc;
+      color: #303b4a;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: currentColor;
+      flex: 0 0 auto;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 18px;
+      min-height: 132px;
+    }
+
+    .metric:first-child {
+      background: var(--orange-soft);
+      border-color: #ffd3a6;
+    }
+
+    .metric strong {
+      display: block;
+      margin: 8px 0 4px;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .metric span,
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      margin-top: 26px;
+    }
+
+    .panel {
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(22, 32, 48, 0.05);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 16px;
+    }
+
+    .lane {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .lane-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 800;
+      min-height: 34px;
+    }
+
+    .badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+
+    .b-blue { background: var(--blue); }
+    .b-green { background: var(--green); }
+    .b-purple { background: var(--purple); }
+    .b-amber { background: var(--amber); }
+    .b-cyan { background: var(--cyan); }
+    .b-rose { background: var(--rose); }
+
+    .node {
+      padding: 14px;
+      min-height: 94px;
+    }
+
+    .node p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .lane.amazon .node { background: var(--blue-soft); }
+    .lane.jmai .node { background: var(--green-soft); }
+    .lane.service .node { background: var(--purple-soft); }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8b96a5;
+      font-size: 30px;
+      font-weight: 300;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .scenario {
+      padding: 16px;
+      min-height: 155px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .scenario:nth-child(1),
+    .scenario:nth-child(5) { background: var(--blue-soft); }
+    .scenario:nth-child(2),
+    .scenario:nth-child(6) { background: var(--amber-soft); }
+    .scenario:nth-child(3),
+    .scenario:nth-child(7) { background: var(--green-soft); }
+    .scenario:nth-child(4),
+    .scenario:nth-child(8) { background: var(--cyan-soft); }
+
+    .scenario-head {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 800;
+    }
+
+    .num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(100, 116, 139, 0.2);
+      font-size: 13px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .scenario p,
+    .phase p,
+    .package p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .list {
+      margin: 10px 0 0;
+      padding-left: 20px;
+      color: #3d4858;
+    }
+
+    .list li {
+      margin: 6px 0;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .phase {
+      padding: 16px;
+      border-top-width: 4px;
+    }
+
+    .phase:nth-child(1) { border-top-color: var(--blue); }
+    .phase:nth-child(2) { border-top-color: var(--green); }
+    .phase:nth-child(3) { border-top-color: var(--purple); }
+
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .package {
+      padding: 16px;
+      min-height: 138px;
+      border-top-width: 4px;
+    }
+
+    .package:nth-child(1) { border-top-color: var(--blue); }
+    .package:nth-child(2) { border-top-color: var(--green); }
+    .package:nth-child(3) { border-top-color: var(--orange); }
+    .package:nth-child(4) { border-top-color: var(--purple); }
+
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .kpi {
+      padding: 12px;
+      border-radius: 8px;
+      background: #f9fafc;
+      border: 1px solid var(--line);
+      text-align: center;
+      min-height: 78px;
+    }
+
+    .kpi strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      header,
+      .two-col,
+      .flow,
+      .roadmap,
+      .package-grid,
+      .kpi-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+        min-height: 24px;
+      }
+
+      .scenario-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 18px 14px 36px;
+      }
+
+      .hero,
+      .panel {
+        padding: 18px;
+      }
+
+      .metrics,
+      .scenario-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .brand {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .brand-line {
+        display: none;
+      }
+
+      .tag {
+        white-space: normal;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        max-width: none;
+        padding: 0;
+      }
+
+      .hero,
+      .panel,
+      .metric,
+      .node,
+      .scenario,
+      .phase,
+      .package {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="hero">
+        <div class="brand">
+          <img class="brand-logo" src="assets/newlogo-4.png" alt="九米">
+          <span class="brand-line" aria-hidden="true"></span>
+          <span class="brand-text">Amazon SPN 服务商 · 出海经营智能服务</span>
+        </div>
+        <p class="eyebrow">九米AI × Amazon SP-API</p>
+        <h1>出海经营智能服务方案</h1>
+        <p class="lead">通过 Amazon 店铺、广告、库存、财务数据，融合九米的关汇税、物流履约、Google 流量和顾问交付能力，形成面向 Amazon 卖家的“数据采集、AI 诊断、服务动作、客户月报”闭环。</p>
+        <div class="tag-row" aria-label="核心定位">
+          <span class="tag"><span class="dot" style="color: var(--blue);"></span>Amazon 接口数据底座</span>
+          <span class="tag"><span class="dot" style="color: var(--green);"></span>AI 经营诊断</span>
+          <span class="tag"><span class="dot" style="color: var(--amber);"></span>关汇税物流服务</span>
+          <span class="tag"><span class="dot" style="color: var(--purple);"></span>SPN 服务交付</span>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <span>建议 MVP 周期</span>
+          <strong>8-12周</strong>
+          <span>先打通授权、数据同步、利润看板、库存预警和月报。</span>
+        </div>
+        <div class="metric">
+          <span>种子客户验证</span>
+          <strong>3-5家</strong>
+          <span>用真实店铺数据验证产品价值和顾问交付流程。</span>
+        </div>
+        <div class="metric">
+          <span>首批数据域</span>
+          <strong>6类</strong>
+          <span>订单、库存、财务、报表、广告、物流成本。</span>
+        </div>
+        <div class="metric">
+          <span>商业化服务包</span>
+          <strong>4档</strong>
+          <span>基础、专业、增长、企业，覆盖不同规模卖家。</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>服务闭环架构</h2>
+      <p class="muted">九米AI 的重点不是替代 ERP，而是把 Amazon 经营数据和九米出海服务能力连接起来，形成可解释、可交付、可收费的服务系统。</p>
+      <div class="flow" aria-label="服务闭环架构图">
+        <div class="lane amazon">
+          <div class="lane-title"><span class="badge b-blue">1</span>Amazon / Google 数据源</div>
+          <div class="node">
+            <h3>SP-API</h3>
+            <p>Orders、Reports、Data Kiosk、Finances、FBA Inventory、Listings。</p>
+          </div>
+          <div class="node">
+            <h3>Amazon Ads API</h3>
+            <p>Campaign、Keyword、Target、ASIN、ACOS、ROAS、预算与广告报表。</p>
+          </div>
+          <div class="node">
+            <h3>Google 流量数据</h3>
+            <p>Google Ads、GA4、落地页、站外引流效果和跨渠道 ROI。</p>
+          </div>
+        </div>
+
+        <div class="arrow" aria-hidden="true">→</div>
+
+        <div class="lane jmai">
+          <div class="lane-title"><span class="badge b-green">2</span>九米AI 能力层</div>
+          <div class="node">
+            <h3>经营数据仓库</h3>
+            <p>多店铺、多站点、多币种、SKU/ASIN 指标模型。</p>
+          </div>
+          <div class="node">
+            <h3>利润与风控引擎</h3>
+            <p>平台费、FBA、广告、头程、关税、VAT、汇率统一核算。</p>
+          </div>
+          <div class="node">
+            <h3>AI Agent 服务</h3>
+            <p>经营分析、补货预测、Listing 诊断、关汇税助手、月报生成。</p>
+          </div>
+        </div>
+
+        <div class="arrow" aria-hidden="true">→</div>
+
+        <div class="lane service">
+          <div class="lane-title"><span class="badge b-purple">3</span>客户与服务交付</div>
+          <div class="node">
+            <h3>卖家客户门户</h3>
+            <p>经营驾驶舱、真实利润、库存预警、增长建议。</p>
+          </div>
+          <div class="node">
+            <h3>九米顾问工作台</h3>
+            <p>客户健康分、风险工单、月报、会议纪要、服务任务。</p>
+          </div>
+          <div class="node">
+            <h3>SPN 服务包</h3>
+            <p>关汇税、物流履约、广告增长、企业数据中台。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>8 个可产品化服务场景</h2>
+      <div class="scenario-grid">
+        <div class="scenario">
+          <div class="scenario-head"><span class="num">01</span>经营驾驶舱</div>
+          <p>多店铺、多站点、多币种看板，统一查看销售、广告、库存、利润和回款。</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-head"><span class="num">02</span>真实利润核算</div>
+          <p>销售额减平台费、FBA、广告、头程、关税、VAT，识别赚钱和亏损 SKU。</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-head"><span class="num">03</span>关汇税助手</div>
+          <p>HS Code、关税、VAT/GST、发票、回款资料整理，辅助顾问判断风险。</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-head"><span class="num">04</span>补货与头程协同</div>
+          <p>预测断货日期，建议备货量和物流方式，跟踪清关、预约和入仓状态。</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-head"><span class="num">05</span>Listing 体检</div>
+          <p>检查标题、五点、图片、A+、变体、类目限制和转化异常。</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-head"><span class="num">06</span>广告增长联动</div>
+          <p>把 Amazon Ads 和 Google 流量合并分析，判断站外引流是否带来站内增长。</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-head"><span class="num">07</span>客户月报自动生成</div>
+          <p>自动生成经营复盘、风险事项、顾问点评和下月行动计划。</p>
+        </div>
+        <div class="scenario">
+          <div class="scenario-head"><span class="num">08</span>SPN 服务商工作台</div>
+          <p>管理客户档案、授权状态、服务合同、风险工单和顾问服务进度。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>MVP 功能范围</h2>
+      <div class="two-col">
+        <div>
+          <h3>首期必做</h3>
+          <ul class="list">
+            <li>Amazon 店铺 OAuth 授权与客户接入</li>
+            <li>Orders、Reports/Data Kiosk、FBA Inventory、Finances 数据同步</li>
+            <li>Amazon Ads 基础报表同步</li>
+            <li>SKU/ASIN 真实利润看板</li>
+            <li>库存断货预警和客户月报自动生成</li>
+          </ul>
+        </div>
+        <div>
+          <h3>首期暂缓</h3>
+          <ul class="list">
+            <li>全自动调价和自动广告投放修改</li>
+            <li>自动买家消息和自动税务申报</li>
+            <li>深度 ERP 替代能力</li>
+            <li>高风险敏感数据长期存储</li>
+            <li>未人工确认的账户写入动作</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>实施路线图</h2>
+      <div class="roadmap">
+        <div class="phase">
+          <h3>阶段一：技术打底与 MVP</h3>
+          <p>第 1-3 个月</p>
+          <ul class="list">
+            <li>完成 Amazon 授权与数据同步</li>
+            <li>建立订单、库存、财务、广告基础模型</li>
+            <li>上线利润看板、库存预警、AI 月报</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <h3>阶段二：服务闭环</h3>
+          <p>第 4-6 个月</p>
+          <ul class="list">
+            <li>接入关务、物流、税务成本数据</li>
+            <li>上线顾问工单和客户健康分</li>
+            <li>接入 Google Ads/GA4 增长分析</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <h3>阶段三：规模化与生态</h3>
+          <p>第 7-12 个月</p>
+          <ul class="list">
+            <li>客户自助授权和自助报表</li>
+            <li>形成 SPN 服务商案例和官方展示材料</li>
+            <li>建设企业版数据中台和开放 API</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>商业化服务包</h2>
+      <div class="package-grid">
+        <div class="package">
+          <h3>基础版</h3>
+          <p>经营数据看板、基础异常提醒、月度经营报告。</p>
+        </div>
+        <div class="package">
+          <h3>专业版</h3>
+          <p>SKU 级真实利润、库存预测、补货建议、关税/VAT 测算。</p>
+        </div>
+        <div class="package">
+          <h3>增长版</h3>
+          <p>Amazon Ads + Google 流量联动，投放策略复盘和增长建议。</p>
+        </div>
+        <div class="package">
+          <h3>企业版</h3>
+          <p>多账号数据中台、定制报表、API 开放和深度顾问服务。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>关键成功指标</h2>
+      <div class="kpi-strip">
+        <div class="kpi">
+          <strong>授权店铺数</strong>
+          <span class="muted">客户接入规模</span>
+        </div>
+        <div class="kpi">
+          <strong>利润覆盖 SKU</strong>
+          <span class="muted">核算深度</span>
+        </div>
+        <div class="kpi">
+          <strong>断货预警命中率</strong>
+          <span class="muted">预测价值</span>
+        </div>
+        <div class="kpi">
+          <strong>AI 建议采纳率</strong>
+          <span class="muted">顾问效率</span>
+        </div>
+        <div class="kpi">
+          <strong>服务升级率</strong>
+          <span class="muted">商业转化</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      九米AI × Amazon SP-API 服务方案 · v0.1 · 2026-07-16
+    </footer>
+  </main>
+</body>
+</html>
