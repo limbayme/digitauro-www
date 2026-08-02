@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:static-release": "node scripts/build-static-release.mjs",
+    "deploy:ssr": "bash scripts/deploy-ssr.sh",
     "start": "next start",
     "lint": "next lint"
   },
